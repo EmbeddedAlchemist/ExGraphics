@@ -1,0 +1,262 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-weight: 800;
+    font-size: 64px;
+}
+
+h2 {
+    font-weight: 800;
+    font-size: 48px;
+}
+
+.title {
+    background-image: linear-gradient(#FFFFFFFF 50%, #FFFFFF00);
+    background-clip: text;
+    color: transparent;
+    display: block;
+}
+
+h1.title {
+    padding: 0;
+    margin: 0;
+}
+
+h2.title {
+    padding: 0;
+    margin: 0;
+    margin-top: -20px;
+}
+
+#root {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+#left-container {
+    z-index: 1;
+    background-image: linear-gradient(45deg, #5959D8, rgb(77, 188, 221));
+    height: 100%;
+    width: 800px;
+    box-shadow: 0 0 30px #5959D880;
+    padding: 70px;
+    overflow-y: scroll;
+    max-height: 100%;
+    box-sizing: border-box;
+    scrollbar-width: none;
+}
+
+#right-container {
+    background-color: whitesmoke;
+    height: 100%;
+    width: 100%;
+    padding: 70px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.input {
+    display: block;
+    margin: 20px 0px;
+
+}
+
+.input>p {
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-size: 18px;
+    margin-bottom: 5px;
+    padding-left: 15px;
+}
+
+.input>input {
+    width: 100%;
+    height: 40px;
+    font-family: monospace;
+    font-size: 18px;
+    text-indent: 20px;
+    border-radius: 20px;
+    outline-style: none;
+    border-style: none;
+}
+
+.spacer {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#between_title_and_input {
+    height: 40px;
+}
+
+label.char_select {
+    font-family: monospace;
+    color: white;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+
+}
+
+label.char_select>input {
+    width: 30px;
+    height: 30px;
+}
+
+.char_select>label {
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+    margin: 2px 0;
+    margin-left: 20px;
+}
+
+.char_select>label>input {
+    width: 15px;
+    height: 15px;
+}
+
+.char_select>label>span {
+    font-family: monospace;
+    color: white;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+#custom_char_input {
+    resize: none;
+    width: 100%;
+    margin-top: 10px;
+    border-style: none;
+    border-radius: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#right-container>canvas {
+    display: block;
+    background: white;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: auto;
+    box-shadow: 0 0 20px lightgray;
+    box-sizing: border-box;
+    /* image-rendering: optimizeSpeed; */
+    /* image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast; */
+    /* image-rendering: optimize-contrast; */
+    image-rendering: pixelated;
+    /* -ms-interpolation-mode: nearest-neighbor; */
+    padding: 40px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+#right-container>canvas:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px lightgray;
+}
+
+#right-container>canvas:active {
+    transform: scale(0.97);
+    box-shadow: 0 0 15px lightgray;
+    transition: 0.1s;
+}
+
+
+#info_container {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+}
+
+#info_box {
+    height: 100%;
+    width: 50%;
+    box-sizing: border-box;
+    box-shadow: 0 0 20px lightgray;
+    background: white;
+    border-radius: 20px;
+    margin-right: 20px;
+
+}
+
+#download_box {
+    height: 100%;
+    width: 50%;
+    box-sizing: border-box;
+    box-shadow: 0 0 20px lightgray;
+    background: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+    user-select: none;
+    transition: 0.25s;
+}
+
+#download_box:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px lightgray;
+
+}
+
+#download_box:active {
+    transform: scale(0.97);
+    box-shadow: 0 0 15px lightgray;
+    transition: 0.1s;
+}
+
+#info_box {
+    box-sizing: border-box;
+    padding: 30px;
+    overflow: auto;
+}
+
+#info_box>p {
+    font-family: monospace;
+    width: 100%;
+    word-wrap: break-word;
+    margin: 0;
+    white-space: pre;
+}
+
+#download_box>p {
+    margin: 0;
+}
+
+#download_text {
+    color: #5959D8;
+    font-size: 36px;
+    font-weight: 700;
+    padding-bottom: 5px;
+}
+
+#download_cpp_name {
+    font-family: monospace;
+}
+
+#download_hpp_name {
+    font-family: monospace;
+}

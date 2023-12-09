@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ExGraphics Font Convertor</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+
+<body>
+    <div id="root">
+        <div id="left-container">
+            <h1 class="title">ExGraphics</h1>
+            <h2 class="title">Font Convertor</h2>
+            <div class="spacer" id="between_title_and_input"></div>
+            <label class="input">
+                <p>Font Name</p>
+                <input id="font_name_input" type="text" placeholder="Font installed in your computer" value="Consolas">
+            </label>
+            <label class="input">
+                <p>Font Size(px)</p>
+                <input id="font_size_input" type="number" min="4" max="108" value="16">
+            </label>
+            <label class="input">
+                <p>Font Weight</p>
+                <input id="font_weight_input" , type="number" min="100" max="900" step="100" value="500">
+            </label>
+            <label class="input">
+                <p>Gray scale bits</p>
+                <input id="gray_scale_input" type="number" min="1" max="4" step="1" value="2">
+            </label>
+            <div class="char_select input">
+                <p>Character set</p>
+                <label>
+                    <input type="checkbox" id="ascii_number_symbol_select" checked="true"> <span>ASCII Numbers and Symbols</span>
+                </label>
+                <label>
+                    <input type="checkbox" id="ascii_select" checked="true"> <span>ASCII Alphabet</span>
+                </label>
+                <label>
+                    <input type="checkbox" id="gb2312_level1_select"> <span>GB2312(Level1)</span>
+                </label>
+                <label>
+                    <input type="checkbox" id="gb2312_level2_select"> <span>GB2312(Level2)</span>
+                </label>
+                <label>
+                    <input type="checkbox" id="custom_char_select"> <span>Custom</span>
+                </label>
+                <textarea id="custom_char_input" style="resize:vertical; width:100%; height:100px;"
+                    placeholder="Custom Character here..."></textarea>
+            </div>
+        </div>
+        <div id="right-container">
+            <canvas id="english_preview"></canvas>
+            <canvas id="chinese_preview"></canvas>
+            <div id="info_container">
+                <div id="info_box">
+                </div>
+                <div id="download_box">
+                    <p id="download_text">Download</p>
+                    <p id="download_cpp_name">font.cpp</p>
+                    <p id="download_hpp_name">font.hpp</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="pinyin4js.js"></script>
+    <script src="convertor.js"></script>
+    <script src="get_char_set.js"></script>
+    <script src="previerer.js"></script>
+</body>
