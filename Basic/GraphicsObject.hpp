@@ -1,12 +1,13 @@
 #pragma once
 
-#include "GraphicsFunction.hpp"
 #include "Focusable.hpp"
-#include "Graphics.hpp"
+#include "GraphicsFunction.hpp"
 #include "Offset.hpp"
 #include "Size.hpp"
 
 namespace ExGraphics {
+    
+class GraphicsFunction;
 
 class GraphicsObject {
   protected:
@@ -15,8 +16,10 @@ class GraphicsObject {
      * DO NOT CALL THIS FUNCTION DIRECTLY, to draw the object, call draw(Offset, GraphicsFunction&) indead;
      * subClass should implement this function.
      * in this function, you should use methon that &func provides to draw self.
+     * 
+     * ** object zero point IS offset, NOT offset + this.offset **
      *
-     * @param offset offset to parent object
+     * @param offset zero point of the object. 
      * @param func graphics function interface
      */
     virtual void onDraw(Offset offset, GraphicsFunction &func) const = 0;

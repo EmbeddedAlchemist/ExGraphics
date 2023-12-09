@@ -4,7 +4,6 @@
 #include "Basic/Offset.hpp"
 #include "GraphicsDevice.hpp"
 #include "Util/Color/Color.hpp"
-#include <type_traits>
 
 namespace ExGraphics {
 
@@ -38,17 +37,15 @@ class Graphics : public GraphicsFunction {
      */
     Offset pageOffset;
 
-
     /**
      * @brief window clip start (included)
-     * 
+     *
      */
     Offset clipStart;
 
-
     /**
      * @brief window clip end (not included)
-     * 
+     *
      */
     Offset clipEnd;
 
@@ -68,6 +65,9 @@ class Graphics : public GraphicsFunction {
      * @return false
      */
     bool inDisplayArea(Offset offset);
+
+    bool inPageArea(Offset offset);
+    bool inWindowArea(Offset offset);
 
     /**
      * @brief check if the position in drawable area
@@ -100,18 +100,18 @@ class Graphics : public GraphicsFunction {
     Offset limitAtDisplayArea(Offset offset);
 
     /**
-     * @brief 
-     * 
-     * @param offset 
-     * @return Offset 
+     * @brief
+     *
+     * @param offset
+     * @return Offset
      */
     Offset limitAtPageArea(Offset offset);
 
     /**
-     * @brief 
-     * 
-     * @param offset 
-     * @return Offset 
+     * @brief
+     *
+     * @param offset
+     * @return Offset
      */
     Offset limitAtWindowArea(Offset offset);
 
@@ -183,7 +183,7 @@ class Graphics : public GraphicsFunction {
      * @param width
      * @param color
      */
-    void drawHorizonLine(Offset offset, std::int16_t width, ColorType color);
+    void drawHorizonLine(Offset start, Offset end, ColorType color);
 
     /**
      * @brief draw vertical line with better performance
@@ -192,7 +192,7 @@ class Graphics : public GraphicsFunction {
      * @param width
      * @param color
      */
-    void drawVerticalLine(Offset offset, std::int16_t height, ColorType color);
+    void drawVerticalLine(Offset start, Offset end, ColorType color);
 
     //
     //
@@ -239,6 +239,15 @@ class Graphics : public GraphicsFunction {
      * @param color color to draw
      */
     virtual void drawPixel(Offset offset, Color color);
+
+    /**
+     * @brief
+     *
+     * @param start
+     * @param end
+     * @param color
+     */
+    virtual void drawLine(Offset start, Offset end, Color color);
 
     /**
      * @brief draw filled rectangle method

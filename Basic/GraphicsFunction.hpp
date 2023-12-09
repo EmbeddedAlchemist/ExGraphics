@@ -1,13 +1,15 @@
 #pragma once
 
 #include "Bitmap.hpp"
+#include "GraphicsObject.hpp"
 #include "Offset.hpp"
 #include "Size.hpp"
-#include "GraphicsObject.hpp"
 
 #include "Util/Color/Color.hpp"
 
 namespace ExGraphics {
+    
+class GraphicsObject;
 
 /**
  * @brief
@@ -32,10 +34,8 @@ class GraphicsFunction {
     void drawHorizonLine(Offset offset, std::uint16_t width, Color color);
     void drawVerticalLine(Offset offset, std::uint16_t height, Color color);
 
-
   public:
-
-    //basic drawing
+    // basic drawing
     virtual void drawPixel(Offset offset, Color color) = 0;
     virtual void drawLine(Offset start, Offset end, Color color);
     virtual void drawRectFilled(Offset offset, Size size, Color color);
@@ -45,15 +45,13 @@ class GraphicsFunction {
     virtual void drawCircleFilled(Offset offset, Color color, std::uint16_t radius, CirclePart part = CirclePart(true, true, true, true));
     virtual void drawCircle(Offset offset, Color color, std::uint16_t radius, CirclePart part = CirclePart(true, true, true, true));
 
-    //bitmap drawing
+    // bitmap drawing
     virtual void drawBitmap(Offset offset, const MonoBitmap &bitmap, Color color) = 0;
 
-    //drawing control
+    // drawing control
     virtual bool isInDrawableArea(Offset offset, Size size) = 0;
-    virtual bool isInDrawableArea(GraphicsObject &obj);
     virtual void setClipWindow(Offset offset, Size size) = 0;
-    virtual void setClipWindow(GraphicsObject &obj);
     virtual void getClipWindow(Offset &offset, Size &size) = 0;
     virtual void resetClipWindow() = 0;
 };
-} // namespace Graphics
+} // namespace ExGraphics

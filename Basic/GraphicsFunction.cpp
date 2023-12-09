@@ -221,11 +221,3 @@ void ExGraphics::GraphicsFunction::drawCircle(Offset offset, Color color, std::u
         drawCircleHelper(offset, cur, color, radius, part);
     }
 }
-
-inline bool ExGraphics::GraphicsFunction::isInDrawableArea(ExGraphics::GraphicsObject &obj) {
-    return isInDrawableArea(obj.offset, obj.size);
-}
-
-void ExGraphics::GraphicsFunction::setClipWindow(ExGraphics::GraphicsObject &obj) {
-    return setClipWindow(obj.offset, obj.size);
-}

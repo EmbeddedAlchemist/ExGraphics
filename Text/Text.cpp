@@ -6,7 +6,7 @@ ExGraphics::Text::Text(Offset offset, Size size, const Font &font, const char *s
 }
 
 void ExGraphics::Text::onDraw(Offset offset, GraphicsFunction &func) const {
-    Offset cur = offset + this->offset;
+    Offset cur = offset;
     const char *str = this->str;
     std::uint32_t ch;
     std::size_t chLen;
