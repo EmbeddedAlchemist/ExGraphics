@@ -5,7 +5,7 @@
 #include "Offset.hpp"
 #include "Size.hpp"
 
-#include "Util/Color/Color.hpp"
+#include "Basic/Color.hpp"
 
 namespace ExGraphics {
     
@@ -38,12 +38,16 @@ class GraphicsFunction {
     // basic drawing
     virtual void drawPixel(Offset offset, Color color) = 0;
     virtual void drawLine(Offset start, Offset end, Color color);
-    virtual void drawRectFilled(Offset offset, Size size, Color color);
+    virtual void fillRect(Offset offset, Size size, Color color);
+
+    // extra drawing
     virtual void drawRect(Offset offset, Size size, Color color);
-    virtual void drawRRectFilled(Offset offset, Size size, Color color, std::int16_t radius);
-    virtual void drawRRect(Offset offset, Size size, Color color, std::int16_t radius);
-    virtual void drawCircleFilled(Offset offset, Color color, std::uint16_t radius, CirclePart part = CirclePart(true, true, true, true));
+    virtual void drawRoundedRect(Offset offset, Size size, Color color, std::int16_t radius);
+    virtual void fillRoundedRect(Offset offset, Size size, Color color, std::int16_t radius);
     virtual void drawCircle(Offset offset, Color color, std::uint16_t radius, CirclePart part = CirclePart(true, true, true, true));
+    virtual void fillCircle(Offset offset, Color color, std::uint16_t radius, CirclePart part = CirclePart(true, true, true, true));
+    virtual void drawPill(Offset offset, Size size, Color color);
+    virtual void fillPill(Offset offset, Size size, Color color);
 
     // bitmap drawing
     virtual void drawBitmap(Offset offset, const MonoBitmap &bitmap, Color color) = 0;

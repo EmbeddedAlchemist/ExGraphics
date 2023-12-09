@@ -5,8 +5,8 @@
 
 
 namespace ExGraphics {
-template <typename ColorType>
-class GraphicsObjectFocusable : public GraphicsObject<ColorType> {
+  
+class GraphicsObjectFocusable : public GraphicsObject {
   protected:
     CallbackFunction &onFocusedCallback;
     CallbackFunction &onActicatedCallback;

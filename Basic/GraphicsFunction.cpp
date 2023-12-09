@@ -108,7 +108,7 @@ void ExGraphics::GraphicsFunction::drawLine(Offset start, Offset end, Color colo
     }
 }
 
-void ExGraphics::GraphicsFunction::drawRectFilled(Offset offset, Size size, Color color) {
+void ExGraphics::GraphicsFunction::fillRect(Offset offset, Size size, Color color) {
     Offset end = offset + size.toOffset();
     Offset curr;
     for (curr.y = offset.y; curr.y <= end.y; curr.y++)
@@ -123,7 +123,7 @@ void ExGraphics::GraphicsFunction::drawRect(Offset offset, Size size, Color colo
     drawLine(offset + Offset(size.width - 1, 0), offset + Offset(size.width - 1, size.height - 1), color);
 }
 
-void ExGraphics::GraphicsFunction::drawRRectFilled(Offset offset, Size size, Color color, std::int16_t radius) {
+void ExGraphics::GraphicsFunction::fillRoundedRect(Offset offset, Size size, Color color, std::int16_t radius) {
     int16_t maxRadius = ((size.width < size.height) ? size.width : size.height) / 2;
     radius = radius > maxRadius ? maxRadius : radius < 0 ? 0
                                                          : radius;
@@ -132,27 +132,27 @@ void ExGraphics::GraphicsFunction::drawRRectFilled(Offset offset, Size size, Col
     yu = offset.y + radius;
     xr = offset.x + size.width - radius - 1;
     yl = offset.y + size.height - radius - 1;
-    drawCircleFilled(Offset(xl, yu), color, radius, CirclePart(true, false, false, false));
-    drawCircleFilled(Offset(xr, yu), color, radius, CirclePart(false, true, false, false));
-    drawCircleFilled(Offset(xl, yl), color, radius, CirclePart(false, false, true, false));
-    drawCircleFilled(Offset(xr, yl), color, radius, CirclePart(false, false, false, true));
+    fillCircle(Offset(xl, yu), color, radius, CirclePart(true, false, false, false));
+    fillCircle(Offset(xr, yu), color, radius, CirclePart(false, true, false, false));
+    fillCircle(Offset(xl, yl), color, radius, CirclePart(false, false, true, false));
+    fillCircle(Offset(xr, yl), color, radius, CirclePart(false, false, false, true));
     ww = size.width - 2 * radius;
     xl = xl + 1;
     yu = yu + 1;
     yl = yl + 1;
     if (ww >= 3) {
         ww = ww - 2;
-        drawRectFilled(Offset(xl, offset.y), Size(ww, radius + 1), color);
-        drawRectFilled(Offset(xl, yl), Size(ww, radius + 1), color);
+        fillRect(Offset(xl, offset.y), Size(ww, radius + 1), color);
+        fillRect(Offset(xl, yl), Size(ww, radius + 1), color);
     }
     hh = size.height - 2 * radius;
     if (hh >= 3) {
         hh = hh - 2;
-        drawRectFilled(Offset(offset.x, yu), Size(size.width, hh), color);
+        fillRect(Offset(offset.x, yu), Size(size.width, hh), color);
     }
 }
 
-void ExGraphics::GraphicsFunction::drawRRect(Offset offset, Size size, Color color, std::int16_t radius) {
+void ExGraphics::GraphicsFunction::drawRoundedRect(Offset offset, Size size, Color color, std::int16_t radius) {
     int16_t maxRadius = ((size.width < size.height) ? size.width : size.height) / 2;
     radius = radius > maxRadius ? maxRadius : radius < 0 ? 0
                                                          : radius;
@@ -186,7 +186,7 @@ void ExGraphics::GraphicsFunction::drawRRect(Offset offset, Size size, Color col
                CirclePart(false, false, false, true));
 }
 
-void ExGraphics::GraphicsFunction::drawCircleFilled(Offset offset, Color color, std::uint16_t radius, CirclePart part) {
+void ExGraphics::GraphicsFunction::fillCircle(Offset offset, Color color, std::uint16_t radius, CirclePart part) {
     std::int16_t f = 1 - radius;
     Offset ddF(1, -2 * radius);
     Offset cur(0, radius);
@@ -201,6 +201,44 @@ void ExGraphics::GraphicsFunction::drawCircleFilled(Offset offset, Color color, 
         ddF.x += 2;
         f += ddF.x;
         drawCircleFilledHelper(offset, cur, color, radius, part);
+    }
+}
+
+void ExGraphics::GraphicsFunction::drawPill(Offset offset, Size size, Color color) {
+    if (size.width < size.height)
+        drawRect(offset, size, color);
+    int radius = size.height / 2;
+    if (size.height % 2 == 0) {
+        drawCircle(offset + Offset(radius, radius), color, radius, CirclePart(true, false, false, false));
+        drawCircle(offset + Offset(radius, radius + 1), color, radius, CirclePart(false, false, true, false));
+        drawLine(offset + Offset(radius + 1, 0), offset + Offset(1 + size.width - radius, 0), color);
+        drawLine(offset + Offset(radius + 1, size.height - 1), offset + Offset(1 + size.width - radius, size.height - 1), color);
+        drawCircle(offset + Offset(size.width - radius - 1, radius), color, radius, CirclePart(false, true, false, false));
+        drawCircle(offset + Offset(size.width - radius - 1, radius + 1), color, radius, CirclePart(false, false, false, true));
+
+    } else {
+        drawCircle(offset + Offset(radius, radius), color, radius, CirclePart(true, false, true, false));
+        drawLine(offset + Offset(radius + 1, 0), offset + Offset(1 + size.width - radius, 0), color);
+        drawLine(offset + Offset(radius + 1, size.height - 1), offset + Offset(1 + size.width - radius, size.height - 1), color);
+        drawCircle(offset + Offset(size.width - radius - 1, radius), color, radius, CirclePart(false, true, false, true));
+    }
+}
+
+void ExGraphics::GraphicsFunction::fillPill(Offset offset, Size size, Color color) {
+    if (size.width < size.height)
+        fillRect(offset, size, color);
+    int radius = size.height / 2;
+    if (size.height % 2 == 0) {
+        fillCircle(offset + Offset(radius, radius), color, radius, CirclePart(true, false, false, false));
+        fillCircle(offset + Offset(radius, radius + 1), color, radius, CirclePart(false, false, true, false));
+        fillRect(offset + Offset(radius + 1, 0), Size(size.width - 2 * radius, size.height), color);
+        fillCircle(offset + Offset(size.width - radius - 1, radius), color, radius, CirclePart(false, true, false, false));
+        fillCircle(offset + Offset(size.width - radius - 1, radius + 1), color, radius, CirclePart(false, false, false, true));
+
+    } else {
+        fillCircle(offset + Offset(radius, radius), color, radius, CirclePart(true, false, true, false));
+        fillRect(offset + Offset(radius + 1, 0), Size(size.width - 2 * radius, size.height), color);
+        fillCircle(offset + Offset(size.width - radius - 1, radius), color, radius, CirclePart(false, true, false, true));
     }
 }
 

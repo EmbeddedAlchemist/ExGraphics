@@ -202,7 +202,7 @@ inline void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeig
         GraphicsFunction::drawLine(start, end, _color);
 }
 template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::drawRectFilled(Offset start, Size size, Color _color) {
+inline void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::fillRect(Offset start, Size size, Color _color) {
     if (!containDrawableArea(start, size))
         return;
     Offset end = start + size.toOffset();

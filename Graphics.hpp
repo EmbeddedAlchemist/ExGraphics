@@ -3,7 +3,7 @@
 #include "Basic/GraphicsFunction.hpp"
 #include "Basic/Offset.hpp"
 #include "GraphicsDevice.hpp"
-#include "Util/Color/Color.hpp"
+#include "Basic/Color.hpp"
 
 namespace ExGraphics {
 
@@ -256,7 +256,7 @@ class Graphics : public GraphicsFunction {
      * @param size rectangle size
      * @param color fill color
      */
-    virtual void drawRectFilled(Offset offset, Size size, Color color);
+    virtual void fillRect(Offset offset, Size size, Color color);
 
     /**
      * @brief draw mono bitmap method
