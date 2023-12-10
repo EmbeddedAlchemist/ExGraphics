@@ -2,7 +2,10 @@
 #include "Util/UTF8Praser.hpp"
 
 ExGraphics::Text::Text(Offset offset, Size size, const Font &font, const char *str, Color color)
-    : GraphicsObject(offset, size), font(font), str(str), color(color) {
+    : GraphicsObject(offset, size, GraphicsObject::ObjectFlags()),
+      font(font),
+      str(str),
+      color(color) {
 }
 
 void ExGraphics::Text::onDraw(Offset offset, GraphicsFunction &func) const {
