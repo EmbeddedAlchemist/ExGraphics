@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Basic/Bitmap.hpp"
-#include "Basic/Offset.hpp"
+#include "Bitmap.hpp"
+#include "Offset.hpp"
 
 namespace ExGraphics {
 class FontCharacter : public MonoBitmap {

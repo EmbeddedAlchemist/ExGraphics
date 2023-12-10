@@ -1,4 +1,5 @@
 #include "GraphicsFunction.hpp"
+#include "UTF8Praser.hpp"
 
 ExGraphics::GraphicsFunction::CirclePart::CirclePart(bool topLeft, bool topRight, bool bottomLeft, bool bottomRight)
     : topLeft(topLeft), topRight(topRight), bottomLeft(bottomLeft), bottomRight(bottomRight) {
@@ -240,6 +241,38 @@ void ExGraphics::GraphicsFunction::fillPill(Offset offset, Size size, Color colo
         fillRect(offset + Offset(radius + 1, 0), Size(size.width - 2 * radius, size.height), color);
         fillCircle(offset + Offset(size.width - radius - 1, radius), color, radius, CirclePart(false, true, false, true));
     }
+}
+
+void ExGraphics::GraphicsFunction::drawText(Offset offset, const Font &font, const char *text, Color color) {
+    Offset cur = offset;
+    const char *str = text;
+    std::uint32_t ch;
+    std::size_t chLen;
+    const FontCharacter *character;
+    while ((ch = UTF8Praser::nextUTF8(str, &chLen)) != 0) {
+        str += chLen;
+        character = font.find(ch);
+        if (character == nullptr)
+            continue;
+        drawBitmap(cur + Offset(0, character->offsetY), *character, color);
+        cur = cur + Offset(character->size.width, 0);
+    }
+}
+
+std::int16_t ExGraphics::GraphicsFunction::getTextWidth(const Font &font, const char *text) {
+    const char *str = text;
+    std::uint32_t ch;
+    std::size_t chLen;
+    const FontCharacter *character;
+    std::uint16_t width = 0;
+    while ((ch = UTF8Praser::nextUTF8(str, &chLen)) != 0) {
+        str += chLen;
+        character = font.find(ch);
+        if (character == nullptr)
+            continue;
+        width += character->size.width;
+    }
+    return width;
 }
 
 void ExGraphics::GraphicsFunction::drawCircle(Offset offset, Color color, std::uint16_t radius, CirclePart part) {

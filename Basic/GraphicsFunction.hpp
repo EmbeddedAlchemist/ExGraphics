@@ -1,14 +1,14 @@
 #pragma once
 
 #include "Bitmap.hpp"
+#include "Color.hpp"
+#include "Font.hpp"
 #include "GraphicsObject.hpp"
 #include "Offset.hpp"
 #include "Size.hpp"
 
-#include "Basic/Color.hpp"
-
 namespace ExGraphics {
-    
+
 class GraphicsObject;
 
 /**
@@ -40,6 +40,9 @@ class GraphicsFunction {
     virtual void drawLine(Offset start, Offset end, Color color);
     virtual void fillRect(Offset offset, Size size, Color color);
 
+    // bitmap drawing
+    virtual void drawBitmap(Offset offset, const MonoBitmap &bitmap, Color color) = 0;
+
     // extra drawing
     virtual void drawRect(Offset offset, Size size, Color color);
     virtual void drawRoundedRect(Offset offset, Size size, Color color, std::int16_t radius);
@@ -49,8 +52,9 @@ class GraphicsFunction {
     virtual void drawPill(Offset offset, Size size, Color color);
     virtual void fillPill(Offset offset, Size size, Color color);
 
-    // bitmap drawing
-    virtual void drawBitmap(Offset offset, const MonoBitmap &bitmap, Color color) = 0;
+    // text
+    void drawText(Offset offset, const Font &font, const char *text, Color color);
+    std::int16_t getTextWidth(const Font &font, const char *text);
 
     // drawing control
     virtual bool isInDrawableArea(Offset offset, Size size) = 0;
