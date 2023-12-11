@@ -16,14 +16,19 @@ namespace ExGraphics {
  * @tparam pageWidth
  * @tparam pageHeight
  */
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
+template <typename ColorType, typename displaySize, typename pageSize>
 class Graphics : public GraphicsFunction {
+
+    static_assert(isTemplateSize<displaySize>::value, "displaySize must be a TemplateSize");
+    static_assert(isTemplateSize<pageSize>::value, "pageSize must be a TemplateSize");
+
   protected:
+
     /**
      * @brief drawing buffer
      *
      */
-    ColorType buffer[pageHeight][pageWidth];
+  ColorType buffer[pageSize::height][pageSize::width];
 
     /**
      * @brief a reference to graphics device

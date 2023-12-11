@@ -10,31 +10,31 @@
 
 namespace ExGraphics {
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline bool Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::inDisplayArea(Offset offset) {
-    return offset.inArea<true, false>(Offset(0, 0), Offset(displayWidth, displayHeight));
+template <typename ColorType, typename displaySize, typename pageSize>
+inline bool Graphics<ColorType, displaySize, pageSize>::inDisplayArea(Offset offset) {
+    return offset.inArea<true, true>(Offset(0, 0), displaySize::toSize().toOffset());
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline bool Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::inPageArea(Offset offset) {
-    return offset.inArea<true, false>(pageOffset, pageOffset + Offset(pageWidth, pageHeight));
+template <typename ColorType, typename displaySize, typename pageSize>
+inline bool Graphics<ColorType, displaySize, pageSize>::inPageArea(Offset offset) {
+    return offset.inArea<true, true>(pageOffset, pageOffset + pageSize::toSize().toOffset());
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline bool Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::inWindowArea(Offset offset) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline bool Graphics<ColorType, displaySize, pageSize>::inWindowArea(Offset offset) {
     return offset.inArea<true, false>(clipStart, clipEnd);
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline bool Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::inDrawableArea(Offset offset) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline bool Graphics<ColorType, displaySize, pageSize>::inDrawableArea(Offset offset) {
     return inPageArea(offset) &&
            inWindowArea(offset) &&
            inDisplayArea(offset);
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline bool Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::containPageArea(Offset targetStart, Size size) {
-    Offset pageEnd = pageOffset + Offset(pageWidth - 1, pageHeight - 1),
+template <typename ColorType, typename displaySize, typename pageSize>
+inline bool Graphics<ColorType, displaySize, pageSize>::containPageArea(Offset targetStart, Size size) {
+    Offset pageEnd = pageOffset + pageSize::toSize().toOffset(),
            targetEnd = targetStart + size.toOffset();
     return pageEnd.y > targetStart.y &&
            pageOffset.y <= targetEnd.y &&
@@ -42,8 +42,8 @@ inline bool Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeig
            pageOffset.x <= targetEnd.x;
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline bool Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::containWindowArea(Offset targetStart, Size size) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline bool Graphics<ColorType, displaySize, pageSize>::containWindowArea(Offset targetStart, Size size) {
     Offset targetEnd = targetStart + size.toOffset();
     return clipEnd.y > targetStart.y &&
            clipStart.y <= targetEnd.y &&
@@ -51,40 +51,40 @@ inline bool Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeig
            clipStart.x <= targetEnd.x;
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline bool Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::containDrawableArea(Offset offset, Size size) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline bool Graphics<ColorType, displaySize, pageSize>::containDrawableArea(Offset offset, Size size) {
     return containPageArea(offset, size) &&
            containWindowArea(offset, size);
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline Offset Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::limitAtDisplayArea(Offset offset) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline Offset Graphics<ColorType, displaySize, pageSize>::limitAtDisplayArea(Offset offset) {
     if (offset.x < 0)
         offset.x = 0;
-    else if (offset.x >= displayWidth)
-        offset.x = displayWidth - 1;
+    else if (offset.x >= displaySize::width)
+        offset.x = displaySize::width - 1;
     if (offset.y < 0)
         offset.y = 0;
-    else if (offset.y >= displayHeight)
-        offset.y = displayHeight - 1;
+    else if (offset.y >= displaySize::height)
+        offset.y = displaySize::height - 1;
     return offset;
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline Offset Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::limitAtPageArea(Offset offset) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline Offset Graphics<ColorType, displaySize, pageSize>::limitAtPageArea(Offset offset) {
     if (offset.x < pageOffset.x)
         offset.x = pageOffset.x;
-    else if (offset.x >= pageOffset.x + pageWidth)
-        offset.x = pageOffset.x + pageWidth - 1;
+    else if (offset.x >= pageOffset.x + pageSize::width)
+        offset.x = pageOffset.x + pageSize::width - 1;
     if (offset.y < pageOffset.y)
         offset.y = pageOffset.y;
-    else if (offset.y >= pageOffset.y + pageHeight)
-        offset.y = pageOffset.y + pageHeight - 1;
+    else if (offset.y >= pageOffset.y + pageSize::height)
+        offset.y = pageOffset.y + pageSize::height - 1;
     return offset;
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline Offset Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::limitAtWindowArea(Offset offset) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline Offset Graphics<ColorType, displaySize, pageSize>::limitAtWindowArea(Offset offset) {
     if (offset.x < clipStart.x)
         offset.x = clipStart.x;
     else if (offset.x >= clipEnd.x)
@@ -96,27 +96,27 @@ inline Offset Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHe
     return offset;
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline Offset Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::limitAtDrawableArea(Offset offset) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline Offset Graphics<ColorType, displaySize, pageSize>::limitAtDrawableArea(Offset offset) {
     offset = limitAtDisplayArea(offset);
     offset = limitAtPageArea(offset);
     offset = limitAtWindowArea(offset);
     return offset;
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline Offset Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::toPageOffset(Offset offset) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline Offset Graphics<ColorType, displaySize, pageSize>::toPageOffset(Offset offset) {
     return offset - pageOffset;
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::Graphics(GraphicsDevice<ColorType> &graphicsDevice)
-    : graphicsDevice(graphicsDevice), pageOffset(0, 0), clipStart(0, 0), clipEnd(displayWidth, displayHeight) {
+template <typename ColorType, typename displaySize, typename pageSize>
+Graphics<ColorType, displaySize, pageSize>::Graphics(GraphicsDevice<ColorType> &graphicsDevice)
+: graphicsDevice(graphicsDevice), pageOffset(0, 0), clipStart(0, 0), clipEnd(displaySize::width, displaySize::height) {
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::fill(ColorType color) {
-    size_t size = pageWidth * pageHeight;
+template <typename ColorType, typename displaySize, typename pageSize>
+void Graphics<ColorType, displaySize, pageSize>::fill(ColorType color) {
+    size_t size = pageSize::toSize().getArea();
     ColorType *pix = &buffer[0][0];
     while (size--) {
         *pix = color;
@@ -124,34 +124,34 @@ void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::fi
     }
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::clear() {
+template <typename ColorType, typename displaySize, typename pageSize>
+void Graphics<ColorType, displaySize, pageSize>::clear() {
     std::memset(&buffer[0][0], 0xFF, sizeof(buffer));
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::update() {
-    graphicsDevice.update(pageOffset, Size(pageWidth, pageHeight), &buffer[0][0]);
+template <typename ColorType, typename displaySize, typename pageSize>
+void Graphics<ColorType, displaySize, pageSize>::update() {
+    graphicsDevice.update(pageOffset, pageSize::toSize(), &buffer[0][0]);
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::setPixel(Offset position, ColorType color) {
+template <typename ColorType, typename displaySize, typename pageSize>
+void Graphics<ColorType, displaySize, pageSize>::setPixel(Offset position, ColorType color) {
     debugAssert(inDrawableArea(position + pageOffset));
     buffer[position.y][position.x] = color;
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-ColorType Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::getPixel(Offset position) {
+template <typename ColorType, typename displaySize, typename pageSize>
+ColorType Graphics<ColorType, displaySize, pageSize>::getPixel(Offset position) {
     return buffer[position.y][position.x];
 }
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline ColorType &Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::getPixelRef(Offset position) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline ColorType &Graphics<ColorType, displaySize, pageSize>::getPixelRef(Offset position) {
     debugAssert(inDrawableArea(position + pageOffset));
     return buffer[position.y][position.x];
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::drawHorizonLine(Offset start, Offset end, ColorType color) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline void Graphics<ColorType, displaySize, pageSize>::drawHorizonLine(Offset start, Offset end, ColorType color) {
     debugAssert(start.y == end.y);
     if(start.x > end.x)
         start.swapXWith(end);
@@ -167,8 +167,8 @@ inline void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeig
     }
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::drawVerticalLine(Offset start, Offset end, ColorType color) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline void Graphics<ColorType, displaySize, pageSize>::drawVerticalLine(Offset start, Offset end, ColorType color) {
     debugAssert(start.x == end.x);
     if(start.y > end.y)
         start.swapYWith(end);
@@ -184,15 +184,15 @@ inline void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeig
     }
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::drawPixel(Offset offset, Color _color) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline void Graphics<ColorType, displaySize, pageSize>::drawPixel(Offset offset, Color _color) {
     if (!inDrawableArea(offset))
         return;
     ColorType color(_color);
     setPixel(toPageOffset(offset), color);
 }
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::drawLine(Offset start, Offset end, Color _color) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline void Graphics<ColorType, displaySize, pageSize>::drawLine(Offset start, Offset end, Color _color) {
     ColorType color(_color);
     if (start.y == end.y)
         drawHorizonLine(start, end, color);
@@ -201,8 +201,8 @@ inline void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeig
     else
         GraphicsFunction::drawLine(start, end, _color);
 }
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::fillRect(Offset start, Size size, Color _color) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline void Graphics<ColorType, displaySize, pageSize>::fillRect(Offset start, Size size, Color _color) {
     if (!containDrawableArea(start, size))
         return;
     Offset end = start + size.toOffset();
@@ -217,8 +217,8 @@ inline void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeig
             setPixel(curr, color);
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::drawBitmap(Offset offset, const MonoBitmap &_bitmap, Color _color) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline void Graphics<ColorType, displaySize, pageSize>::drawBitmap(Offset offset, const MonoBitmap &_bitmap, Color _color) {
     if (!containDrawableArea(offset, _bitmap.size)) // check if there is a part of the bitmap in drawable area
         return;                                     // if not, return.
 
@@ -256,42 +256,42 @@ inline void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeig
     }
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline bool Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::isInDrawableArea(Offset offset, Size size) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline bool Graphics<ColorType, displaySize, pageSize>::isInDrawableArea(Offset offset, Size size) {
     return containDrawableArea(offset, size);
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::setClipWindow(Offset offset, Size size) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline void Graphics<ColorType, displaySize, pageSize>::setClipWindow(Offset offset, Size size) {
     clipStart = offset;
     clipEnd = offset + Offset(size.width, size.height);
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::getClipWindow(Offset &offset, Size &size) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline void Graphics<ColorType, displaySize, pageSize>::getClipWindow(Offset &offset, Size &size) {
     offset = clipStart;
     size = Size(clipEnd.x - clipStart.x, clipEnd.y - clipStart.y);
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::resetClipWindow() {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline void Graphics<ColorType, displaySize, pageSize>::resetClipWindow() {
     clipStart = Offset(0, 0);
-    clipEnd = Offset(displayWidth, displayHeight);
+    clipEnd = Offset(displaySize::width, displaySize::height);
 }
 
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline void Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::firstPage(void) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline void Graphics<ColorType, displaySize, pageSize>::firstPage(void) {
     pageOffset = Offset(0, 0);
 }
-template <typename ColorType, std::uint16_t displayWidth, std::uint16_t displayHeight, std::uint16_t pageWidth, std::uint16_t pageHeight>
-inline bool Graphics<ColorType, displayWidth, displayHeight, pageWidth, pageHeight>::nextPage(void) {
+template <typename ColorType, typename displaySize, typename pageSize>
+inline bool Graphics<ColorType, displaySize, pageSize>::nextPage(void) {
     Offset bkup = pageOffset;
-    pageOffset.x += pageWidth;
-    if (pageOffset.x < displayWidth)
+    pageOffset.x += pageSize::width;
+    if (pageOffset.x < displaySize::width)
         return true;
     pageOffset.x = 0;
-    pageOffset.y += pageHeight;
-    if (pageOffset.y < displayHeight)
+    pageOffset.y += pageSize::height;
+    if (pageOffset.y < displaySize::height)
         return true;
     pageOffset = bkup; // keep pageoffset;
     return false;

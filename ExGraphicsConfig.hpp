@@ -3,8 +3,8 @@
 namespace ExGraphics {
 
 struct Configs {
-    static constexpr bool useAssert = true;
-    static constexpr bool showObjectBorder = true;
+    static constexpr bool useAssert = false;
+    static constexpr bool showObjectBorder = false;
 };
 
 } // namespace ExGraphics

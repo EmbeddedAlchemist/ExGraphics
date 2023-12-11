@@ -159,11 +159,13 @@ async function start_convert() {
         `font_size: ${result.font_size}`,
         `font_weight: ${result.font_weight}`,
         `gray_scale_bits: ${result.gray_scale_bits}`,
+        `ascent: ${result.ascent}px`,
+        `descent: ${result.descent}px`,
         `def_name: ${result.def_name}`,
         `character_count: ${result.character_count}`,
         `font_size: ${((result.content_size + result.struct_size) / 1024).toFixed(2)}KB (${result.content_size + result.struct_size}Bytes)`,
         `  content: ${(result.content_size/1024).toFixed(2)}KB (${result.content_size}Bytes)`,
-        `  struct: ${(result.struct_size/1024).toFixed(2)}KB (${result.struct_size}Bytes)`
+        `  struct: ${(result.struct_size / 1024).toFixed(2)}KB (${result.struct_size}Bytes)`,
     ]
     download_cpp_name.innerHTML = `${result.def_name}.cpp`;
     download_hpp_name.innerHTML = `${result.def_name}.hpp`;

@@ -27,6 +27,14 @@ function drawChar(ch, font) {
     return baseLineHeight;
 }
 
+function getFontHeight(font) {
+    let ctx = document.createElement("canvas").getContext("2d");
+    ctx.font = font;
+    mtr = ctx.measureText("A");
+    console.log(font, mtr);
+    return { ascent: Math.round(mtr.fontBoundingBoxAscent), descent: Math.round(mtr.fontBoundingBoxDescent) };
+}
+
 function spArr(arr, num) {
     let newArr = []
     for (let i = 0; i < arr.length;) {
@@ -106,7 +114,7 @@ function get_def_name(font_name) {
 }
 
 
-function generateDef(arr_ch_encoded, font_name_raw, size, weight, gray_scale_bits) {
+function generateDef(arr_ch_encoded, font_name_raw, size, weight, gray_scale_bits, ascent_descent) {
     var content_size = 0;
     var struct_size = 0;
     var ch_count = arr_ch_encoded.length;
@@ -122,11 +130,11 @@ function generateDef(arr_ch_encoded, font_name_raw, size, weight, gray_scale_bit
         var content_name = `${ch_name}_content`;
         var content_def = `static const std::uint8_t ${content_name}[${value.length}] /* ${value.char} */ = { ${value.arr.join(", ")} };\n`
         content_size += value.arr.length;
-        
+
         var res_name = `${ch_name}_resource`;
         var res_def = `static const LocalResource ${res_name}((const void *)${content_name}, ${value.length});\n`
         struct_size += 8;
-        
+
         var characters_construct = `\tExGraphics::FontCharacter(${ch_code} /* ${value.char} */, ${res_name}, ExGraphics::Size(${value.size.width}, ${value.size.height}), ${gray_scale_bits}, ${value.offset.y})`
         struct_size += 17;
 
@@ -137,32 +145,34 @@ function generateDef(arr_ch_encoded, font_name_raw, size, weight, gray_scale_bit
 
     var character_set_def = `static const ExGraphics::FontCharacter ${character_set_name}[${arr_ch_encoded.length}] = {\n${characters_constructs.join(",\n")},\n};\n`
     var font_name = base_name;
-    var font_def = `extern const ExGraphics::Font ${font_name}(${character_set_name}, ${arr_ch_encoded.length});\n`
+    var font_def = `extern const ExGraphics::Font ${font_name}(${character_set_name}, ${arr_ch_encoded.length}, ${ascent_descent.ascent}, ${ascent_descent.descent});\n`
     var font_declaration = `extern const ExGraphics::Font ${font_name};\n`;
 
     var file_head =
         `/** ExGraphics font file for ${base_name}
-* font_name:       ${font_name_raw}
-* font_size:       ${size}
-* font_weight:     ${weight}
-* gray_scale_bits: ${gray_scale_bits} bit(s)
-* character_count: ${ch_count} character(s)
-* content_size:    ${content_size} byte(s) 
-*                  =${content_size / 1024} KB
-* struct_size:     ${struct_size} byte(s) 
-*                  =${struct_size / 1024} KB
-* total_size:      ${content_size + struct_size} byte(s) 
-*                  =${(content_size + struct_size) / 1024} KB
-*/
+ * font_name:       ${font_name_raw}
+ * font_size:       ${size}
+ * font_weight:     ${weight}
+ * gray_scale_bits: ${gray_scale_bits} bit(s)
+ * character_count: ${ch_count} character(s)
+ * ascent:          ${ascent_descent.ascent}px
+ * descent:         ${ascent_descent.descent}px
+ * content_size:    ${content_size} byte(s) 
+ *                  =${content_size / 1024} KB
+ * struct_size:     ${struct_size} byte(s) 
+ *                  =${struct_size / 1024} KB
+ * total_size:      ${content_size + struct_size} byte(s) 
+ *                  =${(content_size + struct_size) / 1024} KB
+ */
 
 `;
     var src_head =
         `#include <cstdint>
-#include "Font/Font.hpp"
+#include "Basic/Font.hpp"
 #include "Resource/LocalResource.hpp"
 `
     var header_head =
-        `#include "Font/Font.hpp"
+        `#include "Basic/Font.hpp"
 `
 
     var src_text = "";
@@ -190,36 +200,34 @@ function generateDef(arr_ch_encoded, font_name_raw, size, weight, gray_scale_bit
     ret['content_size'] = content_size;
     ret['struct_size'] = struct_size;
     ret['def_name'] = base_name;
+    ret["ascent"] = ascent_descent.ascent;
+    ret["descent"] = ascent_descent.descent;
 
     return ret;
 }
 
 
-function getBaseLineHeight(font) {
-    var ctx = document.createElement("canvas").getContext("2d");
-    ctx.font = font;
-    return ctx.measureText("").fontBoundingBoxAscent;
-}
 
 function conv(ch_str, font_name, font_size, font_weight, gray_scale_bits) {
     var font = `${font_weight} ${font_size} ${font_name}`;
     var ch_array = Array.from(new Set(Array.from(ch_str))).sort((a, b) => { return a.charCodeAt(0) - b.charCodeAt(0) });
     var gray_scale_max = (1 << gray_scale_bits) - 1;
     var arr_ch_encoded = []
-    var font_ascent_height = getBaseLineHeight(font);
+    var ascent_descent = getFontHeight(font);
 
     ch_array.forEach((c) => {
         var dist_ch_info = {};
         ch_base_line_height = drawChar(c.toString(), font);
         dist_ch_info["char"] = c;
-        dist_ch_info["offset"] = { x: 0, y: font_ascent_height - ch_base_line_height };
+        dist_ch_info["offset"] = { x: 0, y: ascent_descent.ascent - ch_base_line_height };
+        console.log(c, ch_base_line_height, ascent_descent.ascent);
         gray_scale_aray = canvasToGrayScaleArray(gray_scale_max);
         dist_ch_info["size"] = { height: gray_scale_aray.length, width: gray_scale_aray[0].length };
         dist_ch_info["arr"] = encode(gray_scale_aray, gray_scale_bits);
         dist_ch_info["length"] = dist_ch_info["arr"].length
         arr_ch_encoded.push(dist_ch_info);
     });
-    return generateDef(arr_ch_encoded, font_name, font_size, font_weight, gray_scale_bits);
+    return generateDef(arr_ch_encoded, font_name, font_size, font_weight, gray_scale_bits, ascent_descent);
 
 }
 

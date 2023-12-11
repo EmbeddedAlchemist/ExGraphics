@@ -20,4 +20,27 @@ class Size {
 
     Offset toOffset() const;
 };
-} // namespace Graphics
+
+template <std::uint16_t argWidth, std::uint16_t argHeight>
+class TemplateSize {
+  public:
+    static constexpr uint16_t width = argWidth;
+    static constexpr uint16_t height = argHeight;
+
+    inline static Size toSize() {
+        return Size(width, height);
+    }
+
+    inline operator Size() const {
+        return Size(width, height);
+    }
+};
+
+
+template <typename any>
+struct isTemplateSize:std::false_type{};
+
+template <std::uint16_t argWidth, std::uint16_t argHeight>
+struct isTemplateSize<TemplateSize<argWidth, argHeight>> : std::true_type {};
+
+} // namespace ExGraphics

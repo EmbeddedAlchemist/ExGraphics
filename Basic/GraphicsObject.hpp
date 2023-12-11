@@ -10,7 +10,7 @@ class GraphicsFunction;
 class GraphicsObject;
 
 /**
- * @brief Callback function for object callback, none return, with a reference to object self.
+ * @brief Callback function for object callback, none return, with a parameter which is a reference to object self.
  *
  */
 using CallbackFunction = void (*)(GraphicsObject &object);

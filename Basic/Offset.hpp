@@ -33,6 +33,17 @@ class Offset {
     Size toSize() const;
 };
 
-} // namespace Graphics
+template <std::int16_t argX, std::int16_t argY>
+class TemplateOffset {
+  public:
+    static constexpr std::int16_t x = argX;
+    static constexpr std::int16_t y = argY;
+
+    inline operator Offset() const {
+        return Offset(x, y);
+    }
+};
+
+} // namespace ExGraphics
 
 #include "Offset.ipp"
