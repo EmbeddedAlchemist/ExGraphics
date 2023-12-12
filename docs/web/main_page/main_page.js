@@ -1,3 +1,60 @@
-document.getElementById("getting_start_btn").addEventListener("click", (e) => {
+import * as StackBlur from "./stackblur-es.js"
+
+const main_page_bg = document.getElementById("main_page_bg");
+
+document.getElementById("getting_start_btn")?.addEventListener("click", (e) => {
     document.location.assign("https://github.com/EmbeddedAlchemist/ExGraphics")
 })
+
+
+
+
+
+
+
+
+
+function main_page_bg_runtime() {
+    var pos = [];
+
+    function setMainBackgroundCancasSize() {
+        main_page_bg.setAttribute("width", window.innerWidth / 8);
+        main_page_bg.setAttribute("height", window.innerHeight / 8);
+        pos = [
+            { x: main_page_bg.width * 0.3, y: main_page_bg.height * 0.3, xd: 1, yd: 1, ax: 0, ay: 0, r: main_page_bg.height*0.3, c:"#8C04A840" },
+            { x: main_page_bg.width * 0.7, y: main_page_bg.height * 0.7, xd: 1, yd: 1, ax: 0, ay: 0, r: main_page_bg.height*0.3, c:"#4512AE40" }
+        ];
+    }
+    window.addEventListener("resize", (e) => {
+        setMainBackgroundCancasSize();
+    })
+    setMainBackgroundCancasSize();
+
+    setInterval(() => {
+        var ctx = main_page_bg.getContext("2d", { willReadFrequently: true });
+        ctx.fillStyle = "#202020"
+        ctx.fillRect(0, 0, main_page_bg.width, main_page_bg.height);
+        pos.forEach((p) => {
+            ctx.fillStyle = p.c;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI, true);
+            ctx.closePath();
+            ctx.fill();
+            p.xd = Math.random() < 0.1 ? - p.xd : p.xd;
+            p.yd = Math.random() < 0.1 ? - p.yd : p.yd;
+            p.ax = p.ax * 0.95 + p.xd * Math.random() * 0.01;
+            p.ay = p.ay * 0.95 + p.yd * Math.random() * 0.01;
+            p.ax += (p.x > main_page_bg.width / 2 ? -1 : 1) * 0.00015;
+            p.ay += (p.y > main_page_bg.height / 2 ? -1 : 1) * 0.00015;
+            p.x += p.ax;
+            p.y += p.ay;
+        })
+
+        StackBlur.canvasRGBA(main_page_bg, 0, 0, main_page_bg.width, main_page_bg.height, 70)
+    }, 20);
+}
+
+main_page_bg_runtime();
+
+
+

@@ -1,5 +1,13 @@
+@font-face {
+    font-family: "小米兰亭Pro";
+    src: url("小米兰亭Pro.ttf");
+}
+
 * {
     box-sizing: border-box;
+    font-family: "小米兰亭Pro";
+    font-weight: 300;
+    user-select: none;
 }
 
 html {
@@ -10,7 +18,7 @@ html {
 
 body {
     display: block;
-    background-color: #333;
+    background-color: #202020;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -18,6 +26,8 @@ body {
     overflow: auto;
     scrollbar-width: none;
 }
+
+
 
 .page {
     display: flex;
@@ -28,40 +38,97 @@ body {
 }
 
 #page1 {
+    position: relative;
     color: white;
 }
 
-#page1 > nav{
+#page1>nav {
+    position:absolute;
+    background-color: #33333333;
     width: 100%;
     height: 100px;
+    display: flex;
+    padding: 20px;
+    justify-content: end;
+    align-items: center;
 }
 
-#page1 >main{
+#page1>main {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
 }
 
-.btn>.glossy_card {
+
+#page1>main>h1{
+    font-size: 96px;
+    margin: 0;
+    font-weight: 100;
+    letter-spacing: 5px;
+}
+
+#page1>main>p{
+    margin: 0;
+    font-size: 24px;
+    font-weight: 200;
+}
+
+
+.btn{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    width: fit-content;
+    height: fit-content;
+    padding: 15px 30px;
+    font-weight: 200;
+    transition: all 0.3s;
+    cursor: pointer;
+    
+}
+
+.btn:active{
+    transform: scale(0.95);
+    transition: all 0.1s;
+}
+
+.btn>.glossy_btn {
     width: 100%;
     height: 100%;
 }
 
-#getting_start_btn {
-    position: relative;
-    display: flex;
-    width: 300px;
-    height: 100px;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
-}
-
-#getting_start_btn>span {
+.btn>span {
     z-index: 1;
     pointer-events: none;
-    font-family: monospace;
+    font-weight: inherit;
+    transition: all 0.5s;
+}
+
+.btn:hover>span{
+    color: var(--clr);
+    letter-spacing: 1px;
+}
+
+#getting_start_btn {
+    margin-top: 30px;
+    font-size: 20px;
+    padding: 20px 40px;
+}
+
+
+.tool_bar_btn{
+    margin: 0 10px;
+}
+
+#main_page_bg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }

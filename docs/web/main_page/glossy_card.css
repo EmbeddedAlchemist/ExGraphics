@@ -38,3 +38,46 @@
     background-color: rgba(45, 45, 45, .7);
     transition: all 0.1s;
 }
+
+
+
+.glossy_btn {
+    position: absolute;
+    background-color: rgba(45, 45, 45, 1);
+    border-radius: 99999px;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+
+.glossy_btn::before {
+    content: '';
+    position: absolute;
+    top: var(--y);
+    left: var(--x);
+    transform: translate(-50%, -50%);
+    background: radial-gradient(var(--clr), transparent, transparent);
+    width: 500px;
+    height: 500px;
+    opacity: 0;
+    transition: top 0, left 0;
+    transition: opacity 0.5s;
+}
+
+.glossy_btn:hover::before {
+    opacity: 1;
+}
+
+.glossy_btn::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: 99999px;
+    background-color: rgba(45, 45, 45, .85);
+    transition: all 0.5s;
+}
+
+.glossy_btn:active:after {
+    background-color: rgba(45, 45, 45, .7);
+    transition: all 0.1s;
+}
