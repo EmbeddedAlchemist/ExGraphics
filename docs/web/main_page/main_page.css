@@ -18,13 +18,14 @@ html {
 
 body {
     display: block;
-    background-color: #202020;
+    background-color: whitesmoke;
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
     scrollbar-width: none;
+    scroll-snap-type: y mandatory;
 }
 
 
@@ -35,6 +36,7 @@ body {
     height: 100%;
     overflow: auto;
     flex-direction: column;
+    scroll-snap-align: start;
 }
 
 #page1 {
@@ -43,7 +45,7 @@ body {
 }
 
 #page1>nav {
-    position:absolute;
+    position: absolute;
     background-color: #33333333;
     width: 100%;
     height: 100px;
@@ -64,21 +66,23 @@ body {
 }
 
 
-#page1>main>h1{
+#page1>main>h1 {
     font-size: 96px;
     margin: 0;
     font-weight: 100;
     letter-spacing: 5px;
+    color: #FFFFFFD0;
 }
 
-#page1>main>p{
+#page1>main>p {
     margin: 0;
     font-size: 24px;
     font-weight: 200;
+    color: #FFFFFFA0;
 }
 
 
-.btn{
+.btn {
     position: relative;
     display: flex;
     align-items: center;
@@ -90,10 +94,10 @@ body {
     font-weight: 200;
     transition: all 0.3s;
     cursor: pointer;
-    
+
 }
 
-.btn:active{
+.btn:active {
     transform: scale(0.95);
     transition: all 0.1s;
 }
@@ -110,7 +114,7 @@ body {
     transition: all 0.5s;
 }
 
-.btn:hover>span{
+.btn:hover>span {
     color: var(--clr);
     letter-spacing: 1px;
 }
@@ -122,13 +126,52 @@ body {
 }
 
 
-.tool_bar_btn{
+#getting_start_btn:hover >span{
+    color:#FFFFFF
+}
+
+.tool_bar_btn {
     margin: 0 10px;
 }
 
-#main_page_bg{
+#getting_start_btn>.glossy_btn {
+    background-color: rgba(255, 255, 255, .30);
+}
+
+#getting_start_btn>.glossy_btn:hover {
+    background-color: rgba(192, 192, 192, .30);
+}
+
+#getting_start_btn>.glossy_btn::after {
+    background-color: #0002;
+}
+
+#getting_start_btn>.glossy_btn:hover::after {
+    background-color: #0004;
+}
+
+#main_page_bg {
     position: absolute;
     width: 100%;
     height: 100%;
     z-index: -1;
+}
+
+#learn_more_hits{
+    position: absolute;
+    bottom: 50px;
+    width: fit-content;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: .6;
+}
+#learn_more_hits>span{
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: 150;
+}
+#learn_more_hits>svg{
+    margin-top: 3px;
 }
