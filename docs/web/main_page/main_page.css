@@ -3,6 +3,33 @@
     src: url("小米兰亭Pro.ttf");
 }
 
+
+@media(prefers-color-scheme: dark) {
+    :root {
+        --bg-color-rgb: 32, 32, 32;
+        --bg-color-dynamic-l: 65;
+        --bg-color-dynamic-a: 7;
+        --text-color-rgb: 255, 255, 255
+    }
+}
+
+@media(prefers-color-scheme: light) {
+    :root {
+        --bg-color-rgb: 245, 245, 245;
+        --bg-color-dynamic-l: 50;
+        --bg-color-dynamic-a: 15;
+        --text-color-rgb: 32, 32, 32
+    }
+}
+
+
+:root {
+    --bg-color: rgb(var(--bg-color-rgb));
+    --text-color: rgb(var(--text-color-rgb));
+    background-color: var(--bg-color);
+    color: rgb(var(--text-color-rgb))
+}
+
 * {
     box-sizing: border-box;
     font-family: "小米兰亭Pro";
@@ -18,14 +45,14 @@ html {
 
 body {
     display: block;
-    background-color: whitesmoke;
+
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
     scrollbar-width: none;
-    scroll-snap-type: y mandatory;
+    scroll-snap-type:y mandatory;
 }
 
 
@@ -37,16 +64,14 @@ body {
     overflow: auto;
     flex-direction: column;
     scroll-snap-align: start;
+    position: relative;
 }
 
-#page1 {
-    position: relative;
-    color: white;
-}
+
 
 #page1>nav {
     position: absolute;
-    background-image: linear-gradient(#00000040,#00000000);
+    background-image: linear-gradient(rgba(var(--bg-color-rgb), 25%), rgba(var(--bg-color-rgb), 0%));
     width: 100%;
     height: 100px;
     display: flex;
@@ -71,18 +96,18 @@ body {
     margin: 0;
     font-weight: 100;
     letter-spacing: 5px;
-    color: #FFFFFFD0;
+    color: rgba(var(--text-color-rgb), 80%);
 }
 
 #page1>main>p {
     margin: 0;
     font-size: 24px;
     font-weight: 200;
-    color: #FFFFFFA0;
+    color: rgba(var(--text-color-rgb), 60%);
 }
 
 
-.btn {
+.btn_gl {
     position: relative;
     display: flex;
     align-items: center;
@@ -97,25 +122,24 @@ body {
 
 }
 
-.btn:active {
+.btn_gl:active {
     transform: scale(0.95);
     transition: all 0.1s;
 }
 
-.btn>.glossy_btn {
+.btn_gl>.glossy_btn {
     width: 100%;
     height: 100%;
 }
 
-.btn>span {
+.btn_gl>span {
     z-index: 1;
     pointer-events: none;
     font-weight: inherit;
     transition: all 0.5s;
 }
 
-.btn:hover>span {
-    color: var(--clr);
+.btn_gl:hover>span {
     letter-spacing: 1px;
 }
 
@@ -125,25 +149,20 @@ body {
     padding: 20px 40px;
 }
 
-
-#getting_start_btn:hover >span{
-    color:#FFFFFF
-}
-
 .tool_bar_btn {
     margin: 0 10px;
 }
 
 #getting_start_btn>.glossy_btn {
-    background-color: rgba(255, 255, 255, .30);
+    background-color: rgba(var(--text-color-rgb), .15);
 }
 
 #getting_start_btn>.glossy_btn::after {
-    background-color: #0002;
+    background-color: rgba(var(--bg-color-rgb), 0.125);
 }
 
 #getting_start_btn>.glossy_btn:hover::after {
-    background-color: #0004;
+    background-color: rgba(var(--bg-color-rgb), 0.250);
 }
 
 #main_page_bg {
@@ -153,7 +172,7 @@ body {
     z-index: -1;
 }
 
-#learn_more_hits{
+#learn_more_hits {
     position: absolute;
     bottom: 50px;
     width: fit-content;
@@ -163,11 +182,48 @@ body {
     justify-content: center;
     opacity: .6;
 }
-#learn_more_hits>span{
+
+#learn_more_hits>span {
     margin-left: 10px;
     font-size: 18px;
-    font-weight: 150;
+    font-weight: 200;
 }
-#learn_more_hits>svg{
+
+#learn_more_hits>svg {
     margin-top: 3px;
+    fill: var(--text-color);
+}
+
+
+.btn_tb {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(var(--text-color-rgb), .10);
+    margin: 0 10px;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.btn_tb:hover {
+    background-color: rgba(var(--text-color-rgb), .20);
+}
+
+.btn_tb:active {
+    transform: scale(0.98);
+    transition: all 0.1s;
+    background-color: rgba(var(--text-color-rgb), .30);
+
+}
+
+.btn_tb>span {
+    color: rgba(var(--text-color-rgb), .80);
+}
+
+.btn_tb>svg {
+    margin-right: 5px;
+    fill: rgba(var(--text-color-rgb), .80);
 }
