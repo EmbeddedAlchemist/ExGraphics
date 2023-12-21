@@ -40,7 +40,7 @@ function main_page_bg_runtime() {
         var bg_color = getComputedStyle(root).getPropertyValue("--bg-color");
         var l = getComputedStyle(root).getPropertyValue("--bg-color-dynamic-l");
         var a = getComputedStyle(root).getPropertyValue("--bg-color-dynamic-a");
-        console.log(l)
+        // console.log(l)
         ctx.fillStyle = bg_color;
         ctx.fillRect(0, 0, main_page_bg.width, main_page_bg.height);
         pos.forEach((p) => {
@@ -71,9 +71,7 @@ function main_page_bg_runtime() {
 }
 
 main_page_bg_runtime();
-console.log(root);
-
-
+// console.log(root);
 
 
 

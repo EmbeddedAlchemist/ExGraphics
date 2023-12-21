@@ -166,7 +166,7 @@ label.char_select>input {
     image-rendering: pixelated;
     /* -ms-interpolation-mode: nearest-neighbor; */
     padding: 40px;
-    transition: 0.25s;
+    transition: all 0.25s;
     cursor: pointer;
 }
 

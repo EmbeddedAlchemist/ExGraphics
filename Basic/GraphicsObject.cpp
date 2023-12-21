@@ -33,4 +33,8 @@ GraphicsObject *GraphicsObject::getInnerElementAt(std::size_t index) {
     return nullptr;
 }
 
+GraphicsObject *GraphicsObject::getParentObject() {
+    return nullptr;
+}
+
 } // namespace ExGraphics

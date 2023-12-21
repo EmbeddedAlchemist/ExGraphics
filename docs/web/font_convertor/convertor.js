@@ -109,7 +109,7 @@ function stringToUTF8Int(str) {
 
 function get_def_name(font_name) {
     var def = PinyinHelper.convertToPinyinString(font_name, "_", PinyinFormat.WITHOUT_TONE);
-    def = def.replace(/[^a-z0-9_]/gi, "_");
+    def = def.trim().replace(/[^a-z0-9_]/gi, "_").replace(/_+/g, '_');
     return def;
 }
 

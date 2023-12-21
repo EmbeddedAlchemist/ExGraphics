@@ -152,6 +152,14 @@ class GraphicsObject {
      * @return GraphicsObject* element at index, nullptr for error index.
      */
     virtual GraphicsObject *getInnerElementAt(std::size_t index);
+
+    /**
+     * @brief Container interface, Container Parent Object;
+     * THIS IS CONTAINER INTERFACE, OTHER OBJECT ARE NOT NECESSARY TO IMPLEMENTATION
+     *
+     * @return GraphicsObject*
+     */
+    virtual GraphicsObject *getParentObject();
 };
 
 } // namespace ExGraphics

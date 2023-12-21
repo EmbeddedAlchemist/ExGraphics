@@ -8,7 +8,7 @@
     :root {
         --bg-color-rgb: 32, 32, 32;
         --bg-color-dynamic-l: 65;
-        --bg-color-dynamic-a: 7;
+        --bg-color-dynamic-a: 10;
         --text-color-rgb: 255, 255, 255
     }
 }
@@ -65,8 +65,12 @@ body {
     flex-direction: column;
     scroll-snap-align: start;
     position: relative;
+    background-color: rgba(var(--bg-color-rgb), 50%);
 }
 
+#page1{
+    background-color:transparent;
+}
 
 
 #page1>nav {
@@ -154,15 +158,15 @@ body {
 }
 
 #getting_start_btn>.glossy_btn {
-    background-color: rgba(var(--text-color-rgb), .15);
+    background-color: rgba(var(--text-color-rgb), .05);
 }
 
 #getting_start_btn>.glossy_btn::after {
-    background-color: rgba(var(--bg-color-rgb), 0.125);
+    background-color: rgba(var(--bg-color-rgb), 0);
 }
 
 #getting_start_btn>.glossy_btn:hover::after {
-    background-color: rgba(var(--bg-color-rgb), 0.250);
+    background-color: rgba(var(--bg-color-rgb), 0.25);
 }
 
 #main_page_bg {
@@ -202,20 +206,20 @@ body {
     justify-content: center;
     align-items: center;
     padding: 10px 20px;
-    background-color: rgba(var(--text-color-rgb), .10);
+    background-color: rgba(var(--text-color-rgb), .05);
     margin: 0 10px;
     border-radius: 8px;
     transition: all 0.3s;
 }
 
 .btn_tb:hover {
-    background-color: rgba(var(--text-color-rgb), .20);
+    background-color: rgba(var(--text-color-rgb), .10);
 }
 
 .btn_tb:active {
     transform: scale(0.98);
     transition: all 0.1s;
-    background-color: rgba(var(--text-color-rgb), .30);
+    background-color: rgba(var(--text-color-rgb), .15);
 
 }
 
