@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Basic/GraphicsFunction.hpp"
-#include "Basic/Offset.hpp"
-#include "GraphicsDevice.hpp"
-#include "Basic/Color.hpp"
+#include "Basic/Public/Offset.hpp"
+#include "Basic/Public/Color.hpp"
+#include "Basic/Interface/GraphicsDevice.hpp"
+#include "Basic/Interface/GraphicsFunction.hpp"
+
 
 namespace ExGraphics {
 
@@ -199,6 +200,13 @@ class Graphics : public GraphicsFunction {
      */
     void drawVerticalLine(Offset start, Offset end, ColorType color);
 
+
+
+      //
+
+    //
+
+
     //
     //
     //
@@ -303,3 +311,4 @@ class Graphics : public GraphicsFunction {
 } // namespace ExGraphics
 
 #include "Graphics.ipp"
+#include "DrawingOptimise.ipp"

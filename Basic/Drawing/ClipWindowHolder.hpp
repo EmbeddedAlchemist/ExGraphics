@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GraphicsFunction.hpp"
+#include "Basic/Drawing/DrawingFunction.hpp"
 
 namespace ExGraphics {
 
@@ -14,8 +14,8 @@ class ClipWindowHolder {
     const Size size;
 
   public:
-    ClipWindowHolder(GraphicsFunction &func);
-    void reset(GraphicsFunction &func);
+    ClipWindowHolder(DrawingFunction &func);
+    void reset(DrawingFunction &func);
 };
 
 } // namespace ExGraphics

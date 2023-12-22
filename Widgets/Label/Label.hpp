@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Basic/GraphicsObject.hpp"
-#include "Basic/Font.hpp"
+#include "Basic/UI/GraphicsObject.hpp"
+#include "Basic/Public/Font.hpp"
 
 namespace ExGraphics {
 

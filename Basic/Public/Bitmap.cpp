@@ -1,6 +1,6 @@
 #include "Bitmap.hpp"
 
-#include "debug.hpp"
+#include "Basic/debug.hpp"
 
 namespace ExGraphics {
 

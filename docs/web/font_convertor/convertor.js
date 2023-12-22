@@ -168,11 +168,11 @@ function generateDef(arr_ch_encoded, font_name_raw, size, weight, gray_scale_bit
 `;
     var src_head =
         `#include <cstdint>
-#include "Basic/Font.hpp"
+#include "ExGraphics.hpp"
 #include "Resource/LocalResource.hpp"
 `
     var header_head =
-        `#include "Basic/Font.hpp"
+        `#include "ExGraphics.hpp"
 `
 
     var src_text = "";

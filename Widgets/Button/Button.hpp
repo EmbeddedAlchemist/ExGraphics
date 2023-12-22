@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Basic/GraphicsObject.hpp"
+#include "Basic/UI/GraphicsObject.hpp"
 
 namespace ExGraphics {
 

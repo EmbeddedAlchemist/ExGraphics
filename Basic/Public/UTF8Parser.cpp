@@ -1,6 +1,6 @@
-#include "UTF8Praser.hpp"
+#include "UTF8Parser.hpp"
 
-std::uint32_t UTF8Praser::nextUTF8(const char *str, std::size_t *charLen) {
+std::uint32_t UTF8Parser::nextChar(const char *str, std::size_t *charLen) {
     std::uint32_t result = 0;
     std::size_t loopCounter = getCharLength(str);
     if (charLen)
@@ -14,7 +14,7 @@ std::uint32_t UTF8Praser::nextUTF8(const char *str, std::size_t *charLen) {
     return result;
 }
 
-std::size_t UTF8Praser::getCharLength(const char *str) {
+std::size_t UTF8Parser::getCharLength(const char *str) {
     if((*str & 0b10000000) == 0)
         return 1;
     else if ((*str & 0b11100000) == 0b11000000)

@@ -1,5 +1,5 @@
 #include "DrawingFunction.hpp"
-#include "UTF8Praser.hpp"
+#include "ExGraphicsConfig.hpp"
 
 ExGraphics::DrawingFunction::CirclePart::CirclePart(bool topLeft, bool topRight, bool bottomLeft, bool bottomRight)
     : topLeft(topLeft), topRight(topRight), bottomLeft(bottomLeft), bottomRight(bottomRight) {
@@ -249,9 +249,9 @@ void ExGraphics::DrawingFunction::drawText(Offset offset, const Font &font, cons
     std::uint32_t ch;
     std::size_t chLen;
     const FontCharacter *character;
-    const FontCharacter *tailing = overflowAction == TextOverflow::Ellipsis ? font.find(UTF8Praser::nextUTF8("…", nullptr)) : nullptr;
+    const FontCharacter *tailing = overflowAction == TextOverflow::Ellipsis ? font.find(Configs::StringParser::nextChar("…", nullptr)) : nullptr;
     std::int16_t remainWidth = widthLimit;
-    while ((ch = UTF8Praser::nextUTF8(str, &chLen)) != 0) {
+    while ((ch = Configs::StringParser::nextChar(str, &chLen)) != 0) {
         str += chLen;
         character = font.find(ch);
         if (character == nullptr)
@@ -275,7 +275,7 @@ std::int16_t ExGraphics::DrawingFunction::getTextWidth(const Font &font, const c
     std::size_t chLen;
     const FontCharacter *character;
     std::uint16_t width = 0;
-    while ((ch = UTF8Praser::nextUTF8(str, &chLen)) != 0) {
+    while ((ch = Configs::StringParser::nextChar(str, &chLen)) != 0) {
         str += chLen;
         character = font.find(ch);
         if (character == nullptr)

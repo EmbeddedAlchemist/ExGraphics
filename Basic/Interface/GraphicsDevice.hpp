@@ -3,8 +3,8 @@
 #ifndef _GRAPHICS_DEVICE_HPP_
 #define _GRAPHICS_DEVICE_HPP_
 
-#include "Basic/Offset.hpp"
-#include "Basic/Size.hpp"
+#include "Basic/Public/Size.hpp"
+#include "Basic/Public/Offset.hpp"
 #include <cstdint>
 
 namespace ExGraphics {
@@ -15,6 +15,6 @@ class GraphicsDevice {
     virtual void update(Offset position, Size size, const ColorType *buffer) = 0;
 };
 
-} // namespace Graphics
+} // namespace ExGraphics
 
 #endif

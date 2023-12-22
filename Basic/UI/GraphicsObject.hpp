@@ -1,13 +1,12 @@
 #pragma once
 
-#include "GraphicsFunction.hpp"
-#include "Offset.hpp"
-#include "Size.hpp"
+#include "Basic/Interface/GraphicsFunction.hpp"
+#include "Basic/Public/Offset.hpp"
+#include "Basic/Public/Size.hpp"
 
 namespace ExGraphics {
 
 class GraphicsFunction;
-class GraphicsObject;
 
 /**
  * @brief Callback function for object callback, none return, with a parameter which is a reference to object self.

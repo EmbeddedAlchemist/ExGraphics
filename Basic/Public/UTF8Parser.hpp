@@ -3,10 +3,10 @@
 #include <cstdint>
 #include <cstddef>
 
-class UTF8Praser{
+class UTF8Parser{
     private:
       static std::size_t getCharLength(const char *str);
 
     public:
-      static std::uint32_t nextUTF8(const char *str, std::size_t *charLen);
+      static std::uint32_t nextChar(const char *str, std::size_t *charLen);
 };

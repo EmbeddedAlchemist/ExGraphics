@@ -1,11 +1,10 @@
 #pragma once
 
-#include "Bitmap.hpp"
-#include "Color.hpp"
-#include "Font.hpp"
-#include "GraphicsObject.hpp"
-#include "Offset.hpp"
-#include "Size.hpp"
+#include "Basic/Public/Bitmap.hpp" 
+#include "Basic/Public/Color.hpp"
+#include "Basic/Public/Font.hpp"
+#include "Basic/Public/Offset.hpp"
+#include "Basic/Public/Size.hpp"
 
 namespace ExGraphics{
 class DrawingFunction{

@@ -1,8 +1,11 @@
 #pragma once
 
-#include "GraphicsObject.hpp"
+#include <cstddef>
 
 namespace ExGraphics {
+
+class GraphicsObject;    
+
 class UIFunction {
   private:
     // GraphicsObject rootContainer;
@@ -22,3 +25,5 @@ class UIFunction {
     void activateFocused(void);
 };
 } // namespace ExGraphics
+
+#include "Basic/UI/GraphicsObject.hpp"
