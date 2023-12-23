@@ -123,7 +123,8 @@ body {
     font-weight: 200;
     transition: all 0.3s;
     cursor: pointer;
-
+    border-radius: 50rem;
+    backdrop-filter: saturate(150%);
 }
 
 .btn_gl:active {
@@ -166,7 +167,7 @@ body {
 }
 
 #getting_start_btn>.glossy_btn:hover::after {
-    background-color: rgba(var(--bg-color-rgb), 0.25);
+    background-color: rgba(var(--bg-color-rgb), 0.0);
 }
 
 #main_page_bg {
@@ -210,6 +211,7 @@ body {
     margin: 0 10px;
     border-radius: 8px;
     transition: all 0.3s;
+    backdrop-filter: saturate(150%);
 }
 
 .btn_tb:hover {
