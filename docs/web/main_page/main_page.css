@@ -30,6 +30,10 @@
     color: rgb(var(--text-color-rgb))
 }
 
+::-webkit-scrollbar{
+    display: none;
+}
+
 * {
     box-sizing: border-box;
     font-family: "小米兰亭Pro";
