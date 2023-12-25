@@ -13,11 +13,33 @@ inline void Button<bgColorNormal, fgColorNormal, bgColorFocused, fgColorFocused>
 }
 
 template <typename bgColorNormal, typename fgColorNormal, typename bgColorFocused, typename fgColorFocused>
-inline CallbackFunction Button<bgColorNormal, fgColorNormal, bgColorFocused, fgColorFocused>::getFocusedCallback() {
-    return onFocusedCallback;
+inline GraphicsObject::ObjectFlags Button<bgColorNormal, fgColorNormal, bgColorFocused, fgColorFocused>::getFlags(void) const {
+    return flags;
 }
+
 template <typename bgColorNormal, typename fgColorNormal, typename bgColorFocused, typename fgColorFocused>
-inline CallbackFunction Button<bgColorNormal, fgColorNormal, bgColorFocused, fgColorFocused>::getActivatedCallback() {
-    return onActicatedCallback;
+inline std::uint16_t Button<bgColorNormal, fgColorNormal, bgColorFocused, fgColorFocused>::getFocusIndex(void) const {
+    return focusIndex;
 }
+
+template <typename bgColorNormal, typename fgColorNormal, typename bgColorFocused, typename fgColorFocused>
+inline Offset Button<bgColorNormal, fgColorNormal, bgColorFocused, fgColorFocused>::getOffset(void) const {
+    return offset;
+}
+
+template <typename bgColorNormal, typename fgColorNormal, typename bgColorFocused, typename fgColorFocused>
+inline Size Button<bgColorNormal, fgColorNormal, bgColorFocused, fgColorFocused>::getSize(void) const {
+    return size;
+}
+
+template <typename bgColorNormal, typename fgColorNormal, typename bgColorFocused, typename fgColorFocused>
+inline void Button<bgColorNormal, fgColorNormal, bgColorFocused, fgColorFocused>::onFocused(void) const {
+    onFocusedCallback();
+}
+
+template <typename bgColorNormal, typename fgColorNormal, typename bgColorFocused, typename fgColorFocused>
+inline void Button<bgColorNormal, fgColorNormal, bgColorFocused, fgColorFocused>::onActivated(void) const {
+    onActivatedCallback();
+}
+
 }; // namespace ExGraphics

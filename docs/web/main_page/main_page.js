@@ -4,9 +4,6 @@ const root = document.querySelector(":root");
 const main_page_bg = document.getElementById("main_page_bg");
 const getting_start_btn = document.getElementById("getting_start_btn")
 
-getting_start_btn.addEventListener("click", (e) => {
-    document.location.assign("https://github.com/EmbeddedAlchemist/ExGraphics")
-})
 
 
 
@@ -64,13 +61,48 @@ function main_page_bg_runtime() {
 
             p.c += 0.05;
         })
-        getting_start_btn.style.setProperty("--clr", `hsl(${pos[0].c + 15} 30% 80% / 50%)`)
+        getting_start_btn.style.setProperty("--clr", `hsl(${pos[0].c} 30% 90% / 30%)`)
 
         StackBlur.canvasRGBA(main_page_bg, 0, 0, main_page_bg.width, main_page_bg.height, 50)
     }, 15);
 }
 
 main_page_bg_runtime();
+
+window.addEventListener("load", (e) => {
+    const btn_ui_designer = document.getElementById("btn_ui_designer");
+    const btn_font_convertor = document.getElementById('btn_font_convertor');
+    const btn_document = document.getElementById('btn_document')
+    const btn_github_repo = document.getElementById('btn_github_repo');
+    const body = document.querySelector("body");
+
+    body.addEventListener('scroll', (e) => { 
+        const toolbar_container = document.querySelector("#toolbar>div");
+
+        if (body.scrollTop >= 10) {
+            toolbar_container.setAttribute("hide","") 
+
+        }
+        else { 
+            toolbar_container.removeAttribute("hide") 
+            
+        }
+    })
+
+    btn_github_repo.addEventListener("click", (e) => {
+        document.location.assign("https://github.com/EmbeddedAlchemist/ExGraphics")
+    })
+
+    btn_font_convertor.addEventListener('click', (e) => {
+        document.location.assign("../font_convertor/index.html");
+    })
+
+    btn_ui_designer.addEventListener('click', (e) => {
+        document.location.assign("../ui_designer/index.html")
+    })
+
+})
+
 // console.log(root);
 
 

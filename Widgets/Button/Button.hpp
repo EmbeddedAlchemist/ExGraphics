@@ -1,6 +1,10 @@
 #pragma once
 
+
+#include "Basic/Public/CallbackFunction.hpp"
 #include "Basic/UI/GraphicsObject.hpp"
+
+
 
 namespace ExGraphics {
 
@@ -21,36 +25,48 @@ class Button : public GraphicsObject {
     const char *text;
 
     CallbackFunction onFocusedCallback;
-    CallbackFunction onActicatedCallback;
+    CallbackFunction onActivatedCallback;
 
   public:
     constexpr Button(Offset offset,
                      Size size,
                      const Font &font,
                      const char *text,
-                     CallbackFunction onFocusedCallback = nullptr,
-                     CallbackFunction onActicatedCallback = nullptr,
+                     CallbackFunction onFocusedCallback = CallbackFunction(nullptr),
+                     CallbackFunction onActicatedCallback = CallbackFunction(nullptr),
                      ObjectFlags flags = ObjectFlags(true, true, false),
                      std::uint16_t focusIndex = 65535)
-        : GraphicsObject(offset, size, flags, focusIndex),
+        : offset(offset),
+          size(size),
+          flags(flags),
+          focusIndex(focusIndex),
           font(font),
           text(text),
           onFocusedCallback(onFocusedCallback),
-          onActicatedCallback(onActicatedCallback) {}
+          onActivatedCallback(onActicatedCallback) {}
+
+    ObjectFlags flags;
+    std::uint16_t focusIndex;
+    Offset offset;
+    Size size;
+    virtual ObjectFlags getFlags(void) const;
+    virtual std::uint16_t getFocusIndex(void) const;
+    virtual Offset getOffset(void) const;
+    virtual Size getSize(void) const;
 
     /**
      * @brief interface from GraphicsObject
      *
      * @return CallbackFunction
      */
-    virtual CallbackFunction getFocusedCallback();
+    virtual void onFocused(void) const;
 
     /**
      * @brief interface from GraphicsObject
      *
      * @return CallbackFunction onActivatedCallback nullptr is no callback
      */
-    virtual CallbackFunction getActivatedCallback();
+    virtual void onActivated(void) const;
 };
 } // namespace ExGraphics
 

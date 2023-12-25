@@ -12,7 +12,7 @@ class GraphicsFunction;
  * @brief Callback function for object callback, none return, with a parameter which is a reference to object self.
  *
  */
-using CallbackFunction = void (*)(GraphicsObject &object);
+
 
 class GraphicsObject {
   public:
@@ -73,33 +73,6 @@ class GraphicsObject {
     virtual void onDraw(Offset offset, GraphicsFunction &func) const = 0;
 
   public:
-    constexpr GraphicsObject(Offset offset, Size size, ObjectFlags flags, std::uint16_t focusIndex = 65535)
-        : offset(offset), size(size), flags(flags), focusIndex(focusIndex) {}
-
-    /**
-     * @brief flags of this object;
-     *
-     */
-    ObjectFlags flags;
-
-    /**
-     * @brief the focus index of object in its container. 0 is first;
-     * Effective when focusable = true;
-     *
-     */
-    std::uint16_t focusIndex;
-
-    /**
-     * @brief offset to parent object
-     *
-     */
-    Offset offset;
-
-    /**
-     * @brief this size
-     *
-     */
-    Size size;
 
     /**
      * @brief entry function to draw the object.
@@ -115,6 +88,38 @@ class GraphicsObject {
     void draw(Offset offset, GraphicsFunction &func) const;
 
     /**
+     * @brief should return this object's flag
+     * 
+     * subclass must implement this interface
+     *
+     */
+    virtual ObjectFlags getFlags(void) const = 0;
+
+    /**
+     * @brief the focus index of object in its container. 0 is first;
+     * Effective when focusable = true;
+     * 
+     * subclass must implement this interface
+     *
+     */
+    virtual std::uint16_t getFocusIndex(void) const = 0;
+
+    /**
+     * @brief return the offset to parent object
+     *
+     * subclass must implement this interface
+     */
+    virtual Offset getOffset(void) const = 0;
+
+    /**
+     * @brief return self's size
+     * subclass must implement this interface
+     *
+     */
+    virtual Size getSize(void) const = 0;
+
+
+    /**
      * @brief Get the Focused Callback
      *
      * implement when focusable = true.
@@ -122,7 +127,7 @@ class GraphicsObject {
      *
      * @return CallbackFunction onFocusCallback, nullptr is no callback
      */
-    virtual CallbackFunction getFocusedCallback();
+    virtual void onFocused();
 
     /**
      * @brief Get the Activated Callback
@@ -131,7 +136,7 @@ class GraphicsObject {
      *
      * @return CallbackFunction onActivatedCallback nullptr is no callback
      */
-    virtual CallbackFunction getActivatedCallback();
+    virtual void onActivated();
 
     /**
      * @brief Container interface, Get the Inner Element Count

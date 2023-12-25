@@ -64,7 +64,7 @@ inline void Graphics<ColorType, displaySize, pageSize>::drawLine(Offset start, O
         return drawVerticalLine(start, end, color);
     GraphicsFunction::drawLine(start, end, _color);
 
-    FastFixed_16_16 Mathematical::findLineXAtY(start, end, )
+    //FastFixed_16_16 Mathematical::findLineXAtY(start, end, )
 }
 template <typename ColorType, typename displaySize, typename pageSize>
 inline void Graphics<ColorType, displaySize, pageSize>::fillRect(Offset start, Size size, Color _color) {

@@ -52,7 +52,7 @@ body {
     height: 100%;
     overflow: auto;
     scrollbar-width: none;
-    scroll-snap-type:y mandatory;
+    scroll-snap-type: y mandatory;
 }
 
 
@@ -68,20 +68,49 @@ body {
     background-color: rgba(var(--bg-color-rgb), 50%);
 }
 
-#page1{
-    background-color:transparent;
+#page1 {
+    background-color: transparent;
 }
 
 
-#page1>nav {
-    position: absolute;
+#toolbar {
     background-image: linear-gradient(rgba(var(--bg-color-rgb), 25%), rgba(var(--bg-color-rgb), 0%));
-    width: 100%;
-    height: 100px;
+    position: absolute;
     display: flex;
-    padding: 20px;
+    height: 100px;
+    width: 100%;
+    z-index: 1;
+}
+
+#toolbar>svg {
+    
+    height: 100%;
+    padding: 30px;
+    fill: rgba(var(--text-color-rgb), 70%);
+    margin-left: 10px;
+}
+
+#toolbar>div {
+    width: 100%;
+    display: flex;
+    margin: 20px;
     justify-content: end;
     align-items: center;
+    white-space: nowrap;
+    transition: all 0.3s;
+    opacity: 1;
+    transform: translateY(0px);
+
+}
+
+#toolbar>div[hide]{
+    transform: translateY(-100px);
+    opacity: 0;
+}
+#toolbar:hover>div{
+    opacity: 1;
+    transform: translateY(0px);
+
 }
 
 #page1>main {
@@ -113,7 +142,7 @@ body {
 
 .btn_gl {
     position: relative;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     user-select: none;
