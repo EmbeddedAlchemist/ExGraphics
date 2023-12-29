@@ -1,0 +1,73 @@
+.graphics-object {
+  --focused-outline-color-rgb: 33, 191, 194;
+}
+
+
+.graphics-object {
+  display: flex;
+  position: relative;
+  /* background-color: cadetblue; */
+  /* background-color:attr(bg-color); */
+  outline: 3px solid rgba(var(--focused-outline-color-rgb), 0);
+  transition: all 0.3s;
+  outline-style: dashed;
+}
+
+.graphics-object[hover=true] {
+  /* filter: brightness(1.05); */
+  outline-color: rgba(var(--focused-outline-color-rgb), 0.3);
+  
+}
+
+
+
+.graphics-object[focused=true] {
+  outline-color: rgba(var(--focused-outline-color-rgb), 1);
+}
+
+
+.graphics-object::after {
+  display: block;
+  content: attr(obj-name);
+  position: absolute;
+  right: 0;
+  top: -35px;
+  width: fit-content;
+  background-color: rgba(var(--card-color-rgb), .7);
+  border-radius: 5px;
+  white-space: nowrap;
+  /* overflow: hidden; */
+  text-overflow: ellipsis;
+  box-shadow: 0px 6px 20px rgba(var(--text-color-rgb), .2);
+  visibility: hidden;
+  opacity: 0;
+  padding: 5px 10px;
+  font-size: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(var(--card-color-rgb),.2);
+  filter: blur(2px);
+  transform: scale(0.95) translateY(2px);
+  transition: all 0.35s;
+
+}
+
+
+.graphics-object[hover=true]::after {
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1) translateY(2px);
+  filter: blur(0px);
+  /* top: calc(-1lh - 10px - 5px); */
+
+}
+
+.graphics-object[focused=true]::after {
+  visibility: visible;
+  opacity: 1;
+  /* top: calc(-1lh - 10px - 8px); */
+
+  transform: scale(1) translateY(0px);
+  filter: blur(0px);
+  transition: all 0.2s;
+
+}

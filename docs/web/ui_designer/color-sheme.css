@@ -1,0 +1,44 @@
+@font-face {
+    font-family: "小米兰亭Pro";
+    src: url("小米兰亭Pro.ttf");
+}
+:root[color-scheme=light] {
+    --card-color-rgb: 255, 255, 255;
+    --bg-color-rgb: 245, 245, 245;
+    --bg-color-dynamic-l: 50;
+    --bg-color-dynamic-a: 5;
+    --text-color-rgb: 32, 32, 32;
+    --shadow-color-rgb: 20, 20, 20;
+}
+
+:root[color-scheme=dark] {
+    --card-color-rgb: 48, 48, 48;
+    --bg-color-rgb: 32, 32, 32;
+    --bg-color-dynamic-l: 65;
+    --bg-color-dynamic-a: 3;
+    --text-color-rgb: 255, 255, 255;
+    --shadow-color-rgb: 0, 0, 0;
+
+}
+
+
+
+:root {
+    --bg-color: rgb(var(--bg-color-rgb));
+    --text-color: rgb(var(--text-color-rgb));
+    --card-color: rgb(var(--card-color-rgb));
+    --shadow-color: rgb(var(--shadow-color-rgb), .15);
+    background-color: var(--bg-color);
+    color: rgba(var(--text-color-rgb), .7)
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "小米兰亭Pro";
+    font-weight: 300;
+    user-select: none;
+}
