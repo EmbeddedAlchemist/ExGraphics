@@ -23,7 +23,7 @@ body {
 }
 
 body>main,
-div {
+body>div {
     display: flex;
 
 }
@@ -136,11 +136,13 @@ body>main {
 
 
 #workspace {
+    display: flex;
     width: 100%;
     height: 100%;
     justify-content: center;
     align-items: center;
     /* background-color: bisque; */
+    overflow: auto;
 }
 
 
@@ -148,7 +150,6 @@ body>main {
     width: var(--width);
     position: relative;
     height: 100%;
-
     display: flex;
     align-items: center;
     flex-shrink: 0;
@@ -168,6 +169,7 @@ body>main {
     box-shadow: 0px 0px 50px var(--shadow-color);
     background-color: rgba(var(--bg-color-rgb), .5);
     margin: 10px 10px;
+    /* transform: ; */
 }
 
 .sider-bar:hover[pinned=false] {
@@ -285,3 +287,39 @@ body>main {
     transform: rotate(0deg);
 }
 
+
+#toast-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    padding-top: 15vh;
+    z-index: 999;
+    flex-direction: column;
+
+}
+
+#toast-container > .message{
+    width: fit-content;
+    height: fit-content;
+    background-color: rgba(var(--card-color-rgb), .7);
+    border-radius: 7px;
+    white-space: nowrap;
+    /* overflow: hidden; */
+    text-overflow: ellipsis;
+    box-shadow: 0px 5px 20px var(--shadow-color);
+    /* visibility: hidden; */
+    /* opacity: 0; */
+    padding: 7px 15px;
+    font-size: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(var(--card-color-rgb), .2);
+    /* filter: blur(2px); */
+    /* transform: scale(0.95); */
+    /* transition: all 0.35s; */
+    margin-top: 10px;
+    /* animation: 0.3s cubic-bezier(.34,.8,.38,.99) 0s forwards alternate toast-in-out; */
+
+}

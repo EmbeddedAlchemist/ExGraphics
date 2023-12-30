@@ -1,4 +1,4 @@
-import * as StackBlur from "./stackblur-es.js"
+import * as StackBlur from "./stackblur-es.min.js"
 function main_page_bg_runtime() {
     const root = document.querySelector(":root");
     const main_page_bg = document.getElementById("main_page_bg");

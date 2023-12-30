@@ -4,24 +4,27 @@
 
 
 .graphics-object {
-  display: flex;
-  position: relative;
+  display: block;
+  position: absolute;
   /* background-color: cadetblue; */
   /* background-color:attr(bg-color); */
   outline: 3px solid rgba(var(--focused-outline-color-rgb), 0);
   transition: all 0.3s;
   outline-style: dashed;
+  flex-shrink: 0;
+
 }
 
-.graphics-object[hover=true] {
+.graphics-object[hover] {
   /* filter: brightness(1.05); */
+  /* background-color: rebeccapurple !important; */
   outline-color: rgba(var(--focused-outline-color-rgb), 0.3);
   
 }
 
 
 
-.graphics-object[focused=true] {
+.graphics-object[focused] {
   outline-color: rgba(var(--focused-outline-color-rgb), 1);
 }
 
@@ -38,7 +41,7 @@
   white-space: nowrap;
   /* overflow: hidden; */
   text-overflow: ellipsis;
-  box-shadow: 0px 6px 20px rgba(var(--text-color-rgb), .2);
+  box-shadow: 0px 6px 20px var(--shadow-color);
   visibility: hidden;
   opacity: 0;
   padding: 5px 10px;
@@ -52,16 +55,17 @@
 }
 
 
-.graphics-object[hover=true]::after {
+.graphics-object[hover]::after {
   visibility: visible;
   opacity: 1;
   transform: scale(1) translateY(2px);
   filter: blur(0px);
+  z-index: 1;
   /* top: calc(-1lh - 10px - 5px); */
 
 }
 
-.graphics-object[focused=true]::after {
+.graphics-object[focused]::after {
   visibility: visible;
   opacity: 1;
   /* top: calc(-1lh - 10px - 8px); */

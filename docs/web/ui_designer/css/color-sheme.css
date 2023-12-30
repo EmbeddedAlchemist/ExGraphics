@@ -1,6 +1,6 @@
 @font-face {
     font-family: "小米兰亭Pro";
-    src: url("小米兰亭Pro.ttf");
+    src: url("/font/小米兰亭Pro.ttf");
 }
 :root[color-scheme=light] {
     --card-color-rgb: 255, 255, 255;

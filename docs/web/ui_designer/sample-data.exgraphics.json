@@ -1,0 +1,41 @@
+{
+    "elements": {
+        "name": "Root Container",
+        "width": 160,
+        "height": 80,
+        "top": 0,
+        "left": 0,
+        "style": null,
+        "children": [
+            {
+                "name": "Object1",
+                "width": 20,
+                "height": 20,
+                "top": 0,
+                "left": 20,
+                "style": null,
+                "children": []
+            },
+            {
+                "name": "Container1",
+                "width": 50,
+                "height": 50,
+                "top": 0,
+                "left": 50,
+                "style": null,
+                "children": [
+                    {
+                        "name": "Object2",
+                        "width": 20,
+                        "height": 20,
+                        "top": 15,
+                        "left": 15,
+                        "style": null,
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    "styles": {}
+}
