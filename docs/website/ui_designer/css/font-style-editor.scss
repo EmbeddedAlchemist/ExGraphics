@@ -1,0 +1,87 @@
+#font-style-editor {
+    display: flex;
+    flex-direction: column;
+
+    .content {
+        height: auto;
+        width: auto;
+        display: flex;
+        flex-direction: row;
+
+        /* padding: 10px; */
+        .preview {
+
+            display: flex;
+            align-items: center;
+
+            /* width: fit-content; */
+            /* padding-right: 10px; */
+            canvas {
+                display: block;
+                /* background: white; */
+                border-radius: 20px;
+                margin-bottom: 20px;
+                width: 600px;
+                height: auto;
+                max-height: 100%;
+                padding: 40px;
+
+                /* image-rendering: optimizeSpeed; */
+                /* image-rendering: -moz-crisp-edges;
+                image-rendering: -webkit-optimize-contrast; */
+                /* image-rendering: optimize-contrast; */
+                image-rendering: pixelated;
+                /* -ms-interpolation-mode: nearest-neighbor; */
+                cursor: pointer;
+            }
+        }
+
+        .input {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            border-left: 1px solid var(--divider-color);
+            align-items: end;
+            /* padding-left: 10px; */
+
+            label {
+                margin: 10px 0;
+
+                span {
+                    font-size: 16px;
+                    margin: 10px;
+                }
+
+                input {
+                    width: 200px;
+                    background-color: transparent;
+                    outline: none;
+                    border: none;
+                    font-size: 16px;
+                    padding: 5px 10px;
+                    border-bottom: 2px solid var(--divider-color);
+                    color: var(--text-color);
+                    /* transition: background 0.3s, border 0.3s; */
+
+                    ::placeholder {
+                        color: rgba(var(--text-color-rgb), .3);
+                    }
+                }
+            }
+        }
+
+    }
+
+    .botton-bar {
+        border-top: 1px solid var(--divider-color);
+        display: flex;
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        justify-content: end;
+
+        .button {
+            margin-left: 10px;
+        }
+    }
+}

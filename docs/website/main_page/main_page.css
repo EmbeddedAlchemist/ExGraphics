@@ -1,6 +1,6 @@
 @font-face {
-    font-family: "小米兰亭Pro";
-    src: url("/global_resource/font/小米兰亭Pro.ttf");
+    font-family: "MiSans";
+    src: url("/website/global_resource/fonts/MiSans_VF.ttf");
 }
 
 
@@ -36,7 +36,7 @@
 
 * {
     box-sizing: border-box;
-    font-family: "小米兰亭Pro";
+    font-family: "MiSans";
     font-weight: 300;
     user-select: none;
 }

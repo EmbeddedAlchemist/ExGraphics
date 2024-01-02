@@ -1,0 +1,63 @@
+.icon-btn {
+    position: relative;
+    fill: rgba(var(--text-color-rgb), 70%);
+    aspect-ratio: 1;
+    border-radius: 5px;
+    background-color: rgba(var(--text-color-rgb), 0%);
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.icon-btn:hover {
+    background-color: rgba(var(--text-color-rgb), 5%);
+}
+
+.icon-btn:active {
+    transition: all 0.1s;
+    background-color: rgba(var(--text-color-rgb), 10%);
+    transform: scale(0.95);
+}
+
+.icon-btn>svg {
+    width: 100%;
+    height: 100%;
+    padding: 20%;
+    aspect-ratio: 1;
+    flex-shrink: 0;
+}
+
+
+.icon-btn::after {
+    content: attr(tips);
+    width: fit-content;
+    height: 30px;
+    background-color: rgba(var(--card-color-rgb), .7);
+    border-radius: 5px;
+    white-space: nowrap;
+    /* overflow: hidden; */
+    text-overflow: ellipsis;
+    box-shadow: 0px 5px 20px var(--shadow-color);
+    visibility: hidden;
+    opacity: 0;
+    padding: 5px 10px;
+    font-size: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(var(--card-color-rgb), .2);
+    filter: blur(2px);
+    transform: scale(0.95);
+    transition: all 0.35s;
+    margin-top: 10px;
+}
+
+
+.icon-btn:hover::after {
+    /* transition: all 0.35s 0.75s; */
+
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+}

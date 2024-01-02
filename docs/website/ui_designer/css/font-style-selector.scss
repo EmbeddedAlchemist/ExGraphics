@@ -1,0 +1,51 @@
+#font-style-selector {
+    width: 800px;
+    height: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+    padding: 10px;
+
+    .item {
+
+        // background-color: var(--card-color);
+        width: 200px;
+        height: 200px;
+        margin: 10px;
+        transition: transform 0.3s;
+        cursor: pointer;
+
+
+        &#addBtn {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            // border: 5px solid rgba(var(--text-color-rgb), .1);
+            background-color: rgba(var(--text-color-rgb), .05);
+            border-radius: 10px;
+
+            svg{
+                fill: rgba(var(--text-color-rgb), .3);
+                width: 80px;
+                height: 80px;
+            }
+
+            span{
+                color:rgba(var(--text-color-rgb), .3);
+                // font-weight: 500;
+            }
+        }
+
+        &:hover {
+            transform: scale(1.02);
+        }
+
+        &:active {
+            transition: all 0.1s;
+            transform: scale(.98);
+        }
+    }
+}

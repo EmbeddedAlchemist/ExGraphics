@@ -1,5 +1,4 @@
 import { Toast } from "./toast.js";
-// const Toast = require("toast.ts");
 export class GraphicsObject {
     constructor(json_obj) {
         this.name = 'Unnamed';
@@ -24,7 +23,7 @@ export class GraphicsObject {
         this.node.addEventListener('mouseover', this.mouseoverHandler.bind(this));
         this.node.addEventListener('mouseout', this.mouseoutHandler.bind(this));
         this.node.addEventListener('click', this.clickHandler.bind(this));
-        this.updateStyle();
+        this.applyStyle();
         if (json_obj.children instanceof Array) {
             json_obj.children.forEach((ele) => {
                 let children = new GraphicsObject(ele);
@@ -33,11 +32,17 @@ export class GraphicsObject {
             });
         }
     }
-    updateStyle() {
+    applyStyle() {
         this.node.style.width = `${this.width * GraphicsObject.zoomFactor}px`;
         this.node.style.height = `${this.height * GraphicsObject.zoomFactor}px`;
         this.node.style.left = `${this.left * GraphicsObject.zoomFactor}px`;
         this.node.style.top = `${this.top * GraphicsObject.zoomFactor}px`;
+    }
+    recursiveApplyStyle() {
+        this.applyStyle();
+        this.children.forEach((child) => {
+            child.recursiveApplyStyle();
+        });
     }
     focus(state = true) {
         var _a;
@@ -94,10 +99,10 @@ export class GraphicsObject {
             }
             catch (e) {
                 if (e instanceof SyntaxError) {
-                    new Toast(`Failed because of syntax error`, undefined, { background: "red", foreground: 'white' });
+                    new Toast(`Failed because of syntax error`, { background: "red", foreground: 'white' }).show();
                 }
                 else {
-                    new Toast(`Failed because of unknown error`, undefined, { background: "red", foreground: 'white' });
+                    new Toast(`Failed because of unknown error`, { background: "red", foreground: 'white' }).show();
                 }
             }
         });
@@ -106,7 +111,3 @@ export class GraphicsObject {
 GraphicsObject.focusedElement = null;
 GraphicsObject.rootElement = null;
 GraphicsObject.zoomFactor = 1.0;
-// window.addEventListener('load', e => {
-//     var gsobj = document.querySelectorAll('.graphics-object');
-//     gsobj.forEach(element => new GraphicsObject(element));
-// })

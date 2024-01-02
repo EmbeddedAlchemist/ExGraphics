@@ -1,23 +1,33 @@
 @font-face {
-    font-family: "小米兰亭Pro";
-    src: url("/global_resource/font/小米兰亭Pro.ttf");
+    font-family: "MiSans";
+    src: url("/website/global_resource/fonts/MiSans_VF.ttf");
 }
+
 :root[color-scheme=light] {
     --card-color-rgb: 255, 255, 255;
     --bg-color-rgb: 245, 245, 245;
     --bg-color-dynamic-l: 50;
-    --bg-color-dynamic-a: 5;
+    --bg-color-dynamic-a: 8;
     --text-color-rgb: 32, 32, 32;
     --shadow-color-rgb: 20, 20, 20;
+    --divider-color-rgb: var(--text-color-rgb);
+    --prominent-color-rgb: 89, 89, 216;
+    --warning-color-rgb: 228, 203, 0;
+    --error-color-rgb: 255, 0, 0;
+
 }
 
 :root[color-scheme=dark] {
     --card-color-rgb: 48, 48, 48;
     --bg-color-rgb: 32, 32, 32;
     --bg-color-dynamic-l: 65;
-    --bg-color-dynamic-a: 3;
+    --bg-color-dynamic-a: 5;
     --text-color-rgb: 255, 255, 255;
     --shadow-color-rgb: 0, 0, 0;
+    --divider-color-rgb: var(--text-color-rgb);
+    --prominent-color-rgb: 145, 145, 255;
+    --warning-color-rgb: 241, 215, 0;
+    --error-color-rgb: 255, 0, 0;
 
 }
 
@@ -25,11 +35,13 @@
 
 :root {
     --bg-color: rgb(var(--bg-color-rgb));
-    --text-color: rgb(var(--text-color-rgb));
-    --card-color: rgb(var(--card-color-rgb));
+    --text-color: rgba(var(--text-color-rgb), .7);
+    --card-color: rgba(var(--card-color-rgb), .6);
     --shadow-color: rgb(var(--shadow-color-rgb), .15);
+    --divider-color: rgb(var(--divider-color-rgb), .10);
+
     background-color: var(--bg-color);
-    color: rgba(var(--text-color-rgb), .7)
+    color: var(--text-color);
 }
 
 ::-webkit-scrollbar {
@@ -37,8 +49,23 @@
 }
 
 * {
+    font: 300 18px "MiSans";
     box-sizing: border-box;
-    font-family: "小米兰亭Pro";
-    font-weight: 300;
     user-select: none;
+}
+
+
+.prominent {
+    --text-color-rgb: var(--prominent-color-rgb);
+    color: rgba(var(--text-color-rgb), .9);
+}
+
+.error {
+    --text-color-rgb: var(--error-color-rgb);
+    color: rgba(var(--text-color-rgb), .9);
+}
+
+.warining{
+    --text-color-rgb: var(--warning-color-rgb);
+    color: rgba(var(--text-color-rgb), .9);
 }

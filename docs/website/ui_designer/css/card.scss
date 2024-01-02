@@ -1,0 +1,6 @@
+.card {
+    background-color: var(--card-color);
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 10px 20px var(--shadow-color);
+    border-radius: 10px;
+}

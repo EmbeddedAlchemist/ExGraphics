@@ -1,6 +1,17 @@
-'use strict';
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+import './background.js';
 import { Toast } from './toast.js';
 import { GraphicsObject } from './graphics-object.js';
+import * as WorkSpace from './workspace.js';
+import { FontStyleSelector } from './font-style-selector.js';
 function init_full_screen_btn() {
     const root = document.querySelector(':root');
     const full_screen_btn = document.getElementById('full_screen_btn');
@@ -24,7 +35,6 @@ function init_left_bar() {
         start_x = e.clientX;
         ori_width = parseFloat(getComputedStyle(left_bar).width);
         let move_handler = (e) => {
-            // console.log(e.clientX)
             let width = ori_width + e.clientX - start_x;
             width = Math.min(Math.max(width, 200), window.innerWidth * 0.4);
             left_bar.style.setProperty('--width', width + 'px');
@@ -45,10 +55,7 @@ function init_right_bar() {
     resize_handle.addEventListener('mousedown', (e) => {
         start_x = e.clientX;
         ori_width = parseFloat(getComputedStyle(right_bar).width);
-        // console.log(start_x, ori_width);
         let move_handler = (e) => {
-            // console.log(e.clientX)
-            // right_bar.style.setProperty('--width', ori_width - (e.clientX - start_x) + 'px')
             let width = ori_width - e.clientX + start_x;
             width = Math.min(Math.max(width, 200), window.innerWidth * 0.4);
             right_bar.style.setProperty('--width', width + 'px');
@@ -64,25 +71,37 @@ function init_right_bar() {
 function init_sider_bar() {
     const sider_bar = document.querySelectorAll('.sider-bar');
     sider_bar.forEach((sider) => {
+        function setState(state) {
+            localStorage.setItem(pin_state_key, state.toString());
+            sider.setAttribute('pinned', state.toString());
+        }
         const pin_btn = sider.querySelectorAll('.content-area>.top-bar>*[tag=pin-btn]');
+        const pin_state_key = sider.id + "_pin_state";
+        let pin_state = localStorage.getItem(pin_state_key) === 'true';
+        setState(pin_state);
         pin_btn.forEach((pin) => {
             pin.addEventListener('click', () => {
-                if (sider.getAttribute('pinned') == 'true')
-                    sider.setAttribute('pinned', "false");
-                else
-                    sider.setAttribute('pinned', "true");
+                pin_state = !pin_state;
+                setState(pin_state);
             });
         });
     });
 }
 function init_workspace() {
     const workspace = document.getElementById('workspace');
-    workspace.addEventListener('mousewheel', (e) => {
+    function mousewheelHandler(e) {
         if (e.ctrlKey) {
             e.preventDefault();
-            console.log('mousewheel');
+            if (e.deltaY < 0 || e.detail < 0) {
+                WorkSpace.increase_zoom_factor();
+            }
+            else {
+                WorkSpace.decrease_zoom_factor();
+            }
         }
-    });
+    }
+    workspace.addEventListener('mousewheel', mousewheelHandler);
+    workspace.addEventListener('DOMMouseScroll', mousewheelHandler);
 }
 function init_color_scheme() {
     const root = document.querySelector(':root');
@@ -111,10 +130,35 @@ function init_open_file_btn() {
                 new Toast("No files selected");
                 return;
             }
-            // console.log( GraphicsObject)
             GraphicsObject.loadFromFile(input_tag.files[0]);
         });
     });
+}
+function init_zoom_in_btn() {
+    const zoom_in_btn = document.getElementById('zoom_in_btn');
+    zoom_in_btn.addEventListener('click', () => {
+        WorkSpace.increase_zoom_factor();
+    });
+}
+function init_zoom_out_btn() {
+    const zoom_out_btn = document.getElementById('zoom_out_btn');
+    console.log(zoom_out_btn);
+    zoom_out_btn.addEventListener('click', () => {
+        WorkSpace.decrease_zoom_factor();
+    });
+}
+function init_new_window_btn() {
+    const new_window_btn = document.getElementById('new_window_btn');
+    new_window_btn.addEventListener('click', () => {
+        window.open("./index.html", undefined, 'popup,depended=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no');
+    });
+}
+function init_font_btn() {
+    const font_btn = document.getElementById('font_btn');
+    font_btn === null || font_btn === void 0 ? void 0 : font_btn.addEventListener('click', () => __awaiter(this, void 0, void 0, function* () {
+        var a = yield new FontStyleSelector().select();
+        console.log(a === null || a === void 0 ? void 0 : a.serialize());
+    }));
 }
 window.addEventListener('load', (e) => {
     init_color_scheme();
@@ -124,5 +168,8 @@ window.addEventListener('load', (e) => {
     init_left_bar();
     init_right_bar();
     init_open_file_btn();
-    console.log(111);
+    init_zoom_in_btn();
+    init_zoom_out_btn();
+    init_new_window_btn();
+    init_font_btn();
 });

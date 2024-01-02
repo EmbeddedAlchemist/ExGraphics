@@ -85,7 +85,6 @@ function get_random_english_text() {
         "I know I'm not alone",
         "On my god I lose control",
         "We live, we love, we lie",
-        "01234567890",
     ];
     return textlist[Math.floor(Math.random() * textlist.length)];
 }

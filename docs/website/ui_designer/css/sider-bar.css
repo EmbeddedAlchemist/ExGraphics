@@ -1,0 +1,119 @@
+
+.sider-bar {
+    width: var(--width);
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    transition: all 0.4s cubic-bezier(.34,.8,.38,.99), width 0s;
+    border: 1px solid rgba(var(--text-color-rgb), 8%);
+    z-index: 1;
+}
+
+.sider-bar[pinned=false] {
+    height: calc(100% - 20px);
+    position: absolute;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(var(--text-color-rgb), 8%) !important;
+    /* border-color: transparent !important; */
+    /* background-color: red; */
+    border-radius: 15px;
+    box-shadow: 0px 0px 50px var(--shadow-color);
+    background-color: rgba(var(--bg-color-rgb), .5);
+    margin: 10px 10px;
+    /* transform: ; */
+}
+
+.sider-bar:hover[pinned=false] {
+    transform: translateX(0px) !important;
+    /* box-shadow: 0px 0px 30px rgba(var(--text-color-rgb), .05); */
+
+    /* background-color: red; */
+}
+
+.sider-bar>.content-area {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.sider-bar>.drag-bar {
+    position: relative;
+    width: 6px;
+    height: 50px;
+    background-color: aqua;
+    flex-shrink: 0;
+    margin: 7px;
+    background-color: rgba(var(--text-color-rgb), 8%);
+    border-radius: 50rem;
+    backdrop-filter: blur(10px);
+    cursor: ew-resize;
+    transition: all 0.2s;
+    /* outline: 0.5px solid rgba(var(--text-color-rgb), 30%); */
+}
+
+.sider-bar>.drag-bar:hover {
+    transform: scale(1.1);
+    background-color: rgba(var(--text-color-rgb), 20%);
+
+}
+
+.sider-bar>.drag-bar:active {
+    transform: scale(1.2);
+    transition: all 0.1s;
+    background-color: rgba(var(--text-color-rgb), 30%);
+
+}
+
+.sider-bar>.drag-bar::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 64px;
+    background-color: transparent;
+    left: -7px;
+    top: -7px;
+}
+
+
+.sider-bar>.content-area>.top-bar {
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    /* background-color: aqua; */
+    width: 100%;
+    padding: 15px;
+    flex-shrink: 0;
+}
+
+.sider-bar>.content-area>.content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    /* background-color: aquamarine; */
+}
+
+.sider-bar>.content-area>.top-bar>.title{
+    font-size: 18px;
+    margin-left: 10px;
+    font-weight: 400;
+
+}
+
+.sider-bar>.content-area>.top-bar>.icon-btn {
+    width: 36px;
+    height: 36px;
+}
+
+
+.sider-bar>.content-area>.top-bar>.icon-btn[tag=pin-btn]>svg{
+    transform: rotate(45deg);
+    transition: all 0.2s cubic-bezier(.34,.8,.38,.99);
+}
+
+.sider-bar[pinned=true]>.content-area>.top-bar>.icon-btn[tag=pin-btn]>svg{
+    transform: rotate(0deg);
+}

@@ -1,3 +1,6 @@
 {
-    "liveServer.settings.port": 5501
+    "liveServer.settings.port": 5501,
+    "livePreview.defaultPreviewPath": "/index.html",
+    "liveSassCompile.settings.watchOnLaunch": true,
+    "liveSassCompile.settings.generateMap": false
 }

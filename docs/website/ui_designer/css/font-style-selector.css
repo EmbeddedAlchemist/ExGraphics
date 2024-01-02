@@ -1,0 +1,39 @@
+#font-style-selector {
+  width: 800px;
+  height: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: row;
+  padding: 10px;
+}
+#font-style-selector .item {
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+#font-style-selector .item#addBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(var(--text-color-rgb), 0.05);
+  border-radius: 10px;
+}
+#font-style-selector .item#addBtn svg {
+  fill: rgba(var(--text-color-rgb), 0.3);
+  width: 80px;
+  height: 80px;
+}
+#font-style-selector .item#addBtn span {
+  color: rgba(var(--text-color-rgb), 0.3);
+}
+#font-style-selector .item:hover {
+  transform: scale(1.02);
+}
+#font-style-selector .item:active {
+  transition: all 0.1s;
+  transform: scale(0.98);
+}

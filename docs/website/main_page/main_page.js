@@ -94,11 +94,11 @@ window.addEventListener("load", (e) => {
     })
 
     btn_font_convertor.addEventListener('click', (e) => {
-        document.location.assign("../font_convertor/index.html");
+        document.location.assign("../font_convertor/");
     })
 
     btn_ui_designer.addEventListener('click', (e) => {
-        document.location.assign("../ui_designer/index.html")
+        document.location.assign("../ui_designer/")
     })
 
 })
