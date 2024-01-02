@@ -6,7 +6,7 @@ import { Toast } from "./toast.js";
 
 export class FontStyleCreator {
     static htmlCode: string | null = null;
-    popup: PopupWindow = new PopupWindow();
+    popup: PopupWindow = new PopupWindow('./font-style-editor.html');
 
     constructor(title: string = "Create Font Style") {
         this.popup.title = title;
@@ -15,20 +15,7 @@ export class FontStyleCreator {
     private async init() {
         var toast = new Toast("Loading");
         try {
-            if (FontStyleCreator.htmlCode == null) {
-                toast.show(0);
-                var htmlCode: string;
-                htmlCode = await fetch('./font-style-editor.html')
-                    .then((response) => {
-                        if (response.ok != true)
-                            throw new Error("Cannot fetch font-window.html");
-                        return response.text()
-                    })
-                // console.log(htmlCode);
-                FontStyleCreator.htmlCode = htmlCode;
-                // console.log(this.popup.contentNode.innerHTML);
-            }
-            this.popup.contentNode.innerHTML = FontStyleCreator.htmlCode;
+            await this.popup.load()
             const fontNameInput = this.popup.contentNode.querySelector('#fontNameInput');
             const sizeInput = this.popup.contentNode.querySelector('#sizeInput');
             const weightInput = this.popup.contentNode.querySelector('#weightInput');
@@ -119,27 +106,6 @@ export class FontStyleCreator {
     }
 
 
-    private waitForContentLoaded() {
-        var list: Promise<null>[] = [];
-        console.log(111);
-        this.popup.contentNode.querySelectorAll('[src], [href]').forEach((node) => { 
-            node.addEventListener('load', () => { console.log('loaded2')})
-        })
-        this.popup.contentNode.querySelectorAll('[src], [href]').forEach((node) => {
-            list.push(new Promise((resolve, reject) => {
-                console.log(node);
-                node.addEventListener('load', () => {
-                    resolve(null);
-                })
-                node.addEventListener('error', () => {
-                    reject(new Error('Error loading resource'));
-                });
-            }))
-        })
-        return Promise.all(list);
-    }
-
-
     private fillInputs(src: FontStyle) {
         const fontNameInput = this.popup.contentNode.querySelector('#fontNameInput') as HTMLInputElement;
         const sizeInput = this.popup.contentNode.querySelector('#sizeInput') as HTMLInputElement;
@@ -154,9 +120,8 @@ export class FontStyleCreator {
     async edit(src:FontStyle|null = null): Promise<FontStyle | null> {
         var result: FontStyle | null = null;
         try {
-            await this.init();
             this.popup.init();
-            await this.waitForContentLoaded();
+            await this.init();
             this.popup.show();
             if (src) this.fillInputs(src);
             result = await Promise.race([this.waitForCancel(), this.waitForConfirm()]) as FontStyle|null;

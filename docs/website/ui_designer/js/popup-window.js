@@ -1,7 +1,17 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 export class PopupWindow {
-    constructor() {
+    constructor(url) {
         this.windowNode = document.createElement('div');
         this.playingAmimation = null;
+        this.url = url;
         this.windowNode.className = "popup-window-background";
         this.windowNode.innerHTML = PopupWindow.initialHTML;
         this.topBarNode = this.windowNode.querySelector('.top-bar');
@@ -11,9 +21,42 @@ export class PopupWindow {
     }
     set title(val) { this.titleNode.innerHTML = val; }
     get title() { return this.titleNode.innerHTML; }
+    waitForContentLoaded() {
+        var list = [];
+        console.log(111);
+        this.contentNode.querySelectorAll('[src], [href]').forEach((node) => {
+            node.addEventListener('load', () => { console.log('loaded2'); });
+        });
+        this.contentNode.querySelectorAll('[src], [href]').forEach((node) => {
+            list.push(new Promise((resolve, reject) => {
+                console.log(node);
+                node.addEventListener('load', () => {
+                    resolve(null);
+                });
+                node.addEventListener('error', () => {
+                    reject(new Error('Error loading resource'));
+                });
+            }));
+        });
+        return Promise.all(list);
+    }
     init() {
         this.windowNode.style.display = "none";
         PopupWindow.rootContainer.appendChild(this.windowNode);
+    }
+    load() {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!PopupWindow.urlBuffer[this.url]) {
+                PopupWindow.urlBuffer[this.url] = yield fetch(this.url).then((response) => {
+                    if (!response.ok)
+                        throw new Error(`Failed to fetch ${this.url} with code ${response.status}`);
+                    return response.text();
+                });
+            }
+            var doc = new DOMParser().parseFromString(PopupWindow.urlBuffer[this.url], 'text/html');
+            this.contentNode.appendChild(doc.documentElement);
+            yield this.waitForContentLoaded();
+        });
     }
     show() {
         this.windowNode.style.display = "";
@@ -54,3 +97,4 @@ PopupWindow.rootContainer = document.getElementById("popup-container");
 PopupWindow.container = document.getElementById('toast-container');
 PopupWindow.keyframes_in = [{ transform: "scale(1.1)", opacity: 0, filter: " blur(10px)" }, {}];
 PopupWindow.keyframes_out = [{}, { transform: "scale(1.1)", opacity: 0, filter: " blur(10px)" },];
+PopupWindow.urlBuffer = {};

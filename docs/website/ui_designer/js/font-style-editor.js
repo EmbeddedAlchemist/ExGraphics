@@ -14,25 +14,14 @@ import { tinycolor } from "./tinycolor.js";
 import { Toast } from "./toast.js";
 export class FontStyleCreator {
     constructor(title = "Create Font Style") {
-        this.popup = new PopupWindow();
+        this.popup = new PopupWindow('./font-style-editor.html');
         this.popup.title = title;
     }
     init() {
         return __awaiter(this, void 0, void 0, function* () {
             var toast = new Toast("Loading");
             try {
-                if (FontStyleCreator.htmlCode == null) {
-                    toast.show(0);
-                    var htmlCode;
-                    htmlCode = yield fetch('./font-style-editor.html')
-                        .then((response) => {
-                        if (response.ok != true)
-                            throw new Error("Cannot fetch font-window.html");
-                        return response.text();
-                    });
-                    FontStyleCreator.htmlCode = htmlCode;
-                }
-                this.popup.contentNode.innerHTML = FontStyleCreator.htmlCode;
+                yield this.popup.load();
                 const fontNameInput = this.popup.contentNode.querySelector('#fontNameInput');
                 const sizeInput = this.popup.contentNode.querySelector('#sizeInput');
                 const weightInput = this.popup.contentNode.querySelector('#weightInput');
@@ -106,25 +95,6 @@ export class FontStyleCreator {
             });
         });
     }
-    waitForContentLoaded() {
-        var list = [];
-        console.log(111);
-        this.popup.contentNode.querySelectorAll('[src], [href]').forEach((node) => {
-            node.addEventListener('load', () => { console.log('loaded2'); });
-        });
-        this.popup.contentNode.querySelectorAll('[src], [href]').forEach((node) => {
-            list.push(new Promise((resolve, reject) => {
-                console.log(node);
-                node.addEventListener('load', () => {
-                    resolve(null);
-                });
-                node.addEventListener('error', () => {
-                    reject(new Error('Error loading resource'));
-                });
-            }));
-        });
-        return Promise.all(list);
-    }
     fillInputs(src) {
         const fontNameInput = this.popup.contentNode.querySelector('#fontNameInput');
         const sizeInput = this.popup.contentNode.querySelector('#sizeInput');
@@ -139,9 +109,8 @@ export class FontStyleCreator {
         return __awaiter(this, void 0, void 0, function* () {
             var result = null;
             try {
-                yield this.init();
                 this.popup.init();
-                yield this.waitForContentLoaded();
+                yield this.init();
                 this.popup.show();
                 if (src)
                     this.fillInputs(src);

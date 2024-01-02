@@ -26,9 +26,12 @@ export class PopupWindow {
     static keyframes_out: Keyframe[] = [{}, { transform: "scale(1.1)", opacity: 0, filter: " blur(10px)" },];
 
     private playingAmimation: Animation | null = null;
+    private url: string;
 
+    static urlBuffer: { [key: string]: string } = {};
 
-    constructor() {
+    constructor(url: string) {
+        this.url = url;
         this.windowNode.className = "popup-window-background";
         this.windowNode.innerHTML = PopupWindow.initialHTML;
 
@@ -43,9 +46,42 @@ export class PopupWindow {
     set title(val: string) { this.titleNode.innerHTML = val; }
     get title() { return this.titleNode.innerHTML; }
 
+    private waitForContentLoaded() {
+        var list: Promise<null>[] = [];
+        console.log(111);
+        this.contentNode.querySelectorAll('[src], [href]').forEach((node) => { 
+            node.addEventListener('load', () => { console.log('loaded2')})
+        })
+        this.contentNode.querySelectorAll('[src], [href]').forEach((node) => {
+            list.push(new Promise((resolve, reject) => {
+                console.log(node);
+                node.addEventListener('load', () => {
+                    resolve(null);
+                })
+                node.addEventListener('error', () => {
+                    reject(new Error('Error loading resource'));
+                });
+            }))
+        })
+        return Promise.all(list);
+    }
+
     init() {
         this.windowNode.style.display = "none";
         PopupWindow.rootContainer.appendChild(this.windowNode);
+    }
+
+    async load() {
+        if (!PopupWindow.urlBuffer[this.url]) {
+            PopupWindow.urlBuffer[this.url] = await fetch(this.url).then((response) => {
+                if (!response.ok)
+                    throw new Error(`Failed to fetch ${this.url} with code ${response.status}`);
+                return response.text();
+            })
+        }
+        var doc = new DOMParser().parseFromString(PopupWindow.urlBuffer[this.url], 'text/html');
+        this.contentNode.appendChild(doc.documentElement);
+        await this.waitForContentLoaded();
     }
 
     show() {

@@ -12,7 +12,7 @@ import { PopupWindow } from "./popup-window.js";
 import { Toast } from "./toast.js";
 export class FontStyleSelector {
     constructor() {
-        this.popup = new PopupWindow;
+        this.popup = new PopupWindow('./font-style-selector.html');
     }
     waitForSelect() {
         return new Promise((resolve, reject) => {
@@ -36,48 +36,11 @@ export class FontStyleSelector {
             var newFont = yield new FontStyleEditor().edit();
         });
     }
-    waitForContentLoaded() {
-        var list = [];
-        console.log(111);
-        this.popup.contentNode.querySelectorAll('[src], [href]').forEach((node) => {
-            node.addEventListener('load', () => { console.log('loaded2'); });
-        });
-        this.popup.contentNode.querySelectorAll('[src], [href]').forEach((node) => {
-            list.push(new Promise((resolve, reject) => {
-                console.log(node);
-                node.addEventListener('load', () => {
-                    resolve(null);
-                });
-                node.addEventListener('error', () => {
-                    reject(new Error('Error loading resource'));
-                });
-            }));
-        });
-        return Promise.all(list);
-    }
     init() {
         return __awaiter(this, void 0, void 0, function* () {
             var toast = new Toast("Loading");
             try {
-                if (FontStyleSelector.htmlCode == null) {
-                    toast.show(0);
-                    var htmlCode;
-                    htmlCode = yield fetch('./font-style-selector.html')
-                        .then((response) => {
-                        if (response.ok != true) {
-                            console.log(response);
-                            throw new Error("Cannot fetch font-style-editor.html");
-                            console.log(111);
-                        }
-                        return response.text();
-                    });
-                    FontStyleSelector.htmlCode = htmlCode;
-                }
-                var doc = new DOMParser().parseFromString(FontStyleSelector.htmlCode, 'text/html');
-                this.popup.contentNode.appendChild(doc.documentElement);
-                this.popup.contentNode.querySelectorAll('[src], [href]').forEach((node) => {
-                    node.addEventListener('load', () => { console.log('loaded1'); });
-                });
+                yield this.popup.load();
                 const addBtn = this.popup.contentNode.querySelector('#addBtn');
                 addBtn === null || addBtn === void 0 ? void 0 : addBtn.addEventListener('click', this.addFontStyle.bind(this));
             }
@@ -90,9 +53,8 @@ export class FontStyleSelector {
         return __awaiter(this, void 0, void 0, function* () {
             var result = null;
             try {
-                yield this.init();
                 this.popup.init();
-                yield this.waitForContentLoaded();
+                yield this.init();
                 this.popup.show();
                 result = yield this.waitForResult();
             }
