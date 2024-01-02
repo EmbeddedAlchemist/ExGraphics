@@ -2,6 +2,7 @@ export class LoadingScreen {
     constructor() {
         this.windowNode = document.createElement('div');
         this.windowNode.className = 'popup-window-background';
+        this.windowNode.innerHTML = LoadingScreen.initialHTML;
     }
     show() {
         LoadingScreen.rootContainer.appendChild(this.windowNode);
