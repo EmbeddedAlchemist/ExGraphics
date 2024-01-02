@@ -62,7 +62,7 @@ export class PopupWindow {
     }
     show() {
         this.windowNode.style.display = "";
-        this.playingAmimation = this.windowNode.animate(PopupWindow.keyframes_in, { duration: 400, easing: 'cubic-bezier(.1,.83,.22,.99)' });
+        this.windowNode.animate(PopupWindow.keyframes_in, { duration: 400, easing: 'cubic-bezier(.1,.83,.22,.99)' });
     }
     hide() {
         this.windowNode.animate(PopupWindow.keyframes_out, { duration: 150, easing: 'cubic-bezier(.57,.03,.83,.52)' })
@@ -96,7 +96,6 @@ PopupWindow.initialHTML = '\
             </div>\
         </div>';
 PopupWindow.rootContainer = document.getElementById("popup-container");
-PopupWindow.container = document.getElementById('toast-container');
 PopupWindow.keyframes_in = [{ transform: "scale(1.1)", opacity: 0, filter: " blur(10px)" }, {}];
 PopupWindow.keyframes_out = [{}, { transform: "scale(1.1)", opacity: 0, filter: " blur(10px)" },];
 PopupWindow.urlBuffer = {};

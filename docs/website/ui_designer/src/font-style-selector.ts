@@ -1,5 +1,6 @@
 import { FontStyleCreator as FontStyleEditor } from "./font-style-editor.js";
 import { FontStyle } from "./font-style.js";
+import { LoadingScreen } from "./loading-screen.js";
 import { PopupWindow } from "./popup-window.js";
 import { Toast } from "./toast.js";
 
@@ -35,14 +36,14 @@ export class FontStyleSelector {
 
 
     private async init() {
-        var toast = new Toast("Loading");
+        var loadingScreen = new LoadingScreen();
         try {
-            await this.popup.load(() => toast.show(0));
+            await this.popup.load(() => loadingScreen.show());
             const addBtn = this.popup.contentNode.querySelector('#addBtn');
             addBtn?.addEventListener('click', this.addFontStyle.bind(this))
 
         } finally {
-            toast.hide();
+            loadingScreen.hide();
         }
     }
 

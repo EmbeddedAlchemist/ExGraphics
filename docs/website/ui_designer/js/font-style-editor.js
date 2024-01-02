@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { assert } from "./assert.js";
 import { FontStyle } from "./font-style.js";
+import { LoadingScreen } from "./loading-screen.js";
 import { PopupWindow } from "./popup-window.js";
 import { tinycolor } from "./tinycolor.js";
 import { Toast } from "./toast.js";
@@ -19,9 +20,9 @@ export class FontStyleCreator {
     }
     init() {
         return __awaiter(this, void 0, void 0, function* () {
-            var toast = new Toast("Loading");
+            var loadingScreen = new LoadingScreen();
             try {
-                yield this.popup.load(() => toast.show(0));
+                yield this.popup.load(() => loadingScreen.show());
                 const fontNameInput = this.popup.contentNode.querySelector('#fontNameInput');
                 const sizeInput = this.popup.contentNode.querySelector('#sizeInput');
                 const weightInput = this.popup.contentNode.querySelector('#weightInput');
@@ -33,7 +34,7 @@ export class FontStyleCreator {
                 this.updatePreview();
             }
             finally {
-                toast.hide();
+                loadingScreen.hide();
             }
         });
     }

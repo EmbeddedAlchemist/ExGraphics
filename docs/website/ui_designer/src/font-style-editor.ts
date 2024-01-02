@@ -1,5 +1,6 @@
 import { assert } from "./assert.js";
 import { FontStyle } from "./font-style.js";
+import { LoadingScreen } from "./loading-screen.js";
 import { PopupWindow } from "./popup-window.js";
 import { tinycolor } from "./tinycolor.js";
 import { Toast } from "./toast.js";
@@ -13,9 +14,9 @@ export class FontStyleCreator {
     }
 
     private async init() {
-        var toast = new Toast("Loading");
+        var loadingScreen = new LoadingScreen();
         try {
-            await this.popup.load(() => toast.show(0));
+            await this.popup.load(() => loadingScreen.show());
             const fontNameInput = this.popup.contentNode.querySelector('#fontNameInput');
             const sizeInput = this.popup.contentNode.querySelector('#sizeInput');
             const weightInput = this.popup.contentNode.querySelector('#weightInput');
@@ -27,7 +28,7 @@ export class FontStyleCreator {
             grayScaleInput?.addEventListener('input', this.updatePreview.bind(this));
             this.updatePreview();
         } finally {
-            toast.hide();
+            loadingScreen.hide();
         }
     }
 

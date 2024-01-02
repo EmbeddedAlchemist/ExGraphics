@@ -55,3 +55,30 @@
   /* background-color: blue; */
   overflow: scroll;
 }
+#popup-container .popup-window-background .loading-window {
+  display: flex;
+  padding: 20px 30px;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(var(--card-color-rgb), 0.7);
+  box-shadow: 0px 30px 70px var(--shadow-color);
+  border-radius: 10px;
+}
+#popup-container .popup-window-background .loading-window svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-color);
+  animation: 1s linear 0s infinite forwards rotate;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+#popup-container .popup-window-background .loading-window span {
+  font-size: 18px;
+  margin-left: 10px;
+}

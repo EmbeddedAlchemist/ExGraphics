@@ -1,0 +1,26 @@
+export class LoadingScreen {
+    constructor() {
+        this.windowNode = document.createElement('div');
+        this.windowNode.className = 'popup-window-background';
+    }
+    show() {
+        LoadingScreen.rootContainer.appendChild(this.windowNode);
+        this.windowNode.animate(LoadingScreen.keyframes_in, { duration: 400, easing: 'cubic-bezier(.1,.83,.22,.99)' });
+    }
+    hide() {
+        this.windowNode.animate(LoadingScreen.keyframes_out, { duration: 150, easing: 'cubic-bezier(.57,.03,.83,.52)' })
+            .addEventListener('finish', () => {
+            LoadingScreen.rootContainer.removeChild(this.windowNode);
+        });
+    }
+}
+LoadingScreen.initialHTML = '<div class="loading-window">\
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">\
+                <path\
+                    d="M480-80q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 31.5-155.5t86-127Q252-817 325-848.5T480-880q17 0 28.5 11.5T520-840q0 17-11.5 28.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160q133 0 226.5-93.5T800-480q0-17 11.5-28.5T840-520q17 0 28.5 11.5T880-480q0 82-31.5 155t-86 127.5q-54.5 54.5-127 86T480-80Z" />\
+                </svg>\
+            <span>Loading</span>\
+        </div>';
+LoadingScreen.rootContainer = document.getElementById("popup-container");
+LoadingScreen.keyframes_in = [{ transform: "scale(1.1)", opacity: 0, filter: " blur(10px)" }, {}];
+LoadingScreen.keyframes_out = [{}, { transform: "scale(1.1)", opacity: 0, filter: " blur(10px)" },];

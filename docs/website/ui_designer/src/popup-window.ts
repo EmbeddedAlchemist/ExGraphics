@@ -21,7 +21,6 @@ export class PopupWindow {
     private titleNode: HTMLElement;
     closeBtn: HTMLElement;
 
-    static container = document.getElementById('toast-container');
     static keyframes_in: Keyframe[] = [{ transform: "scale(1.1)", opacity: 0, filter: " blur(10px)" }, {}];
     static keyframes_out: Keyframe[] = [{}, { transform: "scale(1.1)", opacity: 0, filter: " blur(10px)" },];
 
@@ -87,7 +86,7 @@ export class PopupWindow {
 
     show() {
         this.windowNode.style.display = "";
-        this.playingAmimation = this.windowNode.animate(PopupWindow.keyframes_in, { duration: 400, easing: 'cubic-bezier(.1,.83,.22,.99)' });
+        this.windowNode.animate(PopupWindow.keyframes_in, { duration: 400, easing: 'cubic-bezier(.1,.83,.22,.99)' });
     }
 
     hide() {

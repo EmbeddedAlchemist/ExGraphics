@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { FontStyleCreator as FontStyleEditor } from "./font-style-editor.js";
+import { LoadingScreen } from "./loading-screen.js";
 import { PopupWindow } from "./popup-window.js";
 import { Toast } from "./toast.js";
 export class FontStyleSelector {
@@ -38,14 +39,14 @@ export class FontStyleSelector {
     }
     init() {
         return __awaiter(this, void 0, void 0, function* () {
-            var toast = new Toast("Loading");
+            var loadingScreen = new LoadingScreen();
             try {
-                yield this.popup.load(() => toast.show(0));
+                yield this.popup.load(() => loadingScreen.show());
                 const addBtn = this.popup.contentNode.querySelector('#addBtn');
                 addBtn === null || addBtn === void 0 ? void 0 : addBtn.addEventListener('click', this.addFontStyle.bind(this));
             }
             finally {
-                toast.hide();
+                loadingScreen.hide();
             }
         });
     }
