@@ -65,10 +65,17 @@ export class PopupWindow {
         this.windowNode.animate(PopupWindow.keyframes_in, { duration: 400, easing: 'cubic-bezier(.1,.83,.22,.99)' });
     }
     hide() {
-        this.windowNode.animate(PopupWindow.keyframes_out, { duration: 150, easing: 'cubic-bezier(.57,.03,.83,.52)' })
-            .addEventListener('finish', () => {
-            this.windowNode.style.display = 'none';
-        });
+        if (PopupWindow.rootContainer.contains(this.windowNode)) {
+            var a = this.windowNode.animate(PopupWindow.keyframes_out, { duration: 150, easing: 'cubic-bezier(.57,.03,.83,.52)' });
+            return new Promise((resolve, reject) => {
+                a.addEventListener('finish', () => {
+                    this.windowNode.style.display = 'none';
+                    resolve(null);
+                });
+            });
+        }
+        else
+            return new Promise((resolve, reject) => { resolve(null); });
     }
     deinit() {
         var ani = this.windowNode.getAnimations();

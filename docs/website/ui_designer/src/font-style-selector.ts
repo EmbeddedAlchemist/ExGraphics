@@ -43,7 +43,7 @@ export class FontStyleSelector {
             addBtn?.addEventListener('click', this.addFontStyle.bind(this))
 
         } finally {
-            loadingScreen.hide();
+            await loadingScreen.hide();
         }
     }
 

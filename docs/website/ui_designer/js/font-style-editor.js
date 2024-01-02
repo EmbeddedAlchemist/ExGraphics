@@ -34,7 +34,7 @@ export class FontStyleCreator {
                 this.updatePreview();
             }
             finally {
-                loadingScreen.hide();
+                yield loadingScreen.hide();
             }
         });
     }

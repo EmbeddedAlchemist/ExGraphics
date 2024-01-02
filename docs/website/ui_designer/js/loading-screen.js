@@ -9,10 +9,17 @@ export class LoadingScreen {
         this.windowNode.animate(LoadingScreen.keyframes_in, { duration: 400, easing: 'cubic-bezier(.1,.83,.22,.99)' });
     }
     hide() {
-        this.windowNode.animate(LoadingScreen.keyframes_out, { duration: 150, easing: 'cubic-bezier(.57,.03,.83,.52)' })
-            .addEventListener('finish', () => {
-            LoadingScreen.rootContainer.removeChild(this.windowNode);
-        });
+        if (LoadingScreen.rootContainer.contains(this.windowNode)) {
+            var a = this.windowNode.animate(LoadingScreen.keyframes_out, { duration: 150, easing: 'cubic-bezier(.57,.03,.83,.52)' });
+            return new Promise((resolve, reject) => {
+                a.addEventListener('finish', () => {
+                    LoadingScreen.rootContainer.removeChild(this.windowNode);
+                    resolve(null);
+                });
+            });
+        }
+        else
+            return new Promise((resolve, reject) => { resolve(null); });
     }
 }
 LoadingScreen.initialHTML = '<div class="loading-window">\

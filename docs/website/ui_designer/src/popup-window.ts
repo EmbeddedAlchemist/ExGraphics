@@ -1,3 +1,4 @@
+
 export class PopupWindow {
     static initialHTML: string = '\
         <div class="popup-window">\
@@ -48,8 +49,8 @@ export class PopupWindow {
     private waitForContentLoaded() {
         var list: Promise<null>[] = [];
         console.log(111);
-        this.contentNode.querySelectorAll('[src], [href]').forEach((node) => { 
-            node.addEventListener('load', () => { console.log('loaded2')})
+        this.contentNode.querySelectorAll('[src], [href]').forEach((node) => {
+            node.addEventListener('load', () => { console.log('loaded2') })
         })
         this.contentNode.querySelectorAll('[src], [href]').forEach((node) => {
             list.push(new Promise((resolve, reject) => {
@@ -70,7 +71,7 @@ export class PopupWindow {
         PopupWindow.rootContainer.appendChild(this.windowNode);
     }
 
-    async load(nonBufferedCallback: (()=>void) | undefined = undefined) {
+    async load(nonBufferedCallback: (() => void) | undefined = undefined) {
         if (!PopupWindow.urlBuffer[this.url]) {
             if (nonBufferedCallback) nonBufferedCallback();
             PopupWindow.urlBuffer[this.url] = await fetch(this.url).then((response) => {
@@ -90,10 +91,17 @@ export class PopupWindow {
     }
 
     hide() {
-        this.windowNode.animate(PopupWindow.keyframes_out, { duration: 150, easing: 'cubic-bezier(.57,.03,.83,.52)' })
-            .addEventListener('finish', () => {
-                this.windowNode.style.display = 'none';
+        if (PopupWindow.rootContainer.contains(this.windowNode)) {
+            var a = this.windowNode.animate(PopupWindow.keyframes_out, { duration: 150, easing: 'cubic-bezier(.57,.03,.83,.52)' })
+            return new Promise((resolve, reject) => {
+                a.addEventListener('finish', () => {
+                    this.windowNode.style.display = 'none';
+                    resolve(null)
+                })
             })
+        }
+        else
+            return new Promise<null>((resolve, reject) => {resolve(null)})
     }
 
     deinit() {

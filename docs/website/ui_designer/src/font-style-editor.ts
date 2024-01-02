@@ -28,7 +28,7 @@ export class FontStyleCreator {
             grayScaleInput?.addEventListener('input', this.updatePreview.bind(this));
             this.updatePreview();
         } finally {
-            loadingScreen.hide();
+            await loadingScreen.hide();
         }
     }
 

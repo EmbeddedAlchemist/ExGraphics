@@ -18,7 +18,7 @@
 }
 
 :root[color-scheme=dark] {
-    --card-color-rgb: 48, 48, 48;
+    --card-color-rgb: 72, 72, 72;
     --bg-color-rgb: 32, 32, 32;
     --bg-color-dynamic-l: 65;
     --bg-color-dynamic-a: 5;

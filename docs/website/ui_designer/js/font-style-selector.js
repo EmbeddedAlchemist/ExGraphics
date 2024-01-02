@@ -46,7 +46,7 @@ export class FontStyleSelector {
                 addBtn === null || addBtn === void 0 ? void 0 : addBtn.addEventListener('click', this.addFontStyle.bind(this));
             }
             finally {
-                loadingScreen.hide();
+                yield loadingScreen.hide();
             }
         });
     }
