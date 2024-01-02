@@ -33,10 +33,21 @@ export class FontStyleSelector {
     }
 
     private waitForContentLoaded() {
-        var list: any = [];
-        this.popup.contentNode.querySelectorAll('link,script').forEach((node) => {
-            console.log(node);
-            list.push(() => { return new Promise((resolve, reject) => { node.addEventListener('load', () => { resolve(null); }) }) })
+        var list: Promise<null>[] = [];
+        console.log(111);
+        this.popup.contentNode.querySelectorAll('[src], [href]').forEach((node) => { 
+            node.addEventListener('load', () => { console.log('loaded2')})
+        })
+        this.popup.contentNode.querySelectorAll('[src], [href]').forEach((node) => {
+            list.push(new Promise((resolve, reject) => {
+                console.log(node);
+                node.addEventListener('load', () => {
+                    resolve(null);
+                })
+                node.addEventListener('error', () => {
+                    reject(new Error('Error loading resource'));
+                });
+            }))
         })
         return Promise.all(list);
     }
@@ -61,8 +72,12 @@ export class FontStyleSelector {
                 FontStyleSelector.htmlCode = htmlCode;
                 // console.log(this.popup.contentNode.innerHTML);
             }
-            this.popup.contentNode.innerHTML = FontStyleSelector.htmlCode;
-            await this.waitForContentLoaded();
+            var doc = new DOMParser().parseFromString(FontStyleSelector.htmlCode, 'text/html');
+            this.popup.contentNode.appendChild(doc.documentElement);
+            this.popup.contentNode.querySelectorAll('[src], [href]').forEach((node) => { 
+                node.addEventListener('load', () => { console.log('loaded1')})
+            })
+
             const addBtn = this.popup.contentNode.querySelector('#addBtn');
             addBtn?.addEventListener('click', this.addFontStyle.bind(this))
 
@@ -76,6 +91,8 @@ export class FontStyleSelector {
         var result = null;
         try {
             await this.init();
+            this.popup.init();
+            await this.waitForContentLoaded();
             this.popup.show();
             result = await this.waitForResult();
         }
@@ -86,6 +103,7 @@ export class FontStyleSelector {
         }
         finally {
             this.popup.hide();
+            this.popup.deinit();
             return result;
         }
     }

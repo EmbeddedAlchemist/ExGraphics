@@ -119,6 +119,27 @@ export class FontStyleCreator {
     }
 
 
+    private waitForContentLoaded() {
+        var list: Promise<null>[] = [];
+        console.log(111);
+        this.popup.contentNode.querySelectorAll('[src], [href]').forEach((node) => { 
+            node.addEventListener('load', () => { console.log('loaded2')})
+        })
+        this.popup.contentNode.querySelectorAll('[src], [href]').forEach((node) => {
+            list.push(new Promise((resolve, reject) => {
+                console.log(node);
+                node.addEventListener('load', () => {
+                    resolve(null);
+                })
+                node.addEventListener('error', () => {
+                    reject(new Error('Error loading resource'));
+                });
+            }))
+        })
+        return Promise.all(list);
+    }
+
+
     private fillInputs(src: FontStyle) {
         const fontNameInput = this.popup.contentNode.querySelector('#fontNameInput') as HTMLInputElement;
         const sizeInput = this.popup.contentNode.querySelector('#sizeInput') as HTMLInputElement;
@@ -134,6 +155,8 @@ export class FontStyleCreator {
         var result: FontStyle | null = null;
         try {
             await this.init();
+            this.popup.init();
+            await this.waitForContentLoaded();
             this.popup.show();
             if (src) this.fillInputs(src);
             result = await Promise.race([this.waitForCancel(), this.waitForConfirm()]) as FontStyle|null;
@@ -145,6 +168,7 @@ export class FontStyleCreator {
         }
         finally {
             this.popup.hide();
+            this.popup.deinit();
             return result;
         }
     }

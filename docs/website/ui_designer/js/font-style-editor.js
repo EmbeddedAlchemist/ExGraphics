@@ -106,6 +106,25 @@ export class FontStyleCreator {
             });
         });
     }
+    waitForContentLoaded() {
+        var list = [];
+        console.log(111);
+        this.popup.contentNode.querySelectorAll('[src], [href]').forEach((node) => {
+            node.addEventListener('load', () => { console.log('loaded2'); });
+        });
+        this.popup.contentNode.querySelectorAll('[src], [href]').forEach((node) => {
+            list.push(new Promise((resolve, reject) => {
+                console.log(node);
+                node.addEventListener('load', () => {
+                    resolve(null);
+                });
+                node.addEventListener('error', () => {
+                    reject(new Error('Error loading resource'));
+                });
+            }));
+        });
+        return Promise.all(list);
+    }
     fillInputs(src) {
         const fontNameInput = this.popup.contentNode.querySelector('#fontNameInput');
         const sizeInput = this.popup.contentNode.querySelector('#sizeInput');
@@ -121,6 +140,8 @@ export class FontStyleCreator {
             var result = null;
             try {
                 yield this.init();
+                this.popup.init();
+                yield this.waitForContentLoaded();
                 this.popup.show();
                 if (src)
                     this.fillInputs(src);
@@ -133,6 +154,7 @@ export class FontStyleCreator {
             }
             finally {
                 this.popup.hide();
+                this.popup.deinit();
                 return result;
             }
         });

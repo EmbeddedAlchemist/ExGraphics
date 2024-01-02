@@ -1,6 +1,7 @@
 export class PopupWindow {
     constructor() {
         this.windowNode = document.createElement('div');
+        this.playingAmimation = null;
         this.windowNode.className = "popup-window-background";
         this.windowNode.innerHTML = PopupWindow.initialHTML;
         this.topBarNode = this.windowNode.querySelector('.top-bar');
@@ -10,15 +11,30 @@ export class PopupWindow {
     }
     set title(val) { this.titleNode.innerHTML = val; }
     get title() { return this.titleNode.innerHTML; }
-    show() {
+    init() {
+        this.windowNode.style.display = "none";
         PopupWindow.rootContainer.appendChild(this.windowNode);
-        this.windowNode.animate(PopupWindow.keyframes_in, { duration: 400, easing: 'cubic-bezier(.1,.83,.22,.99)' });
+    }
+    show() {
+        this.windowNode.style.display = "";
+        this.playingAmimation = this.windowNode.animate(PopupWindow.keyframes_in, { duration: 400, easing: 'cubic-bezier(.1,.83,.22,.99)' });
     }
     hide() {
         this.windowNode.animate(PopupWindow.keyframes_out, { duration: 150, easing: 'cubic-bezier(.57,.03,.83,.52)' })
             .addEventListener('finish', () => {
-            PopupWindow.rootContainer.removeChild(this.windowNode);
+            this.windowNode.style.display = 'none';
         });
+    }
+    deinit() {
+        var ani = this.windowNode.getAnimations();
+        if (ani.length > 0) {
+            ani[ani.length - 1].addEventListener('finish', () => {
+                PopupWindow.rootContainer.removeChild(this.windowNode);
+            });
+        }
+        else {
+            PopupWindow.rootContainer.removeChild(this.windowNode);
+        }
     }
 }
 PopupWindow.initialHTML = '\
