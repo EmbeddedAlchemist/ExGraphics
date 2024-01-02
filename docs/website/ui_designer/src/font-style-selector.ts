@@ -3,25 +3,25 @@ import { FontStyle } from "./font-style.js";
 import { PopupWindow } from "./popup-window.js";
 import { Toast } from "./toast.js";
 
-export class FontStyleSelector{
+export class FontStyleSelector {
 
     static htmlCode: string | null = null;
     private popup: PopupWindow = new PopupWindow;
 
-    private waitForSelect():Promise<FontStyle> {
+    private waitForSelect(): Promise<FontStyle> {
         return new Promise((resolve, reject) => {
         });
     }
 
-    private waitForCancel():Promise<null> {
-        return new Promise((resolve, reject) => { 
+    private waitForCancel(): Promise<null> {
+        return new Promise((resolve, reject) => {
             this.popup.closeBtn.addEventListener("click", e => {
                 resolve(null);
             })
         })
     }
 
-    private async waitForResult() :Promise<FontStyle|null> {
+    private waitForResult(): Promise<FontStyle | null> {
         return Promise.race([
             this.waitForSelect(),
             this.waitForCancel()
@@ -29,7 +29,16 @@ export class FontStyleSelector{
     }
 
     private async addFontStyle() {
-        var newFont = new FontStyleEditor().edit();
+        var newFont = await new FontStyleEditor().edit();
+    }
+
+    private waitForContentLoaded() {
+        var list: any = [];
+        this.popup.contentNode.querySelectorAll('link,script').forEach((node) => {
+            console.log(node);
+            list.push(() => { return new Promise((resolve, reject) => { node.addEventListener('load', () => { resolve(null); }) }) })
+        })
+        return Promise.all(list);
     }
 
     private async init() {
@@ -53,7 +62,7 @@ export class FontStyleSelector{
                 // console.log(this.popup.contentNode.innerHTML);
             }
             this.popup.contentNode.innerHTML = FontStyleSelector.htmlCode;
-
+            await this.waitForContentLoaded();
             const addBtn = this.popup.contentNode.querySelector('#addBtn');
             addBtn?.addEventListener('click', this.addFontStyle.bind(this))
 
@@ -71,7 +80,7 @@ export class FontStyleSelector{
             result = await this.waitForResult();
         }
         catch (error) {
-            if (error instanceof Error){
+            if (error instanceof Error) {
                 new Toast(error.message).show();
             }
         }

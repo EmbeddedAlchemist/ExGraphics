@@ -26,17 +26,23 @@ export class FontStyleSelector {
         });
     }
     waitForResult() {
-        return __awaiter(this, void 0, void 0, function* () {
-            return Promise.race([
-                this.waitForSelect(),
-                this.waitForCancel()
-            ]);
-        });
+        return Promise.race([
+            this.waitForSelect(),
+            this.waitForCancel()
+        ]);
     }
     addFontStyle() {
         return __awaiter(this, void 0, void 0, function* () {
-            var newFont = new FontStyleEditor().edit();
+            var newFont = yield new FontStyleEditor().edit();
         });
+    }
+    waitForContentLoaded() {
+        var list = [];
+        this.popup.contentNode.querySelectorAll('link,script').forEach((node) => {
+            console.log(node);
+            list.push(() => { return new Promise((resolve, reject) => { node.addEventListener('load', () => { resolve(null); }); }); });
+        });
+        return Promise.all(list);
     }
     init() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -57,6 +63,7 @@ export class FontStyleSelector {
                     FontStyleSelector.htmlCode = htmlCode;
                 }
                 this.popup.contentNode.innerHTML = FontStyleSelector.htmlCode;
+                yield this.waitForContentLoaded();
                 const addBtn = this.popup.contentNode.querySelector('#addBtn');
                 addBtn === null || addBtn === void 0 ? void 0 : addBtn.addEventListener('click', this.addFontStyle.bind(this));
             }
