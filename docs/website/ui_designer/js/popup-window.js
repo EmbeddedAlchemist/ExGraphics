@@ -44,9 +44,11 @@ export class PopupWindow {
         this.windowNode.style.display = "none";
         PopupWindow.rootContainer.appendChild(this.windowNode);
     }
-    load() {
+    load(nonBufferedCallback = undefined) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!PopupWindow.urlBuffer[this.url]) {
+                if (nonBufferedCallback)
+                    nonBufferedCallback();
                 PopupWindow.urlBuffer[this.url] = yield fetch(this.url).then((response) => {
                     if (!response.ok)
                         throw new Error(`Failed to fetch ${this.url} with code ${response.status}`);

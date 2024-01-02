@@ -15,7 +15,7 @@ export class FontStyleCreator {
     private async init() {
         var toast = new Toast("Loading");
         try {
-            await this.popup.load()
+            await this.popup.load(() => toast.show(0));
             const fontNameInput = this.popup.contentNode.querySelector('#fontNameInput');
             const sizeInput = this.popup.contentNode.querySelector('#sizeInput');
             const weightInput = this.popup.contentNode.querySelector('#weightInput');

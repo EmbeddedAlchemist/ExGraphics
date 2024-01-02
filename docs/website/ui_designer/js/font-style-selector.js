@@ -40,7 +40,7 @@ export class FontStyleSelector {
         return __awaiter(this, void 0, void 0, function* () {
             var toast = new Toast("Loading");
             try {
-                yield this.popup.load();
+                yield this.popup.load(() => toast.show(0));
                 const addBtn = this.popup.contentNode.querySelector('#addBtn');
                 addBtn === null || addBtn === void 0 ? void 0 : addBtn.addEventListener('click', this.addFontStyle.bind(this));
             }

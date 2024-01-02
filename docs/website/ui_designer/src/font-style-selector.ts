@@ -37,7 +37,7 @@ export class FontStyleSelector {
     private async init() {
         var toast = new Toast("Loading");
         try {
-            await this.popup.load();
+            await this.popup.load(() => toast.show(0));
             const addBtn = this.popup.contentNode.querySelector('#addBtn');
             addBtn?.addEventListener('click', this.addFontStyle.bind(this))
 

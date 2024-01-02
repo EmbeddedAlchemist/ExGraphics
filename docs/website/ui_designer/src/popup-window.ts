@@ -71,8 +71,9 @@ export class PopupWindow {
         PopupWindow.rootContainer.appendChild(this.windowNode);
     }
 
-    async load() {
+    async load(nonBufferedCallback: (()=>void) | undefined = undefined) {
         if (!PopupWindow.urlBuffer[this.url]) {
+            if (nonBufferedCallback) nonBufferedCallback();
             PopupWindow.urlBuffer[this.url] = await fetch(this.url).then((response) => {
                 if (!response.ok)
                     throw new Error(`Failed to fetch ${this.url} with code ${response.status}`);
