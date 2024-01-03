@@ -71,7 +71,7 @@ export class PopupWindow {
             if (nonBufferedCallback) nonBufferedCallback();
             PopupWindow.urlBuffer[this.url] = await fetch(this.url).then((response) => {
                 if (!response.ok)
-                    throw new Error(`Failed to fetch ${this.url} with code ${response.status}`);
+                    throw new Error('Failed to fetch ' + this.url + ' with code ' + response.status);
                 return response.text();
             })
         }
@@ -96,7 +96,7 @@ export class PopupWindow {
             })
         }
         else
-            return new Promise<null>((resolve, reject) => {resolve(null)})
+            return new Promise<null>((resolve, reject) => { resolve(null) })
     }
 
     deinit() {
