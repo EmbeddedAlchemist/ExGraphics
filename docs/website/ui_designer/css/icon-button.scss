@@ -1,4 +1,4 @@
-.icon-btn {
+.icon-button {
     position: relative;
     fill: rgba(var(--text-color-rgb), 70%);
     aspect-ratio: 1;
@@ -32,6 +32,7 @@
         padding: 20%;
         aspect-ratio: 1;
         flex-shrink: 0;
+        fill:var(--text-color);
     }
 
     &::after {

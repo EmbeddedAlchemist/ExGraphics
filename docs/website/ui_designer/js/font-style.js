@@ -2,11 +2,12 @@ export class FontStyle {
     generatePreviewImageData() {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
-        const previewText = this.toCSSFormat();
+        ctx.font = this.toCSSFormat();
+        const previewText = this.family;
         const measure = ctx.measureText(previewText);
         canvas.setAttribute('width', measure.width.toString() + 'px');
         canvas.setAttribute('height', (measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent).toString() + 'px');
-        ctx.fillStyle = '#000000';
+        ctx.fillStyle = '#FF0000';
         ctx.font = this.toCSSFormat();
         ctx.fillText(previewText, 0, measure.actualBoundingBoxAscent);
         return ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -33,5 +34,11 @@ export class FontStyle {
     }
     toCSSFormat() {
         return `${this.weight} ${this.size}px ${this.family}`;
+    }
+    equals(other) {
+        return (this.family === other.family &&
+            this.size === other.size &&
+            this.weight === other.weight &&
+            this.grayScale === other.grayScale);
     }
 }

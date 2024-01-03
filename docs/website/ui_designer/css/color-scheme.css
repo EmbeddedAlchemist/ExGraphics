@@ -35,7 +35,7 @@
 
 :root {
     --bg-color: rgb(var(--bg-color-rgb));
-    --text-color: rgba(var(--text-color-rgb), .7);
+    --text-color: rgba(var(--text-color-rgb), .8);
     --card-color: rgba(var(--card-color-rgb), .6);
     --shadow-color: rgb(var(--shadow-color-rgb), .15);
     --divider-color: rgb(var(--divider-color-rgb), .10);

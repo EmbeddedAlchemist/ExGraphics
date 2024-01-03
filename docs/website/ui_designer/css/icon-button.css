@@ -1,4 +1,4 @@
-.icon-btn {
+.icon-button {
   position: relative;
   fill: rgba(var(--text-color-rgb), 70%);
   aspect-ratio: 1;
@@ -10,28 +10,29 @@
   align-items: center;
   cursor: pointer;
 }
-.icon-btn:hover {
+.icon-button:hover {
   background-color: rgba(var(--text-color-rgb), 5%);
 }
-.icon-btn:hover::after {
+.icon-button:hover::after {
   visibility: visible;
   opacity: 1;
   transform: scale(1);
   filter: blur(0px);
 }
-.icon-btn:active {
+.icon-button:active {
   transition: all 0.1s;
   background-color: rgba(var(--text-color-rgb), 10%);
   transform: scale(0.95);
 }
-.icon-btn svg {
+.icon-button svg {
   width: 100%;
   height: 100%;
   padding: 20%;
   aspect-ratio: 1;
   flex-shrink: 0;
+  fill: var(--text-color);
 }
-.icon-btn::after {
+.icon-button::after {
   content: attr(tips);
   width: -moz-fit-content;
   width: fit-content;

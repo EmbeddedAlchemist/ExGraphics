@@ -23,13 +23,8 @@ export class PopupWindow {
     get title() { return this.titleNode.innerHTML; }
     waitForContentLoaded() {
         var list = [];
-        console.log(111);
-        this.contentNode.querySelectorAll('[src], [href]').forEach((node) => {
-            node.addEventListener('load', () => { console.log('loaded2'); });
-        });
         this.contentNode.querySelectorAll('[src], [href]').forEach((node) => {
             list.push(new Promise((resolve, reject) => {
-                console.log(node);
                 node.addEventListener('load', () => {
                     resolve(null);
                 });
@@ -93,7 +88,7 @@ PopupWindow.initialHTML = '\
         <div class="popup-window">\
             <div class="top-bar">\
                 <span class="title">Untitle</span>\
-                <div class="icon-btn close-btn" tips="Close">\
+                <div class="icon-button close-btn" tips="Close">\
                      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">\
                         <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>\
                     </svg>\

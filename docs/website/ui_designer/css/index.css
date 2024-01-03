@@ -52,7 +52,7 @@ body>div {
     height: 26px;
     width: auto;
     margin: 0px 30px;
-    fill: rgba(var(--text-color-rgb), 70%);
+    fill: var(--text-color);
 }
 
 #top-bar>hr {
@@ -62,7 +62,7 @@ body>div {
     border-left: 2px solid rgba(var(--text-color-rgb), 30%);
 }
 
-#top-bar>.icon-btn {
+#top-bar>.icon-button {
     width: 40px;
     height: 40px;
 }

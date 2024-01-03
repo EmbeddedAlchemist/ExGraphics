@@ -4,6 +4,7 @@ import { GraphicsObject } from './graphics-object.js';
 import * as WorkSpace from './workspace.js'
 import { FontStyleCreator } from './font-style-editor.js';
 import { FontStyleSelector } from './font-style-selector.js';
+import { LoadingScreen } from './loading-screen.js';
 
 
 function init_full_screen_btn() {
@@ -193,4 +194,14 @@ window.addEventListener('load', (e) => {
     init_zoom_out_btn();
     init_new_window_btn();
     init_font_btn();
+
+
+    // window.addEventListener("beforeunload", (event) => {
+    //     var tips = "You may save your work before leave";
+    //     event.preventDefault();
+    //     event.returnValue = tips;
+    //     return tips
+    // });
 })
+
+
