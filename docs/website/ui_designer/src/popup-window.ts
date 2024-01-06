@@ -1,7 +1,6 @@
 
 export class PopupWindow {
-    static initialHTML: string = '\
-        <div class="popup-window">\
+    static initialHTML: string = '<div class="popup-window">\
             <div class="top-bar">\
                 <span class="title">Untitle</span>\
                 <div class="icon-button close-btn" tips="Close">\

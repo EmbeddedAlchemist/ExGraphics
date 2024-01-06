@@ -1,0 +1,160 @@
+.color-picker {
+    display: flex;
+    flex-direction: column;
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        // max-height: 60vh;
+        width: auto;
+        overflow: hidden;
+        align-items: center;
+        padding: 20px;
+
+
+        @mixin input-range-track($track-w, $track-h, $track-background) {
+
+            box-sizing: content-box;
+            border: 3px solid rgba(var(--card-color-rgb), 1);
+            border-radius: 40px;
+            width: $track-w;
+            height: $track-h;
+
+            background: $track-background;
+
+
+            box-shadow: 0px 0px 20px var(--shadow-color);
+
+
+        }
+
+        @mixin input-range-thumb($thumb-d) {
+            box-sizing: border-box;
+            border: none;
+            width: $thumb-d;
+            height: $thumb-d;
+            border-radius: 50%;
+            background: rgba(var(--card-color-rgb), .3);
+            border: 6px solid rgba(var(--card-color-rgb), 1);
+            box-shadow: 0px 0px 10px var(--shadow-color),
+                0px 0px 5px var(--shadow-color) inset;
+            cursor: pointer;
+            transition: transform 0.2s;
+
+            &:hover {
+                transition: all 0.2s;
+                transform: scale(1.02);
+            }
+
+            &:active {
+                transition: all 0.1s;
+                transform: scale(1.1);
+                border-width: 8px;
+            }
+        }
+
+        @mixin input-range($track-background) {
+            $track-w: 200px;
+            $track-h: 16px;
+            $thumb-d: 27px;
+
+
+
+
+            &,
+            &::-webkit-slider-thumb {
+                -webkit-appearance: none;
+            }
+
+            width: $track-w;
+            height: $thumb-d;
+            background: transparent;
+
+
+            &::-webkit-slider-runnable-track {
+                @include input-range-track($track-w, $track-h, $track-background)
+            }
+
+            &::-moz-range-track {
+                @include input-range-track($track-w, $track-h, $track-background)
+            }
+
+            &::-ms-track {
+                @include input-range-track($track-w, $track-h, $track-background)
+            }
+
+            &::-webkit-slider-thumb {
+                margin-top: .5*($track-h - $thumb-d);
+                @include input-range-thumb($thumb-d)
+            }
+
+            &::-moz-range-thumb {
+                @include input-range-thumb($thumb-d)
+            }
+
+            &::-ms-thumb {
+                margin-top: 0;
+                @include input-range-thumb($thumb-d)
+            }
+
+            &::-ms-tooltip {
+                display: none
+            }
+        }
+
+        .preview{
+            width: auto;
+            height: auto;
+            background-color: aqua;
+            padding: 15px;
+            margin-bottom: 20px;
+            border:5px solid rgba(var(--card-color-rgb),1);
+            border-radius: 15px;
+            box-shadow: 0px 5px 20px var(--shadow-color);
+            p{
+                font-size: 16px;
+                font-weight: 500;
+                font-family: monospace;
+                // text-shadow: 0px 0px 0px  var(--shadow-color);
+            }
+        }
+
+        input[type=range] {
+            margin-bottom: 10px;
+            $a: .5;
+
+            &#inputH {
+                @include input-range(linear-gradient(to right, hsla(0, 100%, 50%, $a), hsla(60, 100%, 50%, $a), hsla(120, 100%, 50%, $a), hsla(180, 100%, 50%, $a), hsla(240, 100%, 50%, $a), hsla(300, 100%, 50%, $a), hsla(360, 100%, 50%, $a)))
+            }
+
+            &#inputS {
+                @include input-range(linear-gradient(to right, hsla(0, 0%, 50%, $a), hsla(0, 100%, 50%, $a)))
+            }
+
+            &#inputL {
+                @include input-range(linear-gradient(to right, hsla(0, 0%, 0%, $a), hsla(0, 0%, 100, $a)));
+            }
+
+            &#inputA {
+                @include input-range((linear-gradient(to right, rgba(var(--bg-color-rgb), .7), rgba(var(--bg-color-rgb), 1)),
+                    linear-gradient(45deg, rgba(var(--text-color-rgb), $a) 25%, transparent 0, transparent 75%, rgba(var(--text-color-rgb), $a) 0) 0px 0px / 10px 10px,
+                        linear-gradient(45deg, rgba(var(--text-color-rgb), $a) 25%, transparent 0, transparent 75%, rgba(var(--text-color-rgb), $a) 0) 5px 5px / 10px 10px
+                        ))
+            }
+        }
+
+    }
+
+    .botton-bar {
+        border-top: 1px solid var(--divider-color);
+        padding: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: end;
+
+        .button {
+            margin-left: 10px;
+        }
+    }
+}

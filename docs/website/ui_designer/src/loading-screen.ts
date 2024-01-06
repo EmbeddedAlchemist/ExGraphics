@@ -20,8 +20,12 @@ export class LoadingScreen {
 
     show() {
         LoadingScreen.rootContainer.appendChild(this.windowNode);
-        this.windowNode.animate(LoadingScreen.keyframes_in, { duration: 400, easing: 'cubic-bezier(.1,.83,.22,.99)' });
-
+        var a = this.windowNode.animate(LoadingScreen.keyframes_in, { duration: 400, easing: 'cubic-bezier(.1,.83,.22,.99)' });
+        return new Promise<null>(function (resolve, reject) { 
+            a.addEventListener('finish', e=> {
+                resolve(null);
+            })
+        })
     }
 
     hide() {

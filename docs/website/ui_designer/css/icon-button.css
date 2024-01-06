@@ -9,6 +9,7 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  outline: none;
 }
 .icon-button:hover {
   background-color: rgba(var(--text-color-rgb), 5%);

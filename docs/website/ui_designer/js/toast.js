@@ -11,7 +11,7 @@ export class Toast {
     show(duration = 3000) {
         var _a;
         (_a = Toast.container) === null || _a === void 0 ? void 0 : _a.insertBefore(this.message_node, Toast.container.firstChild);
-        var a = this.message_node.animate(Toast.keyframes_in, { duration: 500, easing: 'cubic-bezier(.1,.83,.22,.99)' });
+        var a = this.message_node.animate(Toast.keyframes_in, { duration: 400, easing: 'cubic-bezier(.1,.83,.22,.99)' });
         if (duration > 0) {
             a.addEventListener('finish', () => {
                 setTimeout(this.hide.bind(this), duration);

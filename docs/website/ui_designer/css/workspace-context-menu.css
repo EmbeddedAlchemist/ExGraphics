@@ -1,0 +1,28 @@
+#workspaceContextMenu {
+  z-index: 996;
+  position: absolute;
+  display: none;
+  left: 0;
+  top: 0;
+  border-radius: 5px;
+  background-color: rgba(var(--bg-color-rgb), 0.5);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  box-shadow: 0px 10px 20px var(--shadow-color);
+  overflow: hidden;
+}
+#workspaceContextMenu p {
+  padding: 8px 16px;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+#workspaceContextMenu p:hover {
+  background-color: rgba(var(--text-color-rgb), 0.05);
+}
+#workspaceContextMenu p:active {
+  background-color: rgba(var(--text-color-rgb), 0.1);
+  transition: all 0.1s;
+}
+#workspaceContextMenu p:not(:nth-child(1)) {
+  border-top: 1px solid var(--divider-color);
+}

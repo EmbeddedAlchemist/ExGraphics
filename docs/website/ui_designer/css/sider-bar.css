@@ -1,4 +1,3 @@
-
 .sider-bar {
     width: var(--width);
     position: relative;
@@ -6,7 +5,7 @@
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    transition: all 0.4s cubic-bezier(.34,.8,.38,.99), width 0s;
+    transition: all 0.4s cubic-bezier(.34, .8, .38, .99), width 0s;
     border: 1px solid rgba(var(--text-color-rgb), 8%);
     z-index: 1;
 }
@@ -25,7 +24,8 @@
     /* transform: ; */
 }
 
-.sider-bar:hover[pinned=false] {
+.sider-bar[pinned=false]:hover,
+.sider-bar[pinned=false]:focus-within {
     transform: translateX(0px) !important;
     /* box-shadow: 0px 0px 30px rgba(var(--text-color-rgb), .05); */
 
@@ -89,31 +89,31 @@
     flex-shrink: 0;
 }
 
-.sider-bar>.content-area>.content{
+.sider-bar>.content-area>.content {
     width: 100%;
     height: 100%;
     display: flex;
     /* background-color: aquamarine; */
 }
 
-.sider-bar>.content-area>.top-bar>.title{
+.sider-bar>.content-area>.top-bar>.title {
     font-size: 18px;
     margin-left: 10px;
     font-weight: 400;
 
 }
 
-.sider-bar>.content-area>.top-bar>.icon-btn {
+.sider-bar>.content-area>.top-bar>.icon-button {
     width: 36px;
     height: 36px;
 }
 
 
-.sider-bar>.content-area>.top-bar>.icon-btn[tag=pin-btn]>svg{
+.sider-bar>.content-area>.top-bar>.icon-button[tag=pin-btn]>svg {
     transform: rotate(45deg);
-    transition: all 0.2s cubic-bezier(.34,.8,.38,.99);
+    transition: all 0.2s cubic-bezier(.34, .8, .38, .99);
 }
 
-.sider-bar[pinned=true]>.content-area>.top-bar>.icon-btn[tag=pin-btn]>svg{
+.sider-bar[pinned=true]>.content-area>.top-bar>.icon-button[tag=pin-btn]>svg {
     transform: rotate(0deg);
 }

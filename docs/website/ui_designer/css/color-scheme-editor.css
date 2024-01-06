@@ -1,0 +1,88 @@
+.color-scheme-editor {
+  display: flex;
+  flex-direction: column;
+}
+.color-scheme-editor .content {
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  width: auto;
+  overflow: hidden;
+}
+.color-scheme-editor .content .input-area {
+  display: flex;
+}
+.color-scheme-editor .content .input-area .preview-container {
+  display: flex;
+  padding: 30px;
+  justify-content: center;
+  align-items: center;
+}
+.color-scheme-editor .content .input-area .preview-container .preview-element {
+  display: block;
+  background-color: cadetblue;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 15px 30px;
+  border: 5px solid;
+  margin-bottom: 15px;
+}
+.color-scheme-editor .content .input-area .input-container {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--divider-color);
+  align-items: start;
+}
+.color-scheme-editor .content .input-area .input-container .picker {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: rgba(var(--text-color-rgb), 5%);
+  border-radius: 10px;
+  padding: 10px 20px;
+  padding-left: 12px;
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.color-scheme-editor .content .input-area .input-container .picker div {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  margin-right: 12px;
+  border: 3px solid rgba(var(--card-color-rgb), 1);
+  box-shadow: 0px 5px 10px var(--shadow-color);
+}
+.color-scheme-editor .content .input-area .input-container .picker span {
+  font-size: 16px;
+}
+.color-scheme-editor .content .mode-container {
+  overflow-y: scroll;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-left: 1px solid var(--divider-color);
+  padding: 30px;
+}
+.color-scheme-editor .content .mode-container p {
+  width: 100%;
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: rgba(var(--text-color-rgb), 5%);
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.color-scheme-editor .content .mode-container p:hover {
+  background-color: aqua;
+}
+.color-scheme-editor .botton-bar {
+  border-top: 1px solid var(--divider-color);
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+.color-scheme-editor .botton-bar .button {
+  margin-left: 10px;
+}

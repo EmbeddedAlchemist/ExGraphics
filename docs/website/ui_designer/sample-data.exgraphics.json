@@ -1,6 +1,9 @@
 {
+    "info":{
+        "name":"MyProject"
+    },
     "elements": {
-        "name": "Root Container",
+        "name": "RootContainer",
         "width": 160,
         "height": 80,
         "top": 0,

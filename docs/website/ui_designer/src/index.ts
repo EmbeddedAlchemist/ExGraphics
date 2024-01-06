@@ -5,6 +5,7 @@ import * as WorkSpace from './workspace.js'
 import { FontStyleCreator } from './font-style-editor.js';
 import { FontStyleSelector } from './font-style-selector.js';
 import { LoadingScreen } from './loading-screen.js';
+import { ColorSchemeEditor } from './color-scheme-editor.js';
 
 
 function init_full_screen_btn() {
@@ -142,7 +143,7 @@ function init_open_file_btn() {
                 return;
             }
             // console.log( GraphicsObject)
-            GraphicsObject.loadFromFile(input_tag.files!![0]);
+            WorkSpace.loadFromFile(input_tag.files!![0]);
         })
     })
 }
@@ -182,6 +183,16 @@ function init_font_btn() {
     })
 }
 
+function init_color_btn() {
+    const color_btn = document.getElementById('color_btn');
+    console.log(color_btn);
+    color_btn?.addEventListener('click', async () => {
+        console.log('clicked');
+        var a = await new ColorSchemeEditor().edit();
+        console.log(a); 
+    })
+}
+
 window.addEventListener('load', (e) => {
     init_color_scheme();
     init_full_screen_btn();
@@ -194,7 +205,8 @@ window.addEventListener('load', (e) => {
     init_zoom_out_btn();
     init_new_window_btn();
     init_font_btn();
-
+    init_color_btn();
+    WorkSpace.init();
 
     // window.addEventListener("beforeunload", (event) => {
     //     var tips = "You may save your work before leave";

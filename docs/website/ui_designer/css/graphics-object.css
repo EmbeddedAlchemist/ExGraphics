@@ -2,7 +2,6 @@
   --focused-outline-color-rgb: 33, 191, 194;
 }
 
-
 .graphics-object {
   display: block;
   position: absolute;
@@ -12,22 +11,17 @@
   transition: all 0.3s;
   outline-style: dashed;
   flex-shrink: 0;
-
 }
 
 .graphics-object[hover] {
   /* filter: brightness(1.05); */
   /* background-color: rebeccapurple !important; */
   outline-color: rgba(var(--focused-outline-color-rgb), 0.3);
-  
 }
-
-
 
 .graphics-object[focused] {
   outline-color: rgba(var(--focused-outline-color-rgb), 1);
 }
-
 
 .graphics-object::after {
   display: block;
@@ -35,8 +29,9 @@
   position: absolute;
   right: 0;
   top: -35px;
+  width: -moz-fit-content;
   width: fit-content;
-  background-color: rgba(var(--card-color-rgb), .7);
+  background-color: rgba(var(--card-color-rgb), 0.7);
   border-radius: 5px;
   white-space: nowrap;
   /* overflow: hidden; */
@@ -46,14 +41,13 @@
   opacity: 0;
   padding: 5px 10px;
   font-size: 12px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(var(--card-color-rgb),.2);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border: 1px solid rgba(var(--card-color-rgb), 0.2);
   filter: blur(2px);
   transform: scale(0.95) translateY(2px);
   transition: all 0.35s;
-
 }
-
 
 .graphics-object[hover]::after {
   visibility: visible;
@@ -62,16 +56,82 @@
   filter: blur(0px);
   z-index: 1;
   /* top: calc(-1lh - 10px - 5px); */
-
 }
 
 .graphics-object[focused]::after {
   visibility: visible;
   opacity: 1;
   /* top: calc(-1lh - 10px - 8px); */
-
   transform: scale(1) translateY(0px);
   filter: blur(0px);
   transition: all 0.2s;
+}
 
+.graphics-object-properties-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px;
+  width: 100%;
+  overflow: hidden;
+}
+.graphics-object-properties-container label {
+  margin: 6px 0;
+  display: flex;
+  width: 100%;
+}
+.graphics-object-properties-container label .label {
+  font-size: 16px;
+  font-weight: 300;
+  min-width: 60px;
+  width: -moz-fit-content;
+  width: fit-content;
+  flex-shrink: 0;
+  display: inline-flex;
+  justify-content: st;
+  align-items: center;
+  margin-right: 10px;
+}
+.graphics-object-properties-container label .unit {
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: 10px;
+  display: inline-flex;
+  justify-content: end;
+  align-items: center;
+}
+.graphics-object-properties-container label select.unit {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  color: var(--text-color);
+  display: flex;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  padding: 0 10px;
+  background-color: rgba(var(--text-color-rgb), 0.05);
+  border-radius: 5px;
+  margin-left: 10px;
+  transition: all 0.3s;
+  font-weight: 300;
+  font-family: inherit;
+  font-size: 16px;
+  cursor: inherit;
+  line-height: inherit;
+  cursor: pointer;
+}
+.graphics-object-properties-container label select.unit:hover {
+  background-color: rgba(var(--text-color-rgb), 0.1);
+}
+.graphics-object-properties-container label select.unit:active {
+  background-color: rgba(var(--text-color-rgb), 0.15);
+  transform: scale(0.95);
+  transition: all 0.1s;
+}
+.graphics-object-properties-container label select.unit option {
+  font: inherit;
+}
+.graphics-object-properties-container hr {
+  height: 10px;
+  border: none;
 }

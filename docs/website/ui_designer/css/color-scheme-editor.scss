@@ -1,0 +1,114 @@
+.color-scheme-editor {
+    display: flex;
+    flex-direction: column;
+
+    .content {
+        display: flex;
+        flex-direction: row;
+        height: auto;
+        // max-height: 60vh;
+        width: auto;
+        overflow: hidden;
+
+        .input-area {
+            display: flex;
+
+            .preview-container {
+                display: flex;
+                padding: 30px;
+                justify-content: center;
+                align-items: center;
+
+                .preview-element {
+                    display: block;
+                    background-color: cadetblue;
+                    font-size: 20px;
+                    font-weight: 500;
+                    padding: 15px 30px;
+                    border: 5px solid;
+                    margin-bottom: 15px;
+                }
+            }
+
+            .input-container {
+                padding: 30px;
+                // width: fit-content;
+                // height: 100%;
+                display: flex;
+                flex-direction: column;
+                // overflow-y: scroll;
+                border-left: 1px solid var(--divider-color);
+                align-items: start;
+                // justify-content: center;
+
+
+
+                .picker {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 10px;
+                    cursor: pointer;
+                    background-color: rgba(var(--text-color-rgb), 5%);
+                    border-radius: 10px;
+                    padding: 10px 20px;
+                    padding-left: 12px;
+                    width: 100%;
+                    height: fit-content;
+
+                    div {
+                        width: 20px;
+                        height: 20px;
+                        // background-color: aqua;
+                        border-radius: 20px;
+                        margin-right: 12px;
+                        border: 3px solid rgba(var(--card-color-rgb), 1);
+                        box-shadow: 0px 5px 10px var(--shadow-color);
+                    }
+
+                    span {
+                        font-size: 16px;
+                    }
+                }
+
+
+
+            }
+        }
+
+        .mode-container {
+            overflow-y: scroll;
+            width: fit-content;
+            border-left: 1px solid var(--divider-color);
+            // display: flex;
+            // flex-direction: column;
+            padding: 30px;
+
+            p {
+                // display: block;
+                width: 100%;
+                font-size: 16px;
+                padding: 10px 20px;
+                background-color: rgba(var(--text-color-rgb), 5%);
+                border-radius: 10px;
+                margin-bottom: 10px;
+                // border-left: 5px solid aqua;
+
+                &:hover {
+                    background-color: aqua;
+                }
+            }
+        }
+    }
+
+    .botton-bar {
+        border-top: 1px solid var(--divider-color);
+        padding: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: end;
+
+        .button {
+            margin-left: 10px;
+        }
+    }
+}

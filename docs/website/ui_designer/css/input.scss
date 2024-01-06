@@ -1,0 +1,31 @@
+input:not([type=color]):not([type=range]) {
+    width: 100%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-bottom: 2px solid var(--divider-color);
+    color: var(--text-color);
+    transition: border-color 0.3s, color 0.3s;
+
+
+    &::placeholder {
+        color: rgba(var(--text-color-rgb), .3);
+    }
+
+    &[state=error] {
+        color: rgba(var(--error-color-rgb), .7);
+        border-color: rgba(var(--error-color-rgb), .3);
+    }
+}
+
+input[type=color] {
+    
+    // aspect-ratio: 1;
+    // width: 24px;
+    border-radius: calc(infinite * 1px);
+    outline: none;
+    border: 0 none transparent;
+    cursor: pointer;
+}

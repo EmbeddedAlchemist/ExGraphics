@@ -9,9 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import './background.js';
 import { Toast } from './toast.js';
-import { GraphicsObject } from './graphics-object.js';
 import * as WorkSpace from './workspace.js';
 import { FontStyleSelector } from './font-style-selector.js';
+import { ColorSchemeEditor } from './color-scheme-editor.js';
 function init_full_screen_btn() {
     const root = document.querySelector(':root');
     const full_screen_btn = document.getElementById('full_screen_btn');
@@ -130,7 +130,7 @@ function init_open_file_btn() {
                 new Toast("No files selected");
                 return;
             }
-            GraphicsObject.loadFromFile(input_tag.files[0]);
+            WorkSpace.loadFromFile(input_tag.files[0]);
         });
     });
 }
@@ -160,6 +160,15 @@ function init_font_btn() {
         console.log(a === null || a === void 0 ? void 0 : a.serialize());
     }));
 }
+function init_color_btn() {
+    const color_btn = document.getElementById('color_btn');
+    console.log(color_btn);
+    color_btn === null || color_btn === void 0 ? void 0 : color_btn.addEventListener('click', () => __awaiter(this, void 0, void 0, function* () {
+        console.log('clicked');
+        var a = yield new ColorSchemeEditor().edit();
+        console.log(a);
+    }));
+}
 window.addEventListener('load', (e) => {
     init_color_scheme();
     init_full_screen_btn();
@@ -172,4 +181,6 @@ window.addEventListener('load', (e) => {
     init_zoom_out_btn();
     init_new_window_btn();
     init_font_btn();
+    init_color_btn();
+    WorkSpace.init();
 });

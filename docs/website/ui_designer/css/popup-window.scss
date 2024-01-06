@@ -15,6 +15,7 @@
         pointer-events: all;
         /* filter: saturate(); */
         backdrop-filter: blur(15px) saturate(1.2) brightness(0.95);
+        // transform: translateZ(0px);
 
         .popup-window {
             display: flex;
@@ -23,7 +24,7 @@
             height: auto;
             background-color: rgba(var(--bg-color-rgb), .8);
             box-shadow: 0px 30px 70px var(--shadow-color);
-            border: 1px solid rgba(var(--bg-color-rgb), .5);
+            border: 1px solid rgba(var(--card-color-rgb), .5);
             border-radius: 15px;
             max-width: 90vw;
             max-height: 90vw;

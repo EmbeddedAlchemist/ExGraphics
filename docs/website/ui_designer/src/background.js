@@ -37,6 +37,7 @@ function main_page_bg_runtime() {
         ctx.fillRect(0, 0, main_page_bg.width, main_page_bg.height);
         pos.forEach((p) => {
             ctx.fillStyle = `hsl(${p.c} 100% ${l}% / ${a}%)`;
+            // root.style.setPropertyValue("--prominent-color-rgb")
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI, true);
             ctx.closePath();

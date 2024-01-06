@@ -1,0 +1,489 @@
+.color-picker {
+  display: flex;
+  flex-direction: column;
+}
+.color-picker .content {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: auto;
+  overflow: hidden;
+  align-items: center;
+  padding: 20px;
+}
+.color-picker .content .preview {
+  width: auto;
+  height: auto;
+  background-color: aqua;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 5px solid rgba(var(--card-color-rgb), 1);
+  border-radius: 15px;
+  box-shadow: 0px 5px 20px var(--shadow-color);
+}
+.color-picker .content .preview p {
+  font-size: 16px;
+  font-weight: 500;
+  font-family: monospace;
+}
+.color-picker .content input[type=range] {
+  margin-bottom: 10px;
+}
+.color-picker .content input[type=range]#inputH {
+  width: 200px;
+  height: 27px;
+  background: transparent;
+}
+.color-picker .content input[type=range]#inputH, .color-picker .content input[type=range]#inputH::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+.color-picker .content input[type=range]#inputH::-webkit-slider-runnable-track {
+  box-sizing: content-box;
+  border: 3px solid rgba(var(--card-color-rgb), 1);
+  border-radius: 40px;
+  width: 200px;
+  height: 16px;
+  background: linear-gradient(to right, hsla(0, 100%, 50%, 0.5), hsla(60, 100%, 50%, 0.5), hsla(120, 100%, 50%, 0.5), hsla(180, 100%, 50%, 0.5), hsla(240, 100%, 50%, 0.5), hsla(300, 100%, 50%, 0.5), hsla(0, 100%, 50%, 0.5));
+  box-shadow: 0px 0px 20px var(--shadow-color);
+}
+.color-picker .content input[type=range]#inputH::-moz-range-track {
+  box-sizing: content-box;
+  border: 3px solid rgba(var(--card-color-rgb), 1);
+  border-radius: 40px;
+  width: 200px;
+  height: 16px;
+  background: linear-gradient(to right, hsla(0, 100%, 50%, 0.5), hsla(60, 100%, 50%, 0.5), hsla(120, 100%, 50%, 0.5), hsla(180, 100%, 50%, 0.5), hsla(240, 100%, 50%, 0.5), hsla(300, 100%, 50%, 0.5), hsla(0, 100%, 50%, 0.5));
+  box-shadow: 0px 0px 20px var(--shadow-color);
+}
+.color-picker .content input[type=range]#inputH::-ms-track {
+  box-sizing: content-box;
+  border: 3px solid rgba(var(--card-color-rgb), 1);
+  border-radius: 40px;
+  width: 200px;
+  height: 16px;
+  background: linear-gradient(to right, hsla(0, 100%, 50%, 0.5), hsla(60, 100%, 50%, 0.5), hsla(120, 100%, 50%, 0.5), hsla(180, 100%, 50%, 0.5), hsla(240, 100%, 50%, 0.5), hsla(300, 100%, 50%, 0.5), hsla(0, 100%, 50%, 0.5));
+  box-shadow: 0px 0px 20px var(--shadow-color);
+}
+.color-picker .content input[type=range]#inputH::-webkit-slider-thumb {
+  margin-top: -5.5px;
+  box-sizing: border-box;
+  border: none;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: rgba(var(--card-color-rgb), 0.3);
+  border: 6px solid rgba(var(--card-color-rgb), 1);
+  box-shadow: 0px 0px 10px var(--shadow-color), 0px 0px 5px var(--shadow-color) inset;
+  cursor: pointer;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+.color-picker .content input[type=range]#inputH::-webkit-slider-thumb:hover {
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  transform: scale(1.02);
+}
+.color-picker .content input[type=range]#inputH::-webkit-slider-thumb:active {
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
+  transform: scale(1.1);
+  border-width: 8px;
+}
+.color-picker .content input[type=range]#inputH::-moz-range-thumb {
+  box-sizing: border-box;
+  border: none;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: rgba(var(--card-color-rgb), 0.3);
+  border: 6px solid rgba(var(--card-color-rgb), 1);
+  box-shadow: 0px 0px 10px var(--shadow-color), 0px 0px 5px var(--shadow-color) inset;
+  cursor: pointer;
+  -moz-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+.color-picker .content input[type=range]#inputH::-moz-range-thumb:hover {
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
+  transform: scale(1.02);
+}
+.color-picker .content input[type=range]#inputH::-moz-range-thumb:active {
+  -moz-transition: all 0.1s;
+  transition: all 0.1s;
+  transform: scale(1.1);
+  border-width: 8px;
+}
+.color-picker .content input[type=range]#inputH::-ms-thumb {
+  margin-top: 0;
+  box-sizing: border-box;
+  border: none;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: rgba(var(--card-color-rgb), 0.3);
+  border: 6px solid rgba(var(--card-color-rgb), 1);
+  box-shadow: 0px 0px 10px var(--shadow-color), 0px 0px 5px var(--shadow-color) inset;
+  cursor: pointer;
+  -ms-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+.color-picker .content input[type=range]#inputH::-ms-thumb:hover {
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+  transform: scale(1.02);
+}
+.color-picker .content input[type=range]#inputH::-ms-thumb:active {
+  -ms-transition: all 0.1s;
+  transition: all 0.1s;
+  transform: scale(1.1);
+  border-width: 8px;
+}
+.color-picker .content input[type=range]#inputH::-ms-tooltip {
+  display: none;
+}
+.color-picker .content input[type=range]#inputS {
+  width: 200px;
+  height: 27px;
+  background: transparent;
+}
+.color-picker .content input[type=range]#inputS, .color-picker .content input[type=range]#inputS::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+.color-picker .content input[type=range]#inputS::-webkit-slider-runnable-track {
+  box-sizing: content-box;
+  border: 3px solid rgba(var(--card-color-rgb), 1);
+  border-radius: 40px;
+  width: 200px;
+  height: 16px;
+  background: linear-gradient(to right, hsla(0, 0%, 50%, 0.5), hsla(0, 100%, 50%, 0.5));
+  box-shadow: 0px 0px 20px var(--shadow-color);
+}
+.color-picker .content input[type=range]#inputS::-moz-range-track {
+  box-sizing: content-box;
+  border: 3px solid rgba(var(--card-color-rgb), 1);
+  border-radius: 40px;
+  width: 200px;
+  height: 16px;
+  background: linear-gradient(to right, hsla(0, 0%, 50%, 0.5), hsla(0, 100%, 50%, 0.5));
+  box-shadow: 0px 0px 20px var(--shadow-color);
+}
+.color-picker .content input[type=range]#inputS::-ms-track {
+  box-sizing: content-box;
+  border: 3px solid rgba(var(--card-color-rgb), 1);
+  border-radius: 40px;
+  width: 200px;
+  height: 16px;
+  background: linear-gradient(to right, hsla(0, 0%, 50%, 0.5), hsla(0, 100%, 50%, 0.5));
+  box-shadow: 0px 0px 20px var(--shadow-color);
+}
+.color-picker .content input[type=range]#inputS::-webkit-slider-thumb {
+  margin-top: -5.5px;
+  box-sizing: border-box;
+  border: none;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: rgba(var(--card-color-rgb), 0.3);
+  border: 6px solid rgba(var(--card-color-rgb), 1);
+  box-shadow: 0px 0px 10px var(--shadow-color), 0px 0px 5px var(--shadow-color) inset;
+  cursor: pointer;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+.color-picker .content input[type=range]#inputS::-webkit-slider-thumb:hover {
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  transform: scale(1.02);
+}
+.color-picker .content input[type=range]#inputS::-webkit-slider-thumb:active {
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
+  transform: scale(1.1);
+  border-width: 8px;
+}
+.color-picker .content input[type=range]#inputS::-moz-range-thumb {
+  box-sizing: border-box;
+  border: none;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: rgba(var(--card-color-rgb), 0.3);
+  border: 6px solid rgba(var(--card-color-rgb), 1);
+  box-shadow: 0px 0px 10px var(--shadow-color), 0px 0px 5px var(--shadow-color) inset;
+  cursor: pointer;
+  -moz-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+.color-picker .content input[type=range]#inputS::-moz-range-thumb:hover {
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
+  transform: scale(1.02);
+}
+.color-picker .content input[type=range]#inputS::-moz-range-thumb:active {
+  -moz-transition: all 0.1s;
+  transition: all 0.1s;
+  transform: scale(1.1);
+  border-width: 8px;
+}
+.color-picker .content input[type=range]#inputS::-ms-thumb {
+  margin-top: 0;
+  box-sizing: border-box;
+  border: none;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: rgba(var(--card-color-rgb), 0.3);
+  border: 6px solid rgba(var(--card-color-rgb), 1);
+  box-shadow: 0px 0px 10px var(--shadow-color), 0px 0px 5px var(--shadow-color) inset;
+  cursor: pointer;
+  -ms-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+.color-picker .content input[type=range]#inputS::-ms-thumb:hover {
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+  transform: scale(1.02);
+}
+.color-picker .content input[type=range]#inputS::-ms-thumb:active {
+  -ms-transition: all 0.1s;
+  transition: all 0.1s;
+  transform: scale(1.1);
+  border-width: 8px;
+}
+.color-picker .content input[type=range]#inputS::-ms-tooltip {
+  display: none;
+}
+.color-picker .content input[type=range]#inputL {
+  width: 200px;
+  height: 27px;
+  background: transparent;
+}
+.color-picker .content input[type=range]#inputL, .color-picker .content input[type=range]#inputL::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+.color-picker .content input[type=range]#inputL::-webkit-slider-runnable-track {
+  box-sizing: content-box;
+  border: 3px solid rgba(var(--card-color-rgb), 1);
+  border-radius: 40px;
+  width: 200px;
+  height: 16px;
+  background: linear-gradient(to right, hsla(0, 0%, 0%, 0.5), hsla(0, 0%, 100%, 0.5));
+  box-shadow: 0px 0px 20px var(--shadow-color);
+}
+.color-picker .content input[type=range]#inputL::-moz-range-track {
+  box-sizing: content-box;
+  border: 3px solid rgba(var(--card-color-rgb), 1);
+  border-radius: 40px;
+  width: 200px;
+  height: 16px;
+  background: linear-gradient(to right, hsla(0, 0%, 0%, 0.5), hsla(0, 0%, 100%, 0.5));
+  box-shadow: 0px 0px 20px var(--shadow-color);
+}
+.color-picker .content input[type=range]#inputL::-ms-track {
+  box-sizing: content-box;
+  border: 3px solid rgba(var(--card-color-rgb), 1);
+  border-radius: 40px;
+  width: 200px;
+  height: 16px;
+  background: linear-gradient(to right, hsla(0, 0%, 0%, 0.5), hsla(0, 0%, 100%, 0.5));
+  box-shadow: 0px 0px 20px var(--shadow-color);
+}
+.color-picker .content input[type=range]#inputL::-webkit-slider-thumb {
+  margin-top: -5.5px;
+  box-sizing: border-box;
+  border: none;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: rgba(var(--card-color-rgb), 0.3);
+  border: 6px solid rgba(var(--card-color-rgb), 1);
+  box-shadow: 0px 0px 10px var(--shadow-color), 0px 0px 5px var(--shadow-color) inset;
+  cursor: pointer;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+.color-picker .content input[type=range]#inputL::-webkit-slider-thumb:hover {
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  transform: scale(1.02);
+}
+.color-picker .content input[type=range]#inputL::-webkit-slider-thumb:active {
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
+  transform: scale(1.1);
+  border-width: 8px;
+}
+.color-picker .content input[type=range]#inputL::-moz-range-thumb {
+  box-sizing: border-box;
+  border: none;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: rgba(var(--card-color-rgb), 0.3);
+  border: 6px solid rgba(var(--card-color-rgb), 1);
+  box-shadow: 0px 0px 10px var(--shadow-color), 0px 0px 5px var(--shadow-color) inset;
+  cursor: pointer;
+  -moz-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+.color-picker .content input[type=range]#inputL::-moz-range-thumb:hover {
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
+  transform: scale(1.02);
+}
+.color-picker .content input[type=range]#inputL::-moz-range-thumb:active {
+  -moz-transition: all 0.1s;
+  transition: all 0.1s;
+  transform: scale(1.1);
+  border-width: 8px;
+}
+.color-picker .content input[type=range]#inputL::-ms-thumb {
+  margin-top: 0;
+  box-sizing: border-box;
+  border: none;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: rgba(var(--card-color-rgb), 0.3);
+  border: 6px solid rgba(var(--card-color-rgb), 1);
+  box-shadow: 0px 0px 10px var(--shadow-color), 0px 0px 5px var(--shadow-color) inset;
+  cursor: pointer;
+  -ms-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+.color-picker .content input[type=range]#inputL::-ms-thumb:hover {
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+  transform: scale(1.02);
+}
+.color-picker .content input[type=range]#inputL::-ms-thumb:active {
+  -ms-transition: all 0.1s;
+  transition: all 0.1s;
+  transform: scale(1.1);
+  border-width: 8px;
+}
+.color-picker .content input[type=range]#inputL::-ms-tooltip {
+  display: none;
+}
+.color-picker .content input[type=range]#inputA {
+  width: 200px;
+  height: 27px;
+  background: transparent;
+}
+.color-picker .content input[type=range]#inputA, .color-picker .content input[type=range]#inputA::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+.color-picker .content input[type=range]#inputA::-webkit-slider-runnable-track {
+  box-sizing: content-box;
+  border: 3px solid rgba(var(--card-color-rgb), 1);
+  border-radius: 40px;
+  width: 200px;
+  height: 16px;
+  background: linear-gradient(to right, rgba(var(--bg-color-rgb), 0.7), rgba(var(--bg-color-rgb), 1)), linear-gradient(45deg, rgba(var(--text-color-rgb), 0.5) 25%, transparent 0, transparent 75%, rgba(var(--text-color-rgb), 0.5) 0) 0px 0px/10px 10px, linear-gradient(45deg, rgba(var(--text-color-rgb), 0.5) 25%, transparent 0, transparent 75%, rgba(var(--text-color-rgb), 0.5) 0) 5px 5px/10px 10px;
+  box-shadow: 0px 0px 20px var(--shadow-color);
+}
+.color-picker .content input[type=range]#inputA::-moz-range-track {
+  box-sizing: content-box;
+  border: 3px solid rgba(var(--card-color-rgb), 1);
+  border-radius: 40px;
+  width: 200px;
+  height: 16px;
+  background: linear-gradient(to right, rgba(var(--bg-color-rgb), 0.7), rgba(var(--bg-color-rgb), 1)), linear-gradient(45deg, rgba(var(--text-color-rgb), 0.5) 25%, transparent 0, transparent 75%, rgba(var(--text-color-rgb), 0.5) 0) 0px 0px/10px 10px, linear-gradient(45deg, rgba(var(--text-color-rgb), 0.5) 25%, transparent 0, transparent 75%, rgba(var(--text-color-rgb), 0.5) 0) 5px 5px/10px 10px;
+  box-shadow: 0px 0px 20px var(--shadow-color);
+}
+.color-picker .content input[type=range]#inputA::-ms-track {
+  box-sizing: content-box;
+  border: 3px solid rgba(var(--card-color-rgb), 1);
+  border-radius: 40px;
+  width: 200px;
+  height: 16px;
+  background: linear-gradient(to right, rgba(var(--bg-color-rgb), 0.7), rgba(var(--bg-color-rgb), 1)), linear-gradient(45deg, rgba(var(--text-color-rgb), 0.5) 25%, transparent 0, transparent 75%, rgba(var(--text-color-rgb), 0.5) 0) 0px 0px/10px 10px, linear-gradient(45deg, rgba(var(--text-color-rgb), 0.5) 25%, transparent 0, transparent 75%, rgba(var(--text-color-rgb), 0.5) 0) 5px 5px/10px 10px;
+  box-shadow: 0px 0px 20px var(--shadow-color);
+}
+.color-picker .content input[type=range]#inputA::-webkit-slider-thumb {
+  margin-top: -5.5px;
+  box-sizing: border-box;
+  border: none;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: rgba(var(--card-color-rgb), 0.3);
+  border: 6px solid rgba(var(--card-color-rgb), 1);
+  box-shadow: 0px 0px 10px var(--shadow-color), 0px 0px 5px var(--shadow-color) inset;
+  cursor: pointer;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+.color-picker .content input[type=range]#inputA::-webkit-slider-thumb:hover {
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  transform: scale(1.02);
+}
+.color-picker .content input[type=range]#inputA::-webkit-slider-thumb:active {
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
+  transform: scale(1.1);
+  border-width: 8px;
+}
+.color-picker .content input[type=range]#inputA::-moz-range-thumb {
+  box-sizing: border-box;
+  border: none;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: rgba(var(--card-color-rgb), 0.3);
+  border: 6px solid rgba(var(--card-color-rgb), 1);
+  box-shadow: 0px 0px 10px var(--shadow-color), 0px 0px 5px var(--shadow-color) inset;
+  cursor: pointer;
+  -moz-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+.color-picker .content input[type=range]#inputA::-moz-range-thumb:hover {
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
+  transform: scale(1.02);
+}
+.color-picker .content input[type=range]#inputA::-moz-range-thumb:active {
+  -moz-transition: all 0.1s;
+  transition: all 0.1s;
+  transform: scale(1.1);
+  border-width: 8px;
+}
+.color-picker .content input[type=range]#inputA::-ms-thumb {
+  margin-top: 0;
+  box-sizing: border-box;
+  border: none;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: rgba(var(--card-color-rgb), 0.3);
+  border: 6px solid rgba(var(--card-color-rgb), 1);
+  box-shadow: 0px 0px 10px var(--shadow-color), 0px 0px 5px var(--shadow-color) inset;
+  cursor: pointer;
+  -ms-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+.color-picker .content input[type=range]#inputA::-ms-thumb:hover {
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+  transform: scale(1.02);
+}
+.color-picker .content input[type=range]#inputA::-ms-thumb:active {
+  -ms-transition: all 0.1s;
+  transition: all 0.1s;
+  transform: scale(1.1);
+  border-width: 8px;
+}
+.color-picker .content input[type=range]#inputA::-ms-tooltip {
+  display: none;
+}
+.color-picker .botton-bar {
+  border-top: 1px solid var(--divider-color);
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+.color-picker .botton-bar .button {
+  margin-left: 10px;
+}

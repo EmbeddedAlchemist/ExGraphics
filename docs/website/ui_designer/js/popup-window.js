@@ -84,8 +84,7 @@ export class PopupWindow {
         }
     }
 }
-PopupWindow.initialHTML = '\
-        <div class="popup-window">\
+PopupWindow.initialHTML = '<div class="popup-window">\
             <div class="top-bar">\
                 <span class="title">Untitle</span>\
                 <div class="icon-button close-btn" tips="Close">\
