@@ -146,4 +146,3 @@ export class FontStyleSelector {
         });
     }
 }
-FontStyleSelector.htmlCode = null;

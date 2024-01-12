@@ -51,7 +51,7 @@ function AddBtnConstructor() {
 
 export class FontStyleSelector {
 
-    static htmlCode: string | null = null;
+    // static htmlCode: string | null = null;
     private popup: PopupWindow = new PopupWindow('./font-style-selector.html');
     private listOfSelections: FontStyle[];
     private allowEdit: boolean;

@@ -9,8 +9,8 @@
 namespace ExGraphics {
 
 /**
- * @brief
- *
+ * @brief 该类是各项功能的聚合，一般一个图形设备对应一个Graphics类
+ *  
  * @tparam ColorType Color type for graophics. e.g. RGB565
  * @tparam displayWidth
  * @tparam displayHeight

@@ -8,12 +8,12 @@ namespace ExGraphics {
 
 class GraphicsFunction;
 
+
 /**
- * @brief Callback function for object callback, none return, with a parameter which is a reference to object self.
- *
+ * @brief 这是所有图形对象的基类
+ * 在该类中几乎不实现任何功能，只是为所有对象提供统一的接口调用
+ * 
  */
-
-
 class GraphicsObject {
   public:
     /**

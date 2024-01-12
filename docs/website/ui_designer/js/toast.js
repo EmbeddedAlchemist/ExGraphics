@@ -1,8 +1,24 @@
 export class Toast {
-    constructor(message, style = {}) {
+    getStyle(type) {
+        const root = document.querySelector(':root');
+        switch (type) {
+            case 'normal':
+                return {
+                    foreground: root.style.getPropertyValue('--text-color'),
+                    background: root.style.getPropertyValue('--bg-color')
+                };
+            case 'error':
+                return {
+                    foreground: root.style.getPropertyValue('--error-color'),
+                    background: root.style.getPropertyValue('--bg-color')
+                };
+        }
+    }
+    constructor(message, type = 'normal') {
         this.message_node = document.createElement('span');
         this.message_node.innerHTML = message;
         this.message_node.className = 'message';
+        const style = this.getStyle(type);
         if (style.background)
             this.message_node.style.backgroundColor = style.background;
         if (style.foreground)

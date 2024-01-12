@@ -11,7 +11,7 @@ import './background.js';
 import { Toast } from './toast.js';
 import * as WorkSpace from './workspace.js';
 import { FontStyleSelector } from './font-style-selector.js';
-import { ColorSchemeEditor } from './color-scheme-editor.js';
+import { ColorSchemeSelector } from './color-scheme-selector.js';
 function init_full_screen_btn() {
     const root = document.querySelector(':root');
     const full_screen_btn = document.getElementById('full_screen_btn');
@@ -165,7 +165,7 @@ function init_color_btn() {
     console.log(color_btn);
     color_btn === null || color_btn === void 0 ? void 0 : color_btn.addEventListener('click', () => __awaiter(this, void 0, void 0, function* () {
         console.log('clicked');
-        var a = yield new ColorSchemeEditor().edit();
+        var a = yield new ColorSchemeSelector().select();
         console.log(a);
     }));
 }

@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "*.c": "c",
+        "*.s": "arm",
+        "graphicsfunction.hpp": "c",
+        "drawingfunction.hpp": "c",
+        "bitmap.hpp": "c"
+    }
+}

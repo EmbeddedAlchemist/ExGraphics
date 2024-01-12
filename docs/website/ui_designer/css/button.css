@@ -1,20 +1,25 @@
-.button{
-    font-size: 16px;
-    padding: 10px 20px;
-    background-color: rgba(var(--text-color-rgb), 10%);
-    border-radius: 10px;
-    transition: background 0.3s, transform 0.3s;
-    cursor: pointer;
+.button {
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: rgba(var(--text-color-rgb), 5%);
+  border-radius: 10px;
+  transition: background 0.3s, transform 0.3s;
+  cursor: pointer;
 }
-
-.button:hover{
-    background-color: rgba(var(--text-color-rgb), 15%);
-
+.button:hover {
+  background-color: rgba(var(--text-color-rgb), 10%);
 }
-
-.button:active{
-    background-color: rgba(var(--text-color-rgb), 20%);
-    transform: scale(.95);
-    transition: all 0.1s;
-
+.button:active {
+  background-color: rgba(var(--text-color-rgb), 15%);
+  transform: scale(0.95);
+  transition: all 0.1s;
+}
+.button.prominent {
+  background-color: rgba(var(--prominent-color-rgb), 10%);
+}
+.button.prominent:hover {
+  background-color: rgba(var(--prominent-color-rgb), 15%);
+}
+.button.prominent:active {
+  background-color: rgba(var(--prominent-color-rgb), 20%);
 }

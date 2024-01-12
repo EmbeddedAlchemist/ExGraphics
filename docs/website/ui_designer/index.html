@@ -14,10 +14,14 @@
     <link rel="stylesheet" href="css/sider-bar.css">
     <link rel="stylesheet" href="css/icon-button.css">
     <link rel="stylesheet" href="css/popup-window.css">
-    <link rel="stylesheet" href="css/color-scheme-editor.css">
+    <link rel="stylesheet" href="css/color-scheme-selector.css">
     <link rel="stylesheet" href="css/button.css">
     <link rel="stylesheet" href="css/workspace-context-menu.css">
     <link rel="stylesheet" href="./css/input.css">
+    <link rel="stylesheet" href="./css/card.css">
+    <link rel="stylesheet" href="./css/font-style-selector-button.css">
+    <link rel="stylesheet" href="./css/color-scheme-selector-button.css">
+    <link rel="stylesheet" href="css/style-editor.css">
     <link rel="icon" href="/favicon.ico">
 </head>
 
@@ -198,32 +202,59 @@
             </div>
         </div>
     </main>
-    <!-- <div class="mouse-pointer"></div> -->
     <div id="workspaceContextMenu">
         <p>Copy</p>
         <p>Cut</p>
         <p>Delete</p>
     </div>
-    <div class="full-screen-container" id="popup-container"></div>
+    <div class="full-screen-container" id="popup-container">
+        <div class="popup-window-background" style="">
+            <div class="popup-window">
+                <div class="top-bar"> <span class="title">Untitle</span>
+                    <div class="icon-button close-btn" tips="Close"> <svg xmlns="http://www.w3.org/2000/svg" height="24"
+                            viewBox="0 -960 960 960" width="24">
+                            <path
+                                d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z">
+                            </path>
+                        </svg> </div>
+                </div>
+                <div class="content">
+                    <html>
+
+                    <head>
+                        <link rel="stylesheet" href="css/color-scheme.css">
+                        <link rel="stylesheet" href="css/font-style-selector.css">
+                        <link rel="stylesheet" href="css/button.css">
+                        <link rel="stylesheet" href="css/card.css">
+                        <link rel="stylesheet" href="css/icon-button.css">
+
+                    </head>
+
+                    <body>
+                        <div class="style-editor">
+                            <div class="preview-container">
+                                
+                            </div>
+                            <div class="input-container">
+                                <label for=""><span class="label">Name</span><input type="text" name="" id="inputName"></label>
+                                <label for=""><span class="label">Font</span> <font-style-selector-button></font-style-selector-button></label>
+                                <label for=""><span class="label">Color Scheme</span> <color-scheme-selector-button></color-scheme-selector-button></label>
+                                <label for=""><span class="label">Border Radius</span><input type="number" name="" id="ratiusName" min="0" max="100"><span class="unit">px</label>
+                                
+                            </div>
+                        </div>
+                    </body>
+
+                    </html>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="full-screen-container" id="toast-container"></div>
 
-
-    <!-- <script src="js/out.js"></script> -->
     <script type="module" src="./js/index.js"></script>
-    <!-- <script type="module" src="js/toast.js"></script> -->
-    <!-- <script type="module" src="js/background.js"></script> -->
-    <!-- <script type="module" src="js/graphics-object.js"></script> -->
-    <!-- <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./compiled/service-worker.js')
-                .then((registration) => {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                })
-                .catch((error) => {
-                    console.error('Service Worker registration failed:', error);
-                });
-        }
-    </script> -->
+    <script type="module" src="./js/font-style-selector-button.js"></script>
+    <script type="module" src="./js/color-scheme-selector-button.js"></script>
 </body>
 
 </html>

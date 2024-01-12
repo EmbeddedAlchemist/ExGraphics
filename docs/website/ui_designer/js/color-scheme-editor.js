@@ -9,14 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { assert } from "./assert.js";
 import { ColorPicker } from "./color-picker.js";
-import { ColorScheme } from "./color-scheme.js";
+import { ColorItem, ColorScheme } from "./color-scheme.js";
+import { IconButtonConstructor } from "./icon-button.js";
 import { LoadingScreen } from "./loading-screen.js";
 import { PopupWindow } from "./popup-window.js";
+import { SVGConstructor } from "./svg-constructor.js";
 import { Toast } from "./toast.js";
+const deleteIconSVGCode = '<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>';
 export class ColorSchemeEditor {
     constructor() {
         this.popup = new PopupWindow('./color-scheme-editor.html');
         this.modes = [];
+        this.popup.title = 'Edit Color Scheme';
     }
     waitForCancel() {
         return new Promise((resolve, reject) => {
@@ -28,7 +32,20 @@ export class ColorSchemeEditor {
     waitForConfirm() {
         return new Promise((resolve, reject) => {
             const confirmBtn = this.popup.contentNode.querySelector('#confirmBtn');
+            const nameInput = this.popup.contentNode.querySelector('#nameInput');
             confirmBtn === null || confirmBtn === void 0 ? void 0 : confirmBtn.addEventListener('click', () => {
+                var items = [];
+                this.modes.forEach(ele => {
+                    var i = new ColorItem();
+                    i.backgroundColor = ele.backgroundInput.value;
+                    i.foregroundColor = ele.foregroundInput.value;
+                    i.borderColor = ele.borderInput.value;
+                    items.push(i);
+                });
+                var result = new ColorScheme();
+                result.items = items;
+                result.name = nameInput.value;
+                resolve(result);
             });
         });
     }
@@ -57,7 +74,6 @@ export class ColorSchemeEditor {
         });
         mode.modeTag.setAttribute('state', 'active');
         content === null || content === void 0 ? void 0 : content.insertBefore(mode.inputNode, modeContainer);
-        console.log(content, modeContainer, inputArea, mode);
     }
     constructColorPickerTag(name, color, previewUpdater) {
         function setPreview(preview, color) {
@@ -80,7 +96,6 @@ export class ColorSchemeEditor {
         };
         tag.addEventListener('click', () => __awaiter(this, void 0, void 0, function* () {
             var newcolor = yield new ColorPicker().pick(ret.value);
-            console.log(newcolor);
             if (newcolor) {
                 ret.value = newcolor;
                 setPreview(preview, newcolor);
@@ -88,6 +103,15 @@ export class ColorSchemeEditor {
             }
         }));
         return ret;
+    }
+    deleteMode(mode) {
+        const modeContainer = this.popup.contentNode.querySelector('.mode-container');
+        modeContainer === null || modeContainer === void 0 ? void 0 : modeContainer.removeChild(mode.modeTag);
+        const indexOfMode = this.modes.indexOf(mode);
+        const preIndex = indexOfMode < 0 ? 0 : indexOfMode - 1;
+        if (mode.modeTag.getAttribute('state') == 'active')
+            this.changeMode(this.modes[preIndex]);
+        this.modes.splice(indexOfMode, 1);
     }
     constructModeNode(item, index) {
         var ret = {};
@@ -117,18 +141,35 @@ export class ColorSchemeEditor {
         ret.inputNode.appendChild(previewContainer);
         ret.inputNode.appendChild(inputContainer);
         ret.modeTag = document.createElement("p");
-        ret.modeTag.innerText = `Mode ${index + 1}`;
+        var text = document.createElement("span");
+        text.innerText = `Mode ${index}`;
+        ret.modeTag.appendChild(text);
+        if (index != 0) {
+            var deleteBtn = IconButtonConstructor('Delete', SVGConstructor(deleteIconSVGCode));
+            ret.modeTag.appendChild(deleteBtn);
+            deleteBtn.addEventListener('click', (e) => { this.deleteMode(ret); e.stopPropagation(); });
+        }
         ret.modeTag.addEventListener('click', () => { this.changeMode(ret); });
         return ret;
     }
-    constructView(scheme) {
+    addMode(item, index) {
+        const addBtn = this.popup.contentNode.querySelector('#addBtn');
         const modeContainer = this.popup.contentNode.querySelector('.mode-container');
+        var mode = this.constructModeNode(item, index);
+        modeContainer === null || modeContainer === void 0 ? void 0 : modeContainer.insertBefore(mode.modeTag, addBtn);
+        this.modes.push(mode);
+    }
+    constructView(scheme) {
+        const addBtn = this.popup.contentNode.querySelector('#addBtn');
+        const nameInput = this.popup.contentNode.querySelector('#nameInput');
         scheme.items.forEach((item, index) => {
-            var mode = this.constructModeNode(item, index);
-            modeContainer === null || modeContainer === void 0 ? void 0 : modeContainer.appendChild(mode.modeTag);
-            this.modes.push(mode);
+            this.addMode(item, index);
         });
         this.changeMode(this.modes[0]);
+        addBtn === null || addBtn === void 0 ? void 0 : addBtn.addEventListener('click', () => {
+            this.addMode(new ColorItem(), this.modes.length);
+        });
+        nameInput.value = scheme.name;
     }
     init() {
         return __awaiter(this, void 0, void 0, function* () {

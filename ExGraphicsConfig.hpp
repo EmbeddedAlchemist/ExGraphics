@@ -1,3 +1,14 @@
+/**
+ * @file ExGraphicsConfig.hpp
+ * @author your name (you@domain.com)
+ * @brief 该文件用于静态配置ExGraphics的各项参数
+ * @version 0.1
+ * @date 2024-01-10
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
+
 #pragma once
 
 #include "Basic/Public/Color.hpp"

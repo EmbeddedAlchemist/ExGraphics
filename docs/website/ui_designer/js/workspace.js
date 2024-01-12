@@ -99,10 +99,10 @@ export function loadFromFile(file) {
         }
         catch (e) {
             if (e instanceof SyntaxError) {
-                new Toast(`Failed because of syntax error`, { background: "red", foreground: 'white' }).show();
+                new Toast(`Failed because of syntax error`, 'error').show();
             }
             else {
-                new Toast(`Failed because of unknown error`, { background: "red", foreground: 'white' }).show();
+                new Toast(`Failed because of unknown error`, 'error').show();
             }
             console.error(e);
         }

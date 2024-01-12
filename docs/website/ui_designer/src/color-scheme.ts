@@ -8,7 +8,7 @@ export class ColorItem {
 }
 
 export class ColorScheme {
-    name: string = 'Unnamed Scheme';
+    name: string = 'UnnamedScheme';
     items: ColorItem[] = [new ColorItem()];
 
 

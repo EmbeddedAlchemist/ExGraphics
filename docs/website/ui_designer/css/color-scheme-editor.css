@@ -1,6 +1,7 @@
 .color-scheme-editor {
   display: flex;
   flex-direction: column;
+  height: 300px;
 }
 .color-scheme-editor .content {
   display: flex;
@@ -20,7 +21,6 @@
 }
 .color-scheme-editor .content .input-area .preview-container .preview-element {
   display: block;
-  background-color: cadetblue;
   font-size: 20px;
   font-weight: 500;
   padding: 15px 30px;
@@ -33,6 +33,7 @@
   flex-direction: column;
   border-left: 1px solid var(--divider-color);
   align-items: start;
+  justify-content: center;
 }
 .color-scheme-editor .content .input-area .input-container .picker {
   display: flex;
@@ -46,6 +47,14 @@
   width: 100%;
   height: -moz-fit-content;
   height: fit-content;
+  transition: background 0.3s;
+}
+.color-scheme-editor .content .input-area .input-container .picker:hover {
+  background-color: rgba(var(--text-color-rgb), 10%);
+}
+.color-scheme-editor .content .input-area .input-container .picker:active {
+  background-color: rgba(var(--text-color-rgb), 15%);
+  transition: background 0.1s;
 }
 .color-scheme-editor .content .input-area .input-container .picker div {
   width: 20px;
@@ -65,16 +74,50 @@
   border-left: 1px solid var(--divider-color);
   padding: 30px;
 }
+.color-scheme-editor .content .mode-container #nameInput {
+  margin-bottom: 10px;
+  width: 160px;
+}
 .color-scheme-editor .content .mode-container p {
+  display: flex;
   width: 100%;
-  font-size: 16px;
-  padding: 10px 20px;
   background-color: rgba(var(--text-color-rgb), 5%);
   border-radius: 10px;
   margin-bottom: 10px;
+  transition: background 0.3s;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.color-scheme-editor .content .mode-container p span {
+  font-size: 16px;
+  margin: 10px 15px;
+}
+.color-scheme-editor .content .mode-container p .icon-button {
+  height: 30px;
+  width: 30px;
+  margin-left: -10px;
+  margin-right: 5px;
 }
 .color-scheme-editor .content .mode-container p:hover {
-  background-color: aqua;
+  background-color: rgba(var(--text-color-rgb), 10%);
+}
+.color-scheme-editor .content .mode-container p:active {
+  background-color: rgba(var(--text-color-rgb), 15%);
+  transition: background 0.1s;
+}
+.color-scheme-editor .content .mode-container p[state=active] {
+  background-color: rgba(var(--text-color-rgb), 20%);
+}
+.color-scheme-editor .content .mode-container #addBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 100%;
+  padding: 8px 20px;
+}
+.color-scheme-editor .content .mode-container #addBtn svg {
+  height: 24px;
 }
 .color-scheme-editor .botton-bar {
   border-top: 1px solid var(--divider-color);

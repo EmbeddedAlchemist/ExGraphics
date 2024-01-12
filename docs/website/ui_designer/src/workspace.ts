@@ -2,6 +2,7 @@ import { assert } from "./assert.js";
 import { GraphicsObject } from "./graphics-object.js";
 import { Toast } from "./toast.js";
 import { LoadingScreen } from "./loading-screen.js";
+import { localforage } from "./localforage.js";
 
 
 const workspace = document.getElementById('workspace')!!;
@@ -106,10 +107,10 @@ export async function loadFromFile(file: File) {
         new Toast(`${file.name} loaded`);
     } catch (e) {
         if (e instanceof SyntaxError) {
-            new Toast(`Failed because of syntax error`, { background: "red", foreground: 'white' }).show();
+            new Toast(`Failed because of syntax error`, 'error').show();
         }
         else {
-            new Toast(`Failed because of unknown error`, { background: "red", foreground: 'white' }).show();
+            new Toast(`Failed because of unknown error`, 'error').show();
         }
         console.error(e);
     }

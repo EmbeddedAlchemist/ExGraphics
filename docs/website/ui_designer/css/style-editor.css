@@ -1,0 +1,36 @@
+.style-editor .input-container {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+.style-editor .input-container label {
+  margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.style-editor .input-container label .label {
+  font-size: 16px;
+  font-weight: 300;
+  min-width: 60px;
+  width: -moz-fit-content;
+  width: fit-content;
+  flex-shrink: 0;
+  display: inline-flex;
+  justify-content: start;
+  align-items: center;
+  margin-right: 10px;
+}
+.style-editor .input-container label input,
+.style-editor .input-container label font-style-selector-button,
+.style-editor .input-container label color-scheme-selector-button {
+  width: 100%;
+  min-width: 0;
+  font-size: 16px;
+}
+.style-editor .input-container label .unit {
+  font-size: 16px;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: 10px;
+}

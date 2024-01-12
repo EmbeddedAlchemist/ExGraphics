@@ -35,11 +35,29 @@ export class Toast {
 
     message_node: HTMLElement;
 
-    constructor(message: string, style: { background?: string, foreground?: string } = {}) {
+    private getStyle(type: 'normal' | 'error'): { foreground: string, background: string }{
+        const root = document.querySelector(':root') as HTMLHtmlElement;
+        switch (type) { 
+            case 'normal':
+                return {
+                    foreground: root.style.getPropertyValue('--text-color'),
+                    background: root.style.getPropertyValue('--bg-color')
+                }
+            case 'error':
+                return {
+                    foreground: root.style.getPropertyValue('--error-color'),
+                    background: root.style.getPropertyValue('--bg-color')
+                }
+        }
+    }
+
+    constructor(message: string, type: 'normal'|'error' = 'normal') {
         // console.log(Toast.container);
         this.message_node = document.createElement('span');
         this.message_node.innerHTML = message;
-        this.message_node.className = 'message';
+        this.message_node.className = 'message'; 
+        
+        const style = this.getStyle(type);
         // console.log(style)
         if (style.background) this.message_node.style.backgroundColor = style.background;
         if (style.foreground) this.message_node.style.color = style.foreground;

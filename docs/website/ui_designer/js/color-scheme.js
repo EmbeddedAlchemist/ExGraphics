@@ -8,7 +8,7 @@ export class ColorItem {
 }
 export class ColorScheme {
     constructor() {
-        this.name = 'Unnamed Scheme';
+        this.name = 'UnnamedScheme';
         this.items = [new ColorItem()];
     }
     serialize() {

@@ -1,3 +1,17 @@
+/**
+ * @file DrawingOptimise.ipp
+ * @author your name (you@domain.com)
+ * @brief 该文件中的函数都是从GraphicsFunction中继承的虚函数接口
+ * @version 0.1
+ * @date 2024-01-10
+ *  
+ * 由于此处更接近绘图缓存，在此处实现函数可以优化速度，
+ * 但是在绘制前需要做好各种形式的判断，以免越界或绘制错误
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
+
 #pragma once
 
 #include "Basic/Public/Mathematical.hpp"

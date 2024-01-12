@@ -6,6 +6,7 @@ import { FontStyleCreator } from './font-style-editor.js';
 import { FontStyleSelector } from './font-style-selector.js';
 import { LoadingScreen } from './loading-screen.js';
 import { ColorSchemeEditor } from './color-scheme-editor.js';
+import { ColorSchemeSelector } from './color-scheme-selector.js';
 
 
 function init_full_screen_btn() {
@@ -188,7 +189,7 @@ function init_color_btn() {
     console.log(color_btn);
     color_btn?.addEventListener('click', async () => {
         console.log('clicked');
-        var a = await new ColorSchemeEditor().edit();
+        var a = await new ColorSchemeSelector().select();
         console.log(a); 
     })
 }

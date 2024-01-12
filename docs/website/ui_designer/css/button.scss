@@ -1,0 +1,32 @@
+.button{
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: rgba(var(--text-color-rgb), 5%);
+    border-radius: 10px;
+    transition: background 0.3s, transform 0.3s;
+    cursor: pointer;
+
+    &:hover{
+        background-color: rgba(var(--text-color-rgb), 10%);
+    }
+    
+    &:active{
+        background-color: rgba(var(--text-color-rgb), 15%);
+        transform: scale(.95);
+        transition: all 0.1s;
+    
+    }
+
+    &.prominent{
+        background-color: rgba(var(--prominent-color-rgb), 10%);
+    }
+
+    &.prominent:hover{
+        background-color: rgba(var(--prominent-color-rgb), 15%);
+    }
+
+    &.prominent:active{
+        background-color: rgba(var(--prominent-color-rgb), 20%);
+    }
+}
+
